@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ironhack-team5_battleSimulator.iml" filepath="$PROJECT_DIR$/ironhack-team5_battleSimulator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ironhack_rpgbattlesimulator.iml" filepath="$PROJECT_DIR$/ironhack_rpgbattlesimulator.iml" />
     </modules>
   </component>
 </project>
