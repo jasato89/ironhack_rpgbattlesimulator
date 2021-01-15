@@ -9,13 +9,15 @@ private String name;
 private int hp;
 private boolean isAlive = true;
 
-public Character(int id, String name, int hp, boolean isAlive) {
+public Character(String name, int hp, boolean isAlive) {
         id++;
         setName(name);
         setHp(hp);
         setAlive(isAlive);
         }
 
+        // Creamos un método no estático, para recibir el daño
+       // public void damage(int damage) {};
 //getters and setters
 public static int getId() {
         return id;
