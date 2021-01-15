@@ -1,11 +1,25 @@
 package com.ironhack.rpg_simulator.main;
 
 import com.ironhack.rpg_simulator.classes.Warrior;
+import com.ironhack.rpg_simulator.classes.Wizard;
 
 public class Main {
 
-    //Ejemplo de Warrior
-    Warrior warrior = new Warrior("juan", 100, true, 33, 44);
+    public static void main(String[] args) {
+        //Ejemplo de Warrior
+        Warrior warrior = new Warrior("juan", 100, true, 4, 44);
 
-    warrior.attack();
+        //Ejemplo de flow de ataques
+        warrior.attack();
+        warrior.attack();
+        warrior.attack();
+
+        //Ejemplo de Wizard
+        Wizard wizard = new Wizard("Sonia", 50,true, 4, 22);
+
+        //Ejemplo de flow de ataques
+        Wizard.attack();
+        Wizard.attack();
+        Wizard.attack();
+    }
 }

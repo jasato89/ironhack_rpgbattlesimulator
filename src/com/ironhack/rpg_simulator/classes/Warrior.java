@@ -31,6 +31,8 @@ public class Warrior extends Character implements Atacker {
             damage = (int)(this.strength/2);
             this.stamina += 1;
         }
+
+        System.out.println(this.stamina);
         System.out.println(damage);
         return damage;
     }
