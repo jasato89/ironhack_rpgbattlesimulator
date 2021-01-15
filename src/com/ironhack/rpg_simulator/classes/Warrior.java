@@ -57,15 +57,5 @@ public class Warrior extends Character implements Atacker {
 
 }
 
-/*Both wizards and warrios will have the same attack command defined by an interface called Atacker.
 
-Warriors are strong well armored characters that focus on the attribute strength. Every round a warrior will try to do
-a "Heavy attack". The damage of a heavy attack is equals to their strength and every hit will decrease their stamina by
-5 points. If he can't make a heavy attack he will do a "Weak attack". The damage of a weak attack is the half of the
-strength (truncate decimals). Every weak attack will recover his stamina by 1.
-
-Wizards are the masters of the arcane their main attribute is intelligence. Every round a wizard will try to cast
-a "Fireball". The damage of a fireball is equals to his intelligence and every fireball will decrease their mana by 5 points.
-If he can't cast a fireball he will do a "Staff hit". The damage of a staff hit is equals to 2. Every staff hit will
-recover his mana by 1.*/
 

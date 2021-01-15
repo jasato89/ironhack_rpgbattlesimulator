@@ -1,6 +1,10 @@
 package com.ironhack.rpg_simulator.classes;
 
-public class Wizard extends Character{
+import com.ironhack.rpg_simulator.interfaces.Atacker;
+
+import javax.accessibility.AccessibleTable;
+
+public class Wizard extends Character implements Atacker {
 
     //propiedades
     private int mana;
@@ -11,6 +15,27 @@ public class Wizard extends Character{
         super(name, hp, isAlive);
         this.mana = mana;
         this.intelligence = intelligence;
+    }
+
+    //Método attack de mago
+    public int attack () {
+        //Métemos el resultado en la variable damage
+        int damage = 0;
+
+        //Esto es un Fireball
+        if( this.mana >= 5 ) {
+            damage = this.intelligence;
+            this.mana -= 5;
+        }
+        //Esto es un "Staff hit"
+        else {
+            damage = 2;
+            this.mana += 1;
+        }
+
+        System.out.println(this.mana);
+        System.out.println(damage);
+        return damage;
     }
 
     //getters and setters
@@ -32,10 +57,4 @@ public class Wizard extends Character{
     }
 }
 
-/*
-Wizard:
-
-mana - number to represent a resource the wizard consumes to cast spells
-intelligence - number to calculate how strong the wizard spells are
-*/
 

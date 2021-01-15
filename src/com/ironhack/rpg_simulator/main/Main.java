@@ -10,16 +10,17 @@ public class Main {
         Warrior warrior = new Warrior("juan", 100, true, 4, 44);
 
         //Ejemplo de flow de ataques
-        warrior.attack();
-        warrior.attack();
-        warrior.attack();
+        //warrior.attack();
+        //warrior.attack();
+        //warrior.attack();
 
         //Ejemplo de Wizard
-        Wizard wizard = new Wizard("Sonia", 50,true, 4, 22);
+        Wizard wizard = new Wizard("Sonia", 50, true, 4, 22);
 
         //Ejemplo de flow de ataques
-        Wizard.attack();
-        Wizard.attack();
-        Wizard.attack();
+        wizard.attack();
+        wizard.attack();
+        wizard.attack();
+
     }
 }
