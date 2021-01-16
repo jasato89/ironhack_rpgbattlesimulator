@@ -12,24 +12,48 @@ public class RoundStats {
     private int class2;
     private int loser;//1 for character of team 1, 2 for character of team 2, and 3 if both die
     private List<AttackStats> attackLogs;
+    private int roundNumber;
+    private boolean validRound;//false if at least one of the soldiers is already dead
 
 
-    public RoundStats (Character char1, Character char2) {
-        if(char1 instanceof Warrior) {
-            setClass1(1);
-        } else{
-            setClass1(2);
+    public RoundStats (Character char1, Character char2, int roundNumber) {
+        if(char1.isAlive() && char2.isAlive()) {
+            if(char1 instanceof Warrior) {
+                setClass1(1);
+            } else{
+                setClass1(2);
+            }
+            if(char2 instanceof Warrior) {
+                setClass2(1);
+            } else{
+                setClass2(2);
+            }
+            attackLogs = new ArrayList<>();
+            setValidRound(true);
+        } else {
+            setValidRound(false);
         }
-        if(char2 instanceof Warrior) {
-            setClass2(1);
-        } else{
-            setClass2(2);
-        }
-        attackLogs = new ArrayList<>();
+
     }
 
     public void addtoAttackLogs(AttackStats attackStats) {
         attackLogs.add(attackStats);
+    }
+
+    public int getRoundNumber() {
+        return roundNumber;
+    }
+
+    public void setRoundNumber(int roundNumber) {
+        this.roundNumber = roundNumber;
+    }
+
+    public boolean isValidRound() {
+        return validRound;
+    }
+
+    public void setValidRound(boolean validRound) {
+        this.validRound = validRound;
     }
 
     public List<AttackStats> getAttackLogs() {

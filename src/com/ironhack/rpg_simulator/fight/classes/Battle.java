@@ -19,9 +19,9 @@ public class Battle {
         //Output.announceTeam(party1, party2);
     }
 
-    public void fight(Character soldier1, Character soldier2) {
-        if(soldier1.isAlive() && soldier2.isAlive()) {
-            RoundStats round = new RoundStats(soldier1, soldier2);
+    public RoundStats fight(Character soldier1, Character soldier2) {
+        RoundStats round = new RoundStats(soldier1, soldier2, getRoundNumber());
+        if(round.isValidRound()) {
             while(soldier1.isAlive() && soldier2.isAlive()) {
                 AttackStats attackStats = new AttackStats(soldier1.getHp(), soldier2.getHp());
                 int[] damageValue1 = soldier1.attack(); //Saving the attack value of each soldier
@@ -39,7 +39,6 @@ public class Battle {
             if(!soldier1.isAlive()) {
                 graveyard.addSoldier(1,soldier1);
                 round.setLoser(1);
-                //Output.announceDeath(1, soldier1.getName);
             }
             if(!soldier2.isAlive()) {
                 graveyard.addSoldier(2,soldier2);
@@ -49,13 +48,9 @@ public class Battle {
                     round.setLoser(2);
                 }
             }
-            //String endAnnouncement = "Round " + getRoundNumber() + "has ended";
-            //Output.announceEnd(endAnnouncement);
-        } else{
-            //String endAnnouncement = "At least one contestant is already dead.";
-            //Output.announceEnd(endAnnouncement);
+            setRoundNumber(getRoundNumber() + 1);
         }
-
+        return round;
     }
 
     public int getRoundNumber() {
