@@ -1,5 +1,7 @@
 package com.ironhack.rpg_simulator.main;
 
+import com.ironhack.rpg_simulator.classes.Character;
+import com.ironhack.rpg_simulator.classes.Party;
 import com.ironhack.rpg_simulator.classes.Warrior;
 import com.ironhack.rpg_simulator.classes.Wizard;
 
@@ -21,5 +23,8 @@ public class Main {
         wizard.attack();
         wizard.attack();
 
+
+
     }
+
 }
