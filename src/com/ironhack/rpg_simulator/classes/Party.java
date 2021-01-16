@@ -18,7 +18,7 @@ public class Party {
         }
     }
 
-    public Object getMemberById(int id) {
+    public Character getMemberById(int id) {
         return party.get(id);
     }
 
