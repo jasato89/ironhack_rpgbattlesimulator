@@ -18,23 +18,23 @@ public class Wizard extends Character {
     }
 
     //Método attack de mago
-    public int attack () {
-        //Métemos el resultado en la variable damage
-        int damage = 0;
+    public int[] attack () {
+        //We insert the damage into an int
+        int[] damage = new int[2];
 
-        //Esto es un Fireball
+        //This is a Fireball
         if( this.mana >= 5 ) {
-            damage = this.intelligence;
+            damage[0] = this.intelligence;
             this.mana -= 5;
+            damage[1] = 1;
         }
-        //Esto es un "Staff hit"
+        //This is a "Staff hit"
         else {
-            damage = 2;
+            damage[0] = 2;
             this.mana += 1;
+            damage[1] = 2;
         }
 
-        System.out.println(this.mana);
-        System.out.println(damage);
         return damage;
     }
     //implementamos damage
