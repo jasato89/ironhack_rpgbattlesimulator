@@ -16,20 +16,22 @@ public class Warrior extends Character implements Atacker {
     }
 
     //Warrior's attack method
-    public int attack() {
+    public int[] attack() {
 
         //We insert the damage into an int
-        int damage = 0;
+        int[] damage = new int[2];
 
         //This is a heavy attack
         if( this.stamina >= 5 ) {
-            damage = this.strength;
+            damage[0] = this.strength;
             this.stamina -= 5;
+            damage[1] = 1;
         }
         //This is a Weak attack
         else {
-            damage = (int)(this.strength/2);
+            damage[0] = (int)(this.strength/2);
             this.stamina += 1;
+            damage[1] = 0;
         }
 
         System.out.println(this.stamina);
