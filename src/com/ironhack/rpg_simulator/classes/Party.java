@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Party {
+
     ArrayList<Character> party = new ArrayList<Character>();
     private final int PARTY_LIMIT = 10;
 
 
     public Party(ArrayList<Character> party) {
         this.party = party;
+    }
+
+    public Party() {
+        party = generateRandomParty();
     }
 
     public void getAllMembers() {
@@ -41,8 +46,10 @@ public class Party {
                 party.add(wizard);
             }
         }
-        return this.party;
+        return party;
     }
+
+
 
 
 }

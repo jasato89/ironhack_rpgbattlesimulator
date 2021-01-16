@@ -89,19 +89,18 @@ intelligence: random between 1-50*/
 
 
     public static Warrior getRandomWarrior() {
-        //public Warrior(String name, int hp, boolean isAlive, int stamina, int strength)
 
-        return new Warrior(WARRIOR_NAME[new Random(WARRIOR_NAME.length).nextInt()],
-                new Random(HP_MIN + 1).nextInt() + HP_MAX - HP_MIN, true,
-                new Random(STAMINA_MIN + 1).nextInt() + STAMINA_MAX - STAMINA_MIN,
-                new Random(STRENGTH_MIN + 1).nextInt() + STRENGTH_MAX - STRENGTH_MIN);
+        return new Warrior(WARRIOR_NAME[new Random().nextInt(WARRIOR_NAME.length)],
+                new Random().nextInt(HP_MIN + 1) + HP_MAX - HP_MIN, true,
+                new Random().nextInt(STAMINA_MIN + 1) + STAMINA_MAX - STAMINA_MIN,
+                new Random().nextInt(STRENGTH_MIN + 1) + STRENGTH_MAX - STRENGTH_MIN);
     }
 
     public static Wizard getRandomWizard() {
-        return new Wizard(WIZARD_NAME[new Random(WARRIOR_NAME.length).nextInt()],
-                new Random(HP_MIN + 1).nextInt() + HP_MAX - HP_MIN, true,
-                new Random(MANA_MIN + 1).nextInt() + MANA_MAX - MANA_MIN,
-                new Random(INTELLIGENCE_MIN + 1).nextInt() + INTELLIGENCE_MAX - INTELLIGENCE_MIN);
+        return new Wizard(WIZARD_NAME[new Random().nextInt(WARRIOR_NAME.length)],
+                new Random().nextInt(HP_MIN + 1) + HP_MAX - HP_MIN, true,
+                new Random().nextInt(MANA_MIN + 1) + MANA_MAX - MANA_MIN,
+                new Random().nextInt(INTELLIGENCE_MIN + 1) + INTELLIGENCE_MAX - INTELLIGENCE_MIN);
 
     }
 }
