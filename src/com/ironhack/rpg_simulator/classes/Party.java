@@ -27,18 +27,6 @@ public class Party {
         }
     }
 
-    @Override
-    public String toString() {
-
-        String result = "";
-        int i = 0;
-        for (Character character : party) {
-            result += i + " - " + character.toString() + "\n";
-            i++;
-        }
-        return result;
-
-    }
 
     public Character getMemberById(int id) {
         return party.get(id);
@@ -99,4 +87,16 @@ public class Party {
         this.teamName = teamName;
     }
 
+    @Override
+    public String toString() {
+
+        String result = "";
+        int i = 0;
+        for (Character character : party) {
+            result += i + " - " + character.toString() + "\n";
+            i++;
+        }
+        return result;
+
+    }
 }
