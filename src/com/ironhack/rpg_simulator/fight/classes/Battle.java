@@ -19,23 +19,35 @@ public class Battle {
         //Output.announceTeam(party1, party2);
     }
 
-    public void fight(Warrior soldier1, Warrior soldier2) {
+    public void fight(Character soldier1, Character soldier2) {
         if(soldier1.isAlive() && soldier2.isAlive()) {
-            //Output.announceFighters(soldier1, soldier2)
+            RoundStats round = new RoundStats(soldier1, soldier2);
             while(soldier1.isAlive() && soldier2.isAlive()) {
-                int damageValue1 = soldier1.attack();
-                int damageValue2 = soldier2.attack();
-                soldier1.damage(damageValue2);
-                soldier2.damage(damageValue1);
-                //Output.announceRound(soldier1, soldier2, String.valueOf(damageValue1), String.valueOf(damageValue2));
+                AttackStats attackStats = new AttackStats(soldier1.getHp(), soldier2.getHp());
+                int[] damageValue1 = soldier1.attack(); //Saving the attack value of each soldier
+                int[] damageValue2 = soldier2.attack();
+                soldier1.damage(damageValue2[0]); //Damaging the soldiers
+                soldier2.damage(damageValue1[0]);
+                attackStats.setAttackValue1(damageValue1[0]); //Saving the attack value to attackStats
+                attackStats.setAttackValue2(damageValue2[0]);
+                attackStats.setAttackType1(damageValue1[1]); //Saving type of attack, 1 for heavy and 2 for weak
+                attackStats.setAttackType2(damageValue2[1]);
+                attackStats.setFinalHp1(soldier1.getHp()); //Saving final hp of each soldier
+                attackStats.setFinalHp2(soldier2.getHp());
+                round.addtoAttackLogs(attackStats);
             }
             if(!soldier1.isAlive()) {
                 graveyard.addSoldier(1,soldier1);
+                round.setLoser(1);
                 //Output.announceDeath(1, soldier1.getName);
             }
             if(!soldier2.isAlive()) {
                 graveyard.addSoldier(2,soldier2);
-                //Output.announceDeath(2, soldier2.getName);
+                if(round.getLoser() == 1) { //In case both die at the same time, loser value is 3
+                    round.setLoser(3);
+                }else {
+                    round.setLoser(2);
+                }
             }
             //String endAnnouncement = "Round " + getRoundNumber() + "has ended";
             //Output.announceEnd(endAnnouncement);
@@ -44,84 +56,6 @@ public class Battle {
             //Output.announceEnd(endAnnouncement);
         }
 
-    }
-
-    public void fight(Warrior soldier1, Wizard soldier2) {
-        if(!soldier1.isAlive() || soldier2.isAlive()) {
-            //Output.announceFighters(soldier1, soldier2)
-            while (soldier1.isAlive() && soldier2.isAlive()) {
-                int damageValue1 = soldier1.attack();
-                int damageValue2 = soldier2.attack();
-                soldier1.damage(damageValue2);
-                soldier2.damage(damageValue1);
-                //Output.announceRound(soldier1, soldier2, String.valueOf(damageValue1), String.valueOf(damageValue2));
-            }
-            if (!soldier1.isAlive()) {
-                graveyard.addSoldier(1, soldier1);
-                //Output.announceDeath(1, soldier1.getName);
-            }
-            if (!soldier2.isAlive()) {
-                graveyard.addSoldier(2, soldier2);
-                //Output.announceDeath(2, soldier2.getName);
-            }
-            //String endAnnouncement = "Round " + getRoundNumber() + "has ended";
-            //Output.announceEnd(endAnnouncement);
-        } else {
-            //String endAnnouncement = "At least one contestant is dead.";
-            //Output.announceEnd(endAnnouncement);
-        }
-    }
-
-    public void fight(Wizard soldier1, Warrior soldier2) {
-        if(!soldier1.isAlive() || soldier2.isAlive()) {
-            //Output.announceFighters(soldier1, soldier2)
-            while (soldier1.isAlive() && soldier2.isAlive()) {
-                int damageValue1 = soldier1.attack();
-                int damageValue2 = soldier2.attack();
-                soldier1.damage(damageValue2);
-                soldier2.damage(damageValue1);
-                //Output.announceRound(soldier1, soldier2, String.valueOf(damageValue1), String.valueOf(damageValue2));
-            }
-            if (!soldier1.isAlive()) {
-                graveyard.addSoldier(1, soldier1);
-                //Output.announceDeath(1, soldier1.getName);
-            }
-            if (!soldier2.isAlive()) {
-                graveyard.addSoldier(2, soldier2);
-                //Output.announceDeath(2, soldier2.getName);
-            }
-            //String endAnnouncement = "Round " + getRoundNumber() + "has ended";
-            //Output.announceEnd(endAnnouncement);
-        } else {
-            //String endAnnouncement = "At least one contestant is dead.";
-            //Output.announceEnd(endAnnouncement);
-        }
-    }
-
-    public void fight(Wizard soldier1, Wizard soldier2) {
-        if(!soldier1.isAlive() || soldier2.isAlive()) {
-            //Output.announceFighters(soldier1, soldier2)
-            while (soldier1.isAlive() && soldier2.isAlive()) {
-                int damageValue1 = soldier1.attack();
-                int damageValue2 = soldier2.attack();
-                soldier1.damage(damageValue2);
-                soldier2.damage(damageValue1);
-                //Output.announceRound(soldier1, soldier2, String.valueOf(damageValue1), String.valueOf(damageValue2));
-            }
-            if (!soldier1.isAlive()) {
-                graveyard.addSoldier(1, soldier1);
-                //Output.announceDeath(1, soldier1.getName);
-            }
-            if (!soldier2.isAlive()) {
-                graveyard.addSoldier(2, soldier2);
-                //Output.announceDeath(2, soldier2.getName);
-            }
-            //String endAnnouncement = "Round " + getRoundNumber() + "has ended";
-            //Output.announceEnd(endAnnouncement);
-        } else {
-            //String endAnnouncement = "At least one contestant is dead.";
-            //Output.announceEnd(endAnnouncement);
-        }
     }
 
     public int getRoundNumber() {

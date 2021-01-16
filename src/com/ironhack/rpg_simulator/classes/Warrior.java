@@ -2,7 +2,7 @@ package com.ironhack.rpg_simulator.classes;
 
 import com.ironhack.rpg_simulator.interfaces.Atacker;
 
-public class Warrior extends Character implements Atacker {
+public class Warrior extends Character {
 
     //propiedades
     private int stamina;

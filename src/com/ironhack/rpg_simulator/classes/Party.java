@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Party {
     ArrayList<Character> party = new ArrayList<Character>();
 
-
     public Party(ArrayList<Character> party) {
         this.party = party;
     }
@@ -24,7 +23,6 @@ public class Party {
 
     public ArrayList<Character> getParty() {
         return party;
-
     }
 
     public ArrayList<Character> generateRandomParty() {

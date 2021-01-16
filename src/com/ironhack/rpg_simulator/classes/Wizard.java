@@ -4,7 +4,7 @@ import com.ironhack.rpg_simulator.interfaces.Atacker;
 
 import javax.accessibility.AccessibleTable;
 
-public class Wizard extends Character implements Atacker {
+public class Wizard extends Character {
 
     //propiedades
     private int mana;
