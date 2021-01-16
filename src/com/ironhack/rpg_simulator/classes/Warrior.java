@@ -37,16 +37,6 @@ public class Warrior extends Character implements Atacker {
         return damage;
     }
 
-    //implementamos damage
-    public void damage(int damage) {
-        int hp = getHp();
-        hp -= damage;
-        if(getHp() <= 0) {
-            boolean isAlive = isAlive();
-            isAlive = false;
-        }
-    }
-
     //getters and setters
     public int getStamina() {
         return stamina;
