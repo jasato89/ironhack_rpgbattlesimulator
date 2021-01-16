@@ -6,7 +6,7 @@ import javax.accessibility.AccessibleTable;
 
 public class Wizard extends Character implements Atacker {
 
-    //propiedades
+    //propieties
     private int mana;
     private int intelligence;
 
@@ -17,17 +17,17 @@ public class Wizard extends Character implements Atacker {
         this.intelligence = intelligence;
     }
 
-    //Método attack de mago
+    //Wizard's attack method
     public int attack () {
-        //Métemos el resultado en la variable damage
+        //We insert the damage into an int
         int damage = 0;
 
-        //Esto es un Fireball
+        //This is a Fireball
         if( this.mana >= 5 ) {
             damage = this.intelligence;
             this.mana -= 5;
         }
-        //Esto es un "Staff hit"
+        //This is a "Staff hit"
         else {
             damage = 2;
             this.mana += 1;
@@ -37,15 +37,7 @@ public class Wizard extends Character implements Atacker {
         System.out.println(damage);
         return damage;
     }
-    //implementamos damage
-    public void damage(int damage) {
-        int hp = getHp();
-        hp -= damage;
-        if(getHp() <= 0) {
-            boolean isAlive = isAlive();
-            isAlive = false;
-        }
-    }
+
 
     //getters and setters
 

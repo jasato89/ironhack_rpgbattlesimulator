@@ -2,8 +2,8 @@ package com.ironhack.rpg_simulator.classes;
 
 public abstract class Character{
 
-        //propiedades
-        //El id es static, porque tiene que ser un idenficador único, independientemente del número de instancias
+        //Propieties
+        //The id is static, beacuse the id needs to be unique. it doesn't matter how many instances we create
         private static int id = 0;
         private String name;
         private int hp;
@@ -17,7 +17,8 @@ public abstract class Character{
         }
 
 
-        //implementamos damage, no sera una clase abstracta porque todos las clases que heredan, lo reciben igual
+        //damage(), will be use to change the hp, after receiving damage
+        //we implemenet damage here, because this method won't change in the child's Classes.
         public void damage(int damage) {
                 this.hp -= damage;
                 if(this.hp <= 0) {

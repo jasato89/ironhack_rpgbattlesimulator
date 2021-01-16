@@ -4,7 +4,7 @@ import com.ironhack.rpg_simulator.interfaces.Atacker;
 
 public class Warrior extends Character implements Atacker {
 
-    //propiedades
+    //Propieties
     private int stamina;
     private int strength;
 
@@ -15,18 +15,18 @@ public class Warrior extends Character implements Atacker {
         this.strength = strength;
     }
 
-    //Implementamos el método attack(), especifico para el guerrero
+    //Warrior's attack method
     public int attack() {
 
-        //Métemos el resultado en la variable damage
+        //We insert the damage into an int
         int damage = 0;
 
-        //Esto es un heavy attack
+        //This is a heavy attack
         if( this.stamina >= 5 ) {
             damage = this.strength;
             this.stamina -= 5;
         }
-        //Esto es un Weak attack
+        //This is a Weak attack
         else {
             damage = (int)(this.strength/2);
             this.stamina += 1;
