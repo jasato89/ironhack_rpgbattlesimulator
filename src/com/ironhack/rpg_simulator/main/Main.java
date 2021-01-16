@@ -8,7 +8,6 @@ public class Main {
     public static void main(String[] args) {
         //Ejemplo de Warrior
         Warrior warrior = new Warrior("juan", 100, true, 4, 44);
-
         //Ejemplo de flow de ataques
         //warrior.attack();
         //warrior.attack();
