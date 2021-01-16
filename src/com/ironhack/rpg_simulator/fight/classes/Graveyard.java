@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Graveyard {
-    private List<Atacker> graveyard1;
-    private List<Atacker> graveyard2;
+    private List<Character> graveyard1;
+    private List<Character> graveyard2;
 
-    public void addSoldier(int team, Atacker soldier) {
+    public void addSoldier(int team, Character soldier) {
         if(team == 1) {
             this.graveyard1.add(soldier);
         } else if (team == 2) {
@@ -18,7 +18,7 @@ public class Graveyard {
         }
     }
 
-    public Atacker getSoldierByIndex(int team, int index) {
+    public Character getSoldierByIndex(int team, int index) {
         if(team == 1) {
             return graveyard1.get(index);
         } else if (team == 2) {
@@ -28,8 +28,8 @@ public class Graveyard {
         }
     }
 
-    public List<List<Atacker>> getAllSoldiers() {
-        List<List<Atacker>> deadSoldiers = new ArrayList<>();
+    public List<List<Character>> getAllSoldiers() {
+        List<List<Character>> deadSoldiers = new ArrayList<>();
         deadSoldiers.add(graveyard1);
         deadSoldiers.add(graveyard2);
         return deadSoldiers;
