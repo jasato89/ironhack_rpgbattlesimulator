@@ -7,13 +7,15 @@ public class Party {
 
     private final int PARTY_LIMIT = 10;
     private ArrayList<Character> party;
+    private String teamName;
 
-
-    public Party(ArrayList<Character> party) {
+    public Party(ArrayList<Character> party, String teamName) {
         this.party = party;
+        this.teamName = teamName;
     }
 
-    public Party() {
+    public Party(String teamName) {
+        this.teamName = teamName;
         party = new ArrayList<>();
     }
 
@@ -41,6 +43,7 @@ public class Party {
     public void removeMember(int id) {
         party.remove(id);
     }
+
     public void removeLast() {
         party.remove(party.size());
     }
@@ -75,5 +78,12 @@ public class Party {
         return party;
     }
 
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
 
 }
