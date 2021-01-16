@@ -1,9 +1,11 @@
 package com.ironhack.rpg_simulator.classes;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Party {
     ArrayList<Character> party = new ArrayList<Character>();
+    private final int PARTY_LIMIT = 10;
 
 
     public Party(ArrayList<Character> party) {
@@ -28,40 +30,18 @@ public class Party {
     }
 
     public ArrayList<Character> generateRandomParty() {
-
-   /*The Boulder
-    The Corrupter
-    The Skeleton
-    The Exalted
-    The Flurry
-    Ironfang
-    Phoenixgrip
-    Storm Tongue
-    Fire Blood
-    Raven Stride
-    The Jester
-    The Surgeon
-    The Temper
-    The Deserter
-    The Honorbound
-    Deathfury
-    Hellsword
-    Giantblade
-    Demon Brow
-    Bearcleaver
-    The Sentinel
-    The Widow Maker
-    The Savage
-    The Delirious
-    The Honorless
-    Boulder Song
-    Gorefist
-    Goreblood
-    Fistshade
-    Firethorn*/
-
-
-        return null;
+        party.clear();
+        for (int i = 0; i < PARTY_LIMIT; i++) {
+            boolean bool = new Random().nextBoolean();
+            if (bool) {
+                Character warrior = RandomCharacterDatabase.getRandomWarrior();
+                party.add(warrior);
+            } else {
+                Character wizard = RandomCharacterDatabase.getRandomWizard();
+                party.add(wizard);
+            }
+        }
+        return this.party;
     }
 
 
