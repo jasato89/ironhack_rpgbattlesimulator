@@ -1,8 +1,6 @@
 package com.ironhack.rpg_simulator.classes;
 
-import com.ironhack.rpg_simulator.interfaces.Atacker;
-
-public class Warrior extends Character implements Atacker {
+public class Warrior extends Character {
 
     //propiedades
     private int stamina;
@@ -22,13 +20,13 @@ public class Warrior extends Character implements Atacker {
         int damage = 0;
 
         //Esto es un heavy attack
-        if( this.stamina >= 5 ) {
+        if (this.stamina >= 5) {
             damage = this.strength;
             this.stamina -= 5;
         }
         //Esto es un Weak attack
         else {
-            damage = (int)(this.strength/2);
+            damage = (int) (this.strength / 2);
             this.stamina += 1;
         }
 

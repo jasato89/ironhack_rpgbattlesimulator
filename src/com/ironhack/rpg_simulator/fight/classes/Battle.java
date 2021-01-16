@@ -19,7 +19,8 @@ public class Battle {
         //Output.announceTeam(party1, party2);
     }
 
-    public void fight(Warrior soldier1, Warrior soldier2) {
+    public void fight(Character soldier1, Character soldier2) {
+
         if(soldier1.isAlive() && soldier2.isAlive()) {
             //Output.announceFighters(soldier1, soldier2)
             while(soldier1.isAlive() && soldier2.isAlive()) {
@@ -44,84 +45,6 @@ public class Battle {
             //Output.announceEnd(endAnnouncement);
         }
 
-    }
-
-    public void fight(Warrior soldier1, Wizard soldier2) {
-        if(!soldier1.isAlive() || soldier2.isAlive()) {
-            //Output.announceFighters(soldier1, soldier2)
-            while (soldier1.isAlive() && soldier2.isAlive()) {
-                int damageValue1 = soldier1.attack();
-                int damageValue2 = soldier2.attack();
-                soldier1.damage(damageValue2);
-                soldier2.damage(damageValue1);
-                //Output.announceRound(soldier1, soldier2, String.valueOf(damageValue1), String.valueOf(damageValue2));
-            }
-            if (!soldier1.isAlive()) {
-                graveyard.addSoldier(1, soldier1);
-                //Output.announceDeath(1, soldier1.getName);
-            }
-            if (!soldier2.isAlive()) {
-                graveyard.addSoldier(2, soldier2);
-                //Output.announceDeath(2, soldier2.getName);
-            }
-            //String endAnnouncement = "Round " + getRoundNumber() + "has ended";
-            //Output.announceEnd(endAnnouncement);
-        } else {
-            //String endAnnouncement = "At least one contestant is dead.";
-            //Output.announceEnd(endAnnouncement);
-        }
-    }
-
-    public void fight(Wizard soldier1, Warrior soldier2) {
-        if(!soldier1.isAlive() || soldier2.isAlive()) {
-            //Output.announceFighters(soldier1, soldier2)
-            while (soldier1.isAlive() && soldier2.isAlive()) {
-                int damageValue1 = soldier1.attack();
-                int damageValue2 = soldier2.attack();
-                soldier1.damage(damageValue2);
-                soldier2.damage(damageValue1);
-                //Output.announceRound(soldier1, soldier2, String.valueOf(damageValue1), String.valueOf(damageValue2));
-            }
-            if (!soldier1.isAlive()) {
-                graveyard.addSoldier(1, soldier1);
-                //Output.announceDeath(1, soldier1.getName);
-            }
-            if (!soldier2.isAlive()) {
-                graveyard.addSoldier(2, soldier2);
-                //Output.announceDeath(2, soldier2.getName);
-            }
-            //String endAnnouncement = "Round " + getRoundNumber() + "has ended";
-            //Output.announceEnd(endAnnouncement);
-        } else {
-            //String endAnnouncement = "At least one contestant is dead.";
-            //Output.announceEnd(endAnnouncement);
-        }
-    }
-
-    public void fight(Wizard soldier1, Wizard soldier2) {
-        if(!soldier1.isAlive() || soldier2.isAlive()) {
-            //Output.announceFighters(soldier1, soldier2)
-            while (soldier1.isAlive() && soldier2.isAlive()) {
-                int damageValue1 = soldier1.attack();
-                int damageValue2 = soldier2.attack();
-                soldier1.damage(damageValue2);
-                soldier2.damage(damageValue1);
-                //Output.announceRound(soldier1, soldier2, String.valueOf(damageValue1), String.valueOf(damageValue2));
-            }
-            if (!soldier1.isAlive()) {
-                graveyard.addSoldier(1, soldier1);
-                //Output.announceDeath(1, soldier1.getName);
-            }
-            if (!soldier2.isAlive()) {
-                graveyard.addSoldier(2, soldier2);
-                //Output.announceDeath(2, soldier2.getName);
-            }
-            //String endAnnouncement = "Round " + getRoundNumber() + "has ended";
-            //Output.announceEnd(endAnnouncement);
-        } else {
-            //String endAnnouncement = "At least one contestant is dead.";
-            //Output.announceEnd(endAnnouncement);
-        }
     }
 
     public int getRoundNumber() {

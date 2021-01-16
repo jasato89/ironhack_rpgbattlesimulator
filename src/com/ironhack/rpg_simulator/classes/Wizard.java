@@ -1,10 +1,6 @@
 package com.ironhack.rpg_simulator.classes;
 
-import com.ironhack.rpg_simulator.interfaces.Atacker;
-
-import javax.accessibility.AccessibleTable;
-
-public class Wizard extends Character implements Atacker {
+public class Wizard extends Character {
 
     //propiedades
     private int mana;
@@ -18,12 +14,12 @@ public class Wizard extends Character implements Atacker {
     }
 
     //Método attack de mago
-    public int attack () {
+    public int attack() {
         //Métemos el resultado en la variable damage
         int damage = 0;
 
         //Esto es un Fireball
-        if( this.mana >= 5 ) {
+        if (this.mana >= 5) {
             damage = this.intelligence;
             this.mana -= 5;
         }
@@ -37,11 +33,12 @@ public class Wizard extends Character implements Atacker {
         System.out.println(damage);
         return damage;
     }
+
     //implementamos damage
     public void damage(int damage) {
         int hp = getHp();
         hp -= damage;
-        if(getHp() <= 0) {
+        if (getHp() <= 0) {
             boolean isAlive = isAlive();
             isAlive = false;
         }
