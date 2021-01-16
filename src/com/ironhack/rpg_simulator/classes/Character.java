@@ -16,6 +16,7 @@ public abstract class Character{
                 setAlive(isAlive);
         }
 
+
         //implementamos damage, no sera una clase abstracta porque todos las clases que heredan, lo reciben igual
         public void damage(int damage) {
                 this.hp -= damage;
@@ -23,7 +24,6 @@ public abstract class Character{
                         this.isAlive = false;
                 }
         }
-
 
         //getters and setters
 

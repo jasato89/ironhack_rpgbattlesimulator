@@ -37,7 +37,6 @@ public class Warrior extends Character implements Atacker {
         return damage;
     }
 
-
     //getters and setters
     public int getStamina() {
         return stamina;
