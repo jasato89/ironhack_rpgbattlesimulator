@@ -6,10 +6,10 @@ import java.io.FileNotFoundException;   //Import File Exception to manage except
 import java.util.Scanner;   //Import Scanner package to read the CSV file
 import java.util.ArrayList;   //Import ArrayList package to manage ArrayList
 
-public class importParty {
+public class ImportParty {
 
     //Constructor required but the class isn't going to be initialized so it's private
-    private importParty() {}
+    private ImportParty() {}
 
     //The only method in the class. It'll return a Party object created from the information in the CSV file
     //that we'll pass as a parameter
