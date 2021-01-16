@@ -26,9 +26,6 @@ intelligence: random between 1-50*/
     private final int INTELLIGENCE_MAX = 50;
 
 
-
-
-
     private String[] warriorName = {"The Boulder",
             "The Corrupter",
             "The Skeleton",
@@ -60,7 +57,7 @@ intelligence: random between 1-50*/
             "Fistshade",
             "Firethorn"
     };
-    private String[] wizardNames = {"Ogirick",
+    private String[] wizardName = {"Ogirick",
             "Oshan",
             "Aquam",
             "Uzoneus",
@@ -99,13 +96,17 @@ intelligence: random between 1-50*/
 
         String name = warriorName[new Random(warriorName.length).nextInt()];
         return new Warrior(warriorName[new Random(warriorName.length).nextInt()],
-                new Random(HP_MIN +1).nextInt()+HP_MAX-HP_MIN, true,
-                new Random(STAMINA_MIN+1).nextInt()+ STAMINA_MAX-STAMINA_MIN,
+                new Random(HP_MIN + 1).nextInt() + HP_MAX - HP_MIN, true,
+                new Random(STAMINA_MIN + 1).nextInt() + STAMINA_MAX - STAMINA_MIN,
                 new Random(STRENGTH_MIN + 1).nextInt() + STRENGTH_MAX - STRENGTH_MIN);
     }
 
     @Override
     public Wizard getRandomWizard() {
-        return null;
+        return new Wizard(wizardName[new Random(warriorName.length).nextInt()],
+                new Random(HP_MIN + 1).nextInt() + HP_MAX - HP_MIN, true,
+                new Random(MANA_MIN + 1).nextInt() + MANA_MAX - MANA_MIN,
+                new Random(INTELLIGENCE_MIN + 1).nextInt() + INTELLIGENCE_MAX - INTELLIGENCE_MIN);
+
     }
 }
