@@ -37,6 +37,15 @@ public class Wizard extends Character implements Atacker {
         System.out.println(damage);
         return damage;
     }
+    //implementamos damage
+    public void damage(int damage) {
+        int hp = getHp();
+        hp -= damage;
+        if(getHp() <= 0) {
+            boolean isAlive = isAlive();
+            isAlive = false;
+        }
+    }
 
     //getters and setters
 
