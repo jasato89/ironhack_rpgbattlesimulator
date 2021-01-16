@@ -6,7 +6,7 @@ import java.util.Random;
 public class Party {
 
     private final int PARTY_LIMIT = 10;
-    ArrayList<Character> party;
+    private ArrayList<Character> party;
 
 
     public Party(ArrayList<Character> party) {
@@ -32,6 +32,17 @@ public class Party {
     public ArrayList<Character> getParty() {
         return party;
 
+    }
+
+    public void addMember(Character member) {
+        party.add(member);
+    }
+
+    public void removeMember(int id) {
+        party.remove(id);
+    }
+    public void removeLast() {
+        party.remove(party.size());
     }
 
     public ArrayList<Character> generateRandomParty() {
