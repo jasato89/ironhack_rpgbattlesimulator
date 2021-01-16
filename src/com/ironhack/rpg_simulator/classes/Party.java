@@ -14,7 +14,7 @@ public class Party {
     }
 
     public Party() {
-        party = generateRandomParty();
+        party = new ArrayList<>();
     }
 
     public void getAllMembers() {
