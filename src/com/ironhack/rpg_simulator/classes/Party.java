@@ -18,7 +18,7 @@ public class Party {
     }
 
     public void getAllMembers() {
-        int i = 1;
+        int i = 0;
         for (Character character : party) {
             System.out.println(i + " - " + character.toString());
             i++;
@@ -26,7 +26,7 @@ public class Party {
     }
 
     public Character getMemberById(int id) {
-        return party.get(id - 1);
+        return party.get(id);
     }
 
     public ArrayList<Character> getParty() {
