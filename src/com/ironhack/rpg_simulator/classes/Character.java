@@ -20,9 +20,10 @@ public abstract class Character{
         //damage(), will be use to change the hp, after receiving damage
         //we implemenet damage here, because this method won't change in the child's Classes.
         public void damage(int damage) {
-                this.hp -= damage;
-                if(this.hp <= 0) {
-                        this.isAlive = false;
+                //Changed primitives variables to getters and setters
+                setHp(getHp() - damage);
+                if(getHp() <= 0) {
+                        setAlive(false);
                 }
         }
 
