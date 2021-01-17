@@ -1,7 +1,6 @@
 package com.ironhack.rpg_simulator.classes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Party {
@@ -26,7 +25,7 @@ public class Party {
     }
 
     public Party(int partySize) {
-        this.name = "Team E";
+        this.name = RandomCharacterDatabase.getRandomName();
         partyMembers = generateRandomParty(partySize);
         this.partySize = partySize;
     }

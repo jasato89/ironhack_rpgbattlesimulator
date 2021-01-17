@@ -86,6 +86,40 @@ intelligence: random between 1-50*/
             "Uhobarin",
             "Orin"
     };
+    private static final String[] PARTY_NAME = {"Avengers",
+            "Goal Diggers",
+            "Hot Shots",
+            "Masters",
+            "Titans",
+            "Ringmasters",
+            "Brute Force",
+            "Pulverizers",
+            "Ambassadors",
+            "Barbarians",
+            "Black Knights",
+            "Cavaliers",
+            "Crusaders",
+            "Dream Crushers",
+            "Exterminators",
+            "Firing Squad",
+            "Ghost Riders",
+            "Golden Eagles",
+            "Head Hunters",
+            "Laser Beams",
+            "Neck Breakers",
+            "Novastars",
+            "Peacekeepers",
+            "Prairie Wolves",
+            "Puppet Masters",
+            "Razorbacks",
+            "Retrievers",
+            "Scrappers",
+            "Speed Demons",
+            "Thunder Bolts",
+            "Unlimited",
+            "Untouchables",
+            "White Walkers"
+    };
 
 
     public static Warrior getRandomWarrior() {
@@ -102,5 +136,9 @@ intelligence: random between 1-50*/
                 new Random().nextInt(MANA_MIN + 1) + MANA_MAX - MANA_MIN,
                 new Random().nextInt(INTELLIGENCE_MIN + 1) + INTELLIGENCE_MAX - INTELLIGENCE_MIN);
 
+    }
+
+    public static String getRandomName() {
+        return PARTY_NAME[new Random().nextInt(PARTY_NAME.length)];
     }
 }
