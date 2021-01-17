@@ -1,6 +1,5 @@
 package com.ironhack.rpg_simulator.classes;
 
-
 import java.io.File;   //Import File package to receive by parameter the CSV file to be read
 import java.io.FileNotFoundException;   //Import File Exception to manage exception if the file wasn't found
 import java.util.Scanner;   //Import Scanner package to read the CSV file
@@ -19,9 +18,9 @@ public class ImportParty {
         try {
             //Initializes the Scanner and ArrayList objects
             Scanner scannerCsv = new Scanner(csvFile);
-            ArrayList<Character> partyArray = new ArrayList<Character>();
+            ArrayList<Character> partyArray = new ArrayList<>();
 
-            //Saves the Party name from the File name
+            //Saves the Party name from the File name without '.csv'
             String partyName = csvFile.getName().substring(0, csvFile.getName().length() - 5);
             //Skips the first line of the CSV with the field names
             scannerCsv.nextLine();
@@ -45,8 +44,7 @@ public class ImportParty {
             }
             //Closes the Scanner and returns the Party
             scannerCsv.close();
-            Party partyCsv = new Party(partyName, partyArray);
-            return partyCsv;
+            return new Party(partyName, partyArray);
 
         } catch (FileNotFoundException e) {   //If the file isn't found, it prints an error message and returns null
             System.out.println("An error occurred.");
