@@ -1,9 +1,6 @@
 package com.ironhack.rpg_simulator.main;
 
 //<<<<<<< HEAD
-import com.ironhack.rpg_simulator.classes.RandomCharacterDatabase;
-import com.ironhack.rpg_simulator.classes.Warrior;
-import com.ironhack.rpg_simulator.classes.Wizard;
 //=======
 
 import com.ironhack.rpg_simulator.classes.Character;

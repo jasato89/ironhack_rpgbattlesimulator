@@ -25,7 +25,7 @@ public class Party {
     }
 
     public Party(int partySize) {
-        this.name = RandomCharacterDatabase.getRandomName();
+        this.name = RandomDatabaseGenerator.getRandomName();
         partyMembers = generateRandomParty(partySize);
         this.partySize = partySize;
     }
@@ -58,7 +58,7 @@ public class Party {
         for (int i = 0; i < partySize; i++) {
             boolean bool = new Random().nextBoolean();
             if (bool) {
-                Character warrior = RandomCharacterDatabase.getRandomWarrior();
+                Character warrior = RandomDatabaseGenerator.getRandomWarrior();
                 if (!partyMembers.isEmpty()) {
                     for (Character name : partyMembers) {
                         if (warrior.getName().equals(name.getName())) {
@@ -68,7 +68,7 @@ public class Party {
                 }
                 partyMembers.add(warrior);
             } else {
-                Character wizard = RandomCharacterDatabase.getRandomWizard();
+                Character wizard = RandomDatabaseGenerator.getRandomWizard();
                 if (!partyMembers.isEmpty()) {
                     for (Character name : partyMembers) {
                         if (wizard.getName().equals(name.getName())) {

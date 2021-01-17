@@ -155,22 +155,24 @@ public class OutputTerminal implements Output{
         String class2 = roundStats.getClass2() < 2 ? "Warrior" : "Wizard";
         String attackType1;
         String attackType2;
-        if(class1.equals("Warrior")){
-            attackType1 = attackStats.getAttackType1() < 2 ? "heavy attack" : "light attack";
-        } else {
-            attackType1 = attackStats.getAttackType1() < 2 ? "fireball" : "staff attack";
-        }
+        attackType1 = getAttackName(class1, attackStats.getAttackType1());
 
-        if(class2.equals("Warrior")){
-            attackType2 = attackStats.getAttackType2() < 2 ? "heavy attack" : "light attack";
-        } else {
-            attackType2 = attackStats.getAttackType2() < 2 ? "fireball" : "staff attack";
-        }
+        attackType2 = getAttackName(class2, attackStats.getAttackType2());
 
         int attackValue1 = attackStats.getAttackValue1();
         int attackValue2 = attackStats.getAttackValue2();
         System.out.println(name1 + " did " + attackValue1 + " damage using " + attackType1 + ".");
         System.out.println(name2 + " did " + attackValue2 + " damage using " + attackType2 + ".");
 
+    }
+
+    private String getAttackName(String class1, int attackType12) {
+        String attackType1;
+        if (class1.equals("Warrior")) {
+            attackType1 = attackType12 < 2 ? "heavy attack" : "light attack";
+        } else {
+            attackType1 = attackType12 < 2 ? "fireball" : "staff attack";
+        }
+        return attackType1;
     }
 }

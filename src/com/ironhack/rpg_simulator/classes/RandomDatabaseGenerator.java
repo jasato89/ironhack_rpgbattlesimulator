@@ -2,7 +2,7 @@ package com.ironhack.rpg_simulator.classes;
 
 import java.util.Random;
 
-public class RandomCharacterDatabase  {
+public class RandomDatabaseGenerator {
         /*Create a full party of randomly generated Wizards and Warriors with randomized stats considering this limits.
 
         name: based on an array of names, pick random position and if is already in the party add Jr at the end.
