@@ -21,7 +21,7 @@ public abstract class Character implements Attacker {
 
         private String className = null;
 
-        public Character(String name, int hp, boolean isAlive) {
+        public Character(String name, int hp) {
                 staticId++;
                 setName(name);
                 setHp(hp);

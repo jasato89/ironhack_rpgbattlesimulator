@@ -34,7 +34,7 @@ public class PlayMenu implements Page{
                 break;
             case "3":
 //                create a new party
-                nextPage = new createPartyPage();
+                nextPage = new CreatePartyPage();
                 break;
             case "4":
                 nextPage = new MainMenu();

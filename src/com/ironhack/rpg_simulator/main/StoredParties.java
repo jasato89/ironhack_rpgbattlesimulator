@@ -5,24 +5,29 @@ import com.ironhack.rpg_simulator.classes.Party;
 import java.util.ArrayList;
 import java.util.List;
 
-public static class StoredParties {
+public class StoredParties {
 
-    private List<Party> theList;
-
-    public static StoredParties() {
-        this.theList = new ArrayList<>();
+    private StoredParties() {
+        initializeStoredParties();
     }
 
+    private static List<Party> theList;
 
-    public void add (Party partyToAdd){
+    public static void initializeStoredParties(){
+        theList = new ArrayList<>();
+    }
+
+    public static void add (Party partyToAdd){
         theList.add(partyToAdd);
     }
 
-    public List<Party> getTheList() {
+    public static List<Party> getTheList() {
         return theList;
     }
 
-    public void setTheList(List<Party> theList) {
-        this.theList = theList;
-    }
+
+    //TODO IMPORT FROM CSV
+
+    //TODO EXPORT FROM CSV
+
 }

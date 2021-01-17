@@ -17,7 +17,7 @@ public class FighterPickPage implements Page{
     List<Character> fighters;
     Battle battle;
 
-    public FighterPickPage(StoredParties storedParties, Battle battle) throws IOException {
+    public FighterPickPage(Battle battle) throws IOException {
         this.parties = parties;
         this.battle = battle;
     }
@@ -27,12 +27,7 @@ public class FighterPickPage implements Page{
         System.out.println(title);
     }
 
-    @Override
     public void navigation() throws IOException {
-
-    }
-
-    public void navigation(StoredParties storedParties) throws IOException {
         System.out.println(prompt);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String selection = br.readLine().split(" ")[0];

@@ -7,8 +7,8 @@ public class Wizard extends Character {
     private int intelligence;
 
     //Constructor
-    public Wizard(String name, int hp, boolean isAlive, int mana, int intelligence) {
-        super(name, hp, isAlive);
+    public Wizard(String name, int hp, int mana, int intelligence) {
+        super(name, hp);
         this.mana = mana;
         this.intelligence = intelligence;
         setClassName("Wizard");
