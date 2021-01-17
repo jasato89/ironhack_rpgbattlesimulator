@@ -1,32 +1,54 @@
 package com.ironhack.rpg_simulator.classes;
 
-public abstract class Character {
+import com.ironhack.rpg_simulator.interfaces.Attacker;
 
+public abstract class Character implements Attacker {
         //propiedades
-//El id es static, porque tiene que ser un idenficador único, independientemente del número de instancias
-        private static int id = 0;
+        //El id es static, porque tiene que ser un idenficador único, independientemente del número de instancias
+        private static int staticId = 0;
+        private int id;
         private String name;
         private int hp;
         private boolean isAlive = true;
 
+        public String getClassName() {
+                return className;
+        }
+
+        public void setClassName(String className) {
+                this.className = className;
+        }
+
+        private String className = null;
+
         public Character(String name, int hp, boolean isAlive) {
-                id++;
+                staticId++;
                 setName(name);
                 setHp(hp);
                 setAlive(isAlive);
+                setId(staticId);
         }
 
-        // Creamos un método no estático, para recibir el daño. No es abstracto porque es igual en las clases que heredan
+
+        //implementamos damage, no sera una clase abstracta porque todos las clases que heredan, lo reciben igual
         public void damage(int damage) {
                 this.hp -= damage;
                 if(this.hp <= 0) {
                         this.isAlive = false;
                 }
-        };
+        }
+
+        public void setId(int id) {
+                this.id = id;
+        }
+
+        public String toString(){
+                return getName() + " " + getClassName() + " " + getHp();
+        }
 
         //getters and setters
 
-        public static int getId() {
+        public int getId() {
                 return id;
         }
 

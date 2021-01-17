@@ -1,8 +1,6 @@
 package com.ironhack.rpg_simulator.classes;
 
-import com.ironhack.rpg_simulator.interfaces.Atacker;
-
-public class Warrior extends Character implements Atacker {
+public class Warrior extends Character {
 
     //propiedades
     private int stamina;
@@ -13,28 +11,30 @@ public class Warrior extends Character implements Atacker {
         super(name, hp, isAlive);
         this.stamina = stamina;
         this.strength = strength;
+        setClassName("Warrior");
     }
 
     //Implementamos el método attack(), especifico para el guerrero
-    public int attack() {
-
-        //Métemos el resultado en la variable damage
-        int damage = 0;
-
-        //Esto es un heavy attack
+    public int[] attack() {
+        //We insert the damage into an int
+        int[] damage = new int[2];
+        //This is a heavy attack
         if( this.stamina >= 5 ) {
-            damage = this.strength;
+            damage[0] = this.strength;
             this.stamina -= 5;
+            damage[1] = 1;
         }
-        //Esto es un Weak attack
+        //This is a Weak attack
         else {
-            damage = (int)(this.strength/2);
+            damage[0] = (int)(this.strength/2);
             this.stamina += 1;
+            damage[1] = 2;
         }
-
-        System.out.println(this.stamina);
-        System.out.println(damage);
         return damage;
+    }
+
+    public String toString(){
+        return getName() + " " + getClassName() + " " + getHp() + " " + getStrength();
     }
 
     //getters and setters
