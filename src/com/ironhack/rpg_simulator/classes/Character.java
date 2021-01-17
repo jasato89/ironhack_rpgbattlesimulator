@@ -11,6 +11,16 @@ public abstract class Character implements Atacker {
         private int hp;
         private boolean isAlive = true;
 
+        public String getClassName() {
+                return className;
+        }
+
+        public void setClassName(String className) {
+                this.className = className;
+        }
+
+        private String className = null;
+
         public Character(String name, int hp, boolean isAlive) {
                 id++;
                 setName(name);
@@ -25,6 +35,11 @@ public abstract class Character implements Atacker {
                 if(this.hp <= 0) {
                         this.isAlive = false;
                 }
+        }
+
+
+        public String toString(){
+                return getName() + " " + getClassName() + " " + getHp();
         }
 
         //getters and setters

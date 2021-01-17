@@ -1,31 +1,16 @@
-package com.ironhack.rpg_simulator.main;
-
-<<<<<<< HEAD
-import com.ironhack.rpg_simulator.classes.RandomCharacterDatabase;
-import com.ironhack.rpg_simulator.classes.Warrior;
-import com.ironhack.rpg_simulator.classes.Wizard;
-=======
-
-import com.ironhack.rpg_simulator.classes.Character;
-import com.ironhack.rpg_simulator.classes.Party;
-import com.ironhack.rpg_simulator.fight.classes.AttackStats;
-import com.ironhack.rpg_simulator.fight.classes.Battle;
-import com.ironhack.rpg_simulator.fight.classes.RoundStats;
-import com.ironhack.rpg_simulator.output.OutputTerminal;
+package com.ironhack.rpg_simulator.output;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.List;
->>>>>>> 4c2ca25b6b037b41ad74b5365a8a0f37f5b02039
 
 public class Main {
 
     public static void main(String[] args) throws InterruptedException, IOException {
         OutputTerminal output = new OutputTerminal();
-        playBattle(output);
-//        startGame(output);
+        startGame(output);
     }
 
     private static void startGame(OutputTerminal output) throws InterruptedException, IOException {
@@ -174,26 +159,15 @@ public class Main {
     private static void playBattle(OutputTerminal output) throws IOException, InterruptedException {
         //TODO IMPLEMENTS AN OUTPUT FOR BATTLE IS OVER AND IMPLEMENTS A MENU TO GO BACK TO MAIN MENU
 
-        Party teamA = new Party(5);
-        Party teamB = new Party(5);
-
-        Battle battle = new Battle(teamA, teamB);
-
-        //TODO output 2 team and options to start fight
-
-        output.enterBattleRoutine(teamA, teamB);
-
 
         //TODO IMPLEMENTS FIGHTS BETWEEN TO RANDOM GENERATED TEAMS
+        System.out.println("Options...");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String selection = br.readLine();
         switch (selection){
             case "1":
                 //todo pick fighters
-                Character fighterTeamA = pickFighter(output, teamA);
-                Character fighterTeamB = pickFighter(output, teamB);
-                playNextRound(output, battle, fighterTeamA, fighterTeamB );
-                //TODO output fight
+                playNextRound(output);
                 break;
             case "2":
                 //TODO fast battle
@@ -209,28 +183,7 @@ public class Main {
         }
     }
 
-    private static void playNextRound(OutputTerminal output, Battle battle, Character fighterTeamA, Character fighterTeamB) throws IOException, InterruptedException {
-        RoundStats roundStats = battle.fight(fighterTeamA, fighterTeamB);
-        List<AttackStats> attackStats = roundStats.getAttackLogs();
-        for (AttackStats attack : attackStats ) {
-            output.roundRoutine(battle, fighterTeamA, fighterTeamB, attack);
-        }
-    }
-
-    private static Character pickFighter(OutputTerminal output, Party teamA) throws IOException, InterruptedException {
-        output.pickFighterRoutine(teamA);
-        System.out.println("Enter the index of the fighter u want to pick:");
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String r = br.readLine();
-        String [] rArray = r.split(" ");
-        int selection = Integer.parseInt(rArray[0]);
-        return teamA.getMemberFromList(selection);
-    }
-
     private static void playNextRound(OutputTerminal output) {
-
-
-
         //print
     }
 

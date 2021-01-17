@@ -1,65 +1,86 @@
 package com.ironhack.rpg_simulator.classes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class Party {
-    ArrayList<Character> party = new ArrayList<Character>();
 
-    public Party(ArrayList<Character> party) {
-        this.party = party;
+    public String getName() {
+        return name;
     }
 
-    public void getAllMembers() {
-        int i = 0;
-        for (Character character : party) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
+
+    private int partySize;
+    ArrayList<Character> partyMembers;
+
+
+    public Party(String name, ArrayList<Character> party) {
+        this.name = name;
+        this.partyMembers = party;
+    }
+
+    public Party(int partySize) {
+        this.name = "Team E";
+        partyMembers = generateRandomParty(partySize);
+        this.partySize = partySize;
+    }
+
+
+    public int getPartyMaxSize() {
+        return partySize;
+    }
+
+    public void printAllMembers() {
+        int i = 1;
+        for (Character character : partyMembers) {
             System.out.println(i + " - " + character.toString());
             i++;
         }
     }
 
-    public Character getMemberById(int id) {
-        return party.get(id);
+    public Character getMemberFromList(int index) {
+        return partyMembers.get(index - 1);
     }
 
-    public ArrayList<Character> getParty() {
-        return party;
+    public ArrayList<Character> getPartyMembers() {
+        return partyMembers;
+
     }
 
-    public ArrayList<Character> generateRandomParty() {
+    public ArrayList<Character> generateRandomParty(int partySize) {
+        partyMembers = new ArrayList<>();
+        for (int i = 0; i < partySize; i++) {
+            boolean bool = new Random().nextBoolean();
+            if (bool) {
+                Character warrior = RandomCharacterDatabase.getRandomWarrior();
+                if (!partyMembers.isEmpty()) {
+                    for (Character name : partyMembers) {
+                        if (warrior.getName().equals(name.getName())) {
+                            warrior.setName(warrior.getName() + " Jr.");
+                        }
+                    }
+                }
+                partyMembers.add(warrior);
+            } else {
+                Character wizard = RandomCharacterDatabase.getRandomWizard();
+                if (!partyMembers.isEmpty()) {
+                    for (Character name : partyMembers) {
+                        if (wizard.getName().equals(name.getName())) {
+                            wizard.setName(wizard.getName() + " Jr.");
+                        }
+                    }
+                }
+                partyMembers.add(wizard);
+            }
+        }
 
-   /*The Boulder
-    The Corrupter
-    The Skeleton
-    The Exalted
-    The Flurry
-    Ironfang
-    Phoenixgrip
-    Storm Tongue
-    Fire Blood
-    Raven Stride
-    The Jester
-    The Surgeon
-    The Temper
-    The Deserter
-    The Honorbound
-    Deathfury
-    Hellsword
-    Giantblade
-    Demon Brow
-    Bearcleaver
-    The Sentinel
-    The Widow Maker
-    The Savage
-    The Delirious
-    The Honorless
-    Boulder Song
-    Gorefist
-    Goreblood
-    Fistshade
-    Firethorn*/
-
-
-        return null;
+        return partyMembers;
     }
 
 
