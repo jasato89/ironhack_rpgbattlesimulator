@@ -14,7 +14,7 @@ public class Graveyard {
         this.graveyard2 = new ArrayList<>();
     }
 
-    public void addSoldier(int team, Character soldier) {
+    public void addSoldier(Character soldier, int team) {
         if(team == 1) {
             this.graveyard1.add(soldier);
         } else if (team == 2) {

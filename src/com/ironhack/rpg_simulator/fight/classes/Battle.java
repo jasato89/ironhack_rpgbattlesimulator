@@ -3,6 +3,8 @@ package com.ironhack.rpg_simulator.fight.classes;
 import com.ironhack.rpg_simulator.classes.Character;
 import com.ironhack.rpg_simulator.classes.Party;
 
+import java.util.List;
+
 public class Battle {
     private int roundNumber;
     private Graveyard graveyard;
@@ -17,34 +19,42 @@ public class Battle {
         //Output.announceTeam(party1, party2);
     }
 
-    public RoundStats fight(Character soldier1, Character soldier2) {
-        RoundStats round = new RoundStats(soldier1, soldier2, party1.getName(), party2.getName(), getRoundNumber());
+    public RoundStats fight(int fighterIndex1, int fighterIndex2) {
+        RoundStats round = new RoundStats(party1.getAliveMembers().get(fighterIndex1),party2.getAliveMembers().get(fighterIndex2), party1.getName(), party2.getName(), getRoundNumber());
         if(round.isValidRound()) {
-            while(soldier1.isAlive() && soldier2.isAlive()) {
-                AttackStats attackStats = new AttackStats(soldier1.getHp(), soldier2.getHp());
-                int[] damageValue1 = soldier1.attack(); //Saving the attack value of each soldier
-                int[] damageValue2 = soldier2.attack();
-                soldier1.damage(damageValue2[0]); //Damaging the soldiers
-                soldier2.damage(damageValue1[0]);
+            Character fighter1 = party1.getAliveMembers().get(fighterIndex1);
+            Character fighter2 = party2.getAliveMembers().get(fighterIndex2);
+            while(fighter1.isAlive() && fighter2.isAlive()) {
+                AttackStats attackStats = new AttackStats(fighter1.getHp(), fighter2.getHp());
+                int[] damageValue1 = fighter1.attack(); //Saving the attack value of each soldier
+                int[] damageValue2 = fighter2.attack();
+                fighter1.damage(damageValue2[0]); //Damaging the soldiers
+                fighter2.damage(damageValue1[0]);
                 attackStats.setAttackValue1(damageValue1[0]); //Saving the attack value to attackStats
                 attackStats.setAttackValue2(damageValue2[0]);
                 attackStats.setAttackType1(damageValue1[1]); //Saving type of attack, 1 for heavy and 2 for weak
                 attackStats.setAttackType2(damageValue2[1]);
-                attackStats.setFinalHp1(soldier1.getHp()); //Saving final hp of each soldier
-                attackStats.setFinalHp2(soldier2.getHp());
+                attackStats.setFinalHp1(fighter1.getHp()); //Saving final hp of each soldier
+                attackStats.setFinalHp2(fighter2.getHp());
                 round.addtoAttackLogs(attackStats);
             }
-            if(!soldier1.isAlive()) {
-                graveyard.addSoldier(1,soldier1);
+            if(!fighter1.isAlive()) {
+                graveyard.addSoldier(fighter1, 1);
+                party1.removeAliveMember();
                 round.setLoser(1);
+            } else{
+                party1.updateAliveMember(fighter1, fighterIndex1);
             }
-            if(!soldier2.isAlive()) {
-                graveyard.addSoldier(2,soldier2);
+            if(!fighter2.isAlive()) {
+                graveyard.addSoldier(fighter2, 2);
+                party2.removeAliveMember();
                 if(round.getLoser() == 1) { //In case both die at the same time, loser value is 3
                     round.setLoser(3);
                 }else {
                     round.setLoser(2);
                 }
+            } else {
+                party1.updateAliveMember(fighter2, fighterIndex2);
             }
             setRoundNumber(getRoundNumber() + 1);
         }

@@ -6,23 +6,13 @@ import java.util.Random;
 
 public class Party {
 
+    private String name;
+    private int partySize;
+    private List<Character> partyMembers;
     private List<Character> aliveMembers;
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    private String name;
-
-    private int partySize;
-    ArrayList<Character> partyMembers;
-
-
-    public Party(String name, ArrayList<Character> party) {
+    public Party(String name, List<Character> party) {
         this.name = name;
         this.partyMembers = party;
         aliveMembers = partyMembers;
@@ -35,12 +25,23 @@ public class Party {
         aliveMembers = partyMembers;
     }
 
+    public List<Character> getAliveMembers() {
+        return aliveMembers;
+    }
+
+    public void setAliveMembers(List<Character> aliveMembers) {
+        this.aliveMembers = aliveMembers;
+    }
+
+    public void updateAliveMember(Character updatedMember, int index) {
+        this.aliveMembers.set(index, updatedMember);
+    }
 
     public int getPartyMaxSize() {
         return partySize;
     }
 
-    public List<Character> updateAlive(){
+    public void removeAliveMember(){
         List<Character> temp = new ArrayList<>();
         for (Character character : aliveMembers)
         {
@@ -48,7 +49,6 @@ public class Party {
                 temp.add(character);
         }
         aliveMembers = temp;
-        return temp;
     }
 
     public void printAllMembers() {
@@ -61,16 +61,9 @@ public class Party {
         }
     }
 
-    public Character getMemberFromList(int index) {
-        return partyMembers.get(index - 1);
-    }
 
-    public ArrayList<Character> getPartyMembers() {
-        return partyMembers;
 
-    }
-
-    public ArrayList<Character> generateRandomParty(int partySize) {
+    public List<Character> generateRandomParty(int partySize) {
         partyMembers = new ArrayList<>();
 
         for (int i = 0; i < partySize; i++) {
@@ -99,6 +92,23 @@ public class Party {
         }
 
         return partyMembers;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Character getMemberFromList(int index) {
+        return partyMembers.get(index - 1);
+    }
+
+    public List<Character> getPartyMembers() {
+        return partyMembers;
+
     }
 
 

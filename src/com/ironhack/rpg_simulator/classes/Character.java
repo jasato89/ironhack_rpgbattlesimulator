@@ -3,10 +3,10 @@ package com.ironhack.rpg_simulator.classes;
 import com.ironhack.rpg_simulator.interfaces.Attacker;
 
 public abstract class Character implements Attacker {
-
         //propiedades
         //El id es static, porque tiene que ser un idenficador único, independientemente del número de instancias
-        private static int id = 0;
+        private static int staticId = 0;
+        private int id;
         private String name;
         private int hp;
         private boolean isAlive = true;
@@ -22,10 +22,11 @@ public abstract class Character implements Attacker {
         private String className = null;
 
         public Character(String name, int hp, boolean isAlive) {
-                id++;
+                staticId++;
                 setName(name);
                 setHp(hp);
                 setAlive(isAlive);
+                setId(staticId);
         }
 
 
@@ -37,6 +38,9 @@ public abstract class Character implements Attacker {
                 }
         }
 
+        public void setId(int id) {
+                this.id = id;
+        }
 
         public String toString(){
                 return getName() + " " + getClassName() + " " + getHp();
@@ -44,7 +48,7 @@ public abstract class Character implements Attacker {
 
         //getters and setters
 
-        public static int getId() {
+        public int getId() {
                 return id;
         }
 
