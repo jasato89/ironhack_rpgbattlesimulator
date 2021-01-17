@@ -16,11 +16,12 @@ public class Battle {
         this.party1 = party1;
         this.party2 = party2;
         setRoundNumber(0);
+        this.graveyard = new Graveyard();
         //Output.announceTeam(party1, party2);
     }
 
     public RoundStats fight(Character soldier1, Character soldier2) {
-        RoundStats round = new RoundStats(soldier1, soldier2, getRoundNumber());
+        RoundStats round = new RoundStats(soldier1, soldier2, party1.getName(), party2.getName(), getRoundNumber());
         if(round.isValidRound()) {
             while(soldier1.isAlive() && soldier2.isAlive()) {
                 AttackStats attackStats = new AttackStats(soldier1.getHp(), soldier2.getHp());

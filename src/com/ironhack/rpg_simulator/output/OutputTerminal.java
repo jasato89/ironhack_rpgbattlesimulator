@@ -4,6 +4,7 @@ import com.ironhack.rpg_simulator.classes.Character;
 import com.ironhack.rpg_simulator.classes.Party;
 import com.ironhack.rpg_simulator.fight.classes.AttackStats;
 import com.ironhack.rpg_simulator.fight.classes.Battle;
+import com.ironhack.rpg_simulator.fight.classes.RoundStats;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -141,15 +142,35 @@ public class OutputTerminal implements Output{
         teamA.printAllMembers();
     }
 
-    public void roundRoutine(Battle battle, Character fighterTeamA, Character fighterTeamB, AttackStats attackStats) throws IOException, InterruptedException {
+    public void roundRoutine(Battle battle, RoundStats roundStats, Character fighterTeamA, Character fighterTeamB, AttackStats attackStats) throws IOException, InterruptedException {
         terminalRenderer.clearScreen();
         int maxSize1 = battle.getParty1().getPartyMaxSize();
         //need current size
         int maxSize2 = battle.getParty2().getPartyMaxSize();
         //need current size
+        int currentRound = battle.getRoundNumber();
         String name1 = fighterTeamA.getName();
         String name2 = fighterTeamB.getName();
-        String attack1 = attackStats.getAttackType1() < 2 ? "heavy" : "light";
-        String attack2 = attackStats.getAttackType1() < 2 ? "heavy" : "light";
+        String class1 = roundStats.getClass1() < 2 ? "Warrior" : "Wizard";
+        String class2 = roundStats.getClass2() < 2 ? "Warrior" : "Wizard";
+        String attackType1;
+        String attackType2;
+        if(class1.equals("Warrior")){
+            attackType1 = attackStats.getAttackType1() < 2 ? "heavy attack" : "light attack";
+        } else {
+            attackType1 = attackStats.getAttackType1() < 2 ? "fireball" : "staff attack";
+        }
+
+        if(class2.equals("Warrior")){
+            attackType2 = attackStats.getAttackType2() < 2 ? "heavy attack" : "light attack";
+        } else {
+            attackType2 = attackStats.getAttackType2() < 2 ? "fireball" : "staff attack";
+        }
+
+        int attackValue1 = attackStats.getAttackValue1();
+        int attackValue2 = attackStats.getAttackValue2();
+        System.out.println(name1 + " did " + attackValue1 + " damage using " + attackType1 + ".");
+        System.out.println(name2 + " did " + attackValue2 + " damage using " + attackType2 + ".");
+
     }
 }

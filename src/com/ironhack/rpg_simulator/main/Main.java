@@ -1,10 +1,10 @@
 package com.ironhack.rpg_simulator.main;
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import com.ironhack.rpg_simulator.classes.RandomCharacterDatabase;
 import com.ironhack.rpg_simulator.classes.Warrior;
 import com.ironhack.rpg_simulator.classes.Wizard;
-=======
+//=======
 
 import com.ironhack.rpg_simulator.classes.Character;
 import com.ironhack.rpg_simulator.classes.Party;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
->>>>>>> 4c2ca25b6b037b41ad74b5365a8a0f37f5b02039
+//>>>>>>> 4c2ca25b6b037b41ad74b5365a8a0f37f5b02039
 
 public class Main {
 
@@ -211,10 +211,17 @@ public class Main {
 
     private static void playNextRound(OutputTerminal output, Battle battle, Character fighterTeamA, Character fighterTeamB) throws IOException, InterruptedException {
         RoundStats roundStats = battle.fight(fighterTeamA, fighterTeamB);
-        List<AttackStats> attackStats = roundStats.getAttackLogs();
-        for (AttackStats attack : attackStats ) {
-            output.roundRoutine(battle, fighterTeamA, fighterTeamB, attack);
+        if(roundStats.isValidRound()){
+            List<AttackStats> attackStats = roundStats.getAttackLogs();
+            System.out.println("Starting round " + battle.getRoundNumber() + "...");
+            for (AttackStats attack : attackStats ) {
+                output.roundRoutine(battle, roundStats, fighterTeamA, fighterTeamB, attack);
+            }
+            System.out.println(roundStats.getRoundWinner(fighterTeamA, fighterTeamB));
+        } else {
+            System.out.println("At least one of the contestants is dead.");
         }
+
     }
 
     private static Character pickFighter(OutputTerminal output, Party teamA) throws IOException, InterruptedException {

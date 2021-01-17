@@ -55,6 +55,7 @@ public class Party {
 
     public ArrayList<Character> generateRandomParty(int partySize) {
         partyMembers = new ArrayList<>();
+
         for (int i = 0; i < partySize; i++) {
             boolean bool = new Random().nextBoolean();
             if (bool) {

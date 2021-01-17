@@ -10,6 +10,11 @@ public class Graveyard {
     private List<Character> graveyard1;
     private List<Character> graveyard2;
 
+    public Graveyard() {
+        this.graveyard1 = new ArrayList<>();
+        this.graveyard2 = new ArrayList<>();
+    }
+
     public void addSoldier(int team, Character soldier) {
         if(team == 1) {
             this.graveyard1.add(soldier);

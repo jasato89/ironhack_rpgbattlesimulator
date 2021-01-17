@@ -10,13 +10,15 @@ public class RoundStats {
 
     private int class1; //1 for Warrior, 2 for Wizard
     private int class2;
+    private String nameTeam1;
+    private String nameTeam2;
     private int loser;//1 for character of team 1, 2 for character of team 2, and 3 if both die
     private List<AttackStats> attackLogs;
     private int roundNumber;
     private boolean validRound;//false if at least one of the soldiers is already dead
 
 
-    public RoundStats (Character char1, Character char2, int roundNumber) {
+    public RoundStats (Character char1, Character char2, String nameTeam1, String nameTeam2, int roundNumber) {
         if(char1.isAlive() && char2.isAlive()) {
             if(char1 instanceof Warrior) {
                 setClass1(1);
@@ -29,11 +31,40 @@ public class RoundStats {
                 setClass2(2);
             }
             attackLogs = new ArrayList<>();
+            setNameTeam1(nameTeam1);
+            setNameTeam2(nameTeam2);
+            setRoundNumber(roundNumber);
             setValidRound(true);
         } else {
             setValidRound(false);
         }
 
+    }
+
+    public String getRoundWinner(Character soldier1, Character soldier2) {
+        if(getLoser() == 1) {
+            return "The winner is " + soldier2.getName() + " from team " + nameTeam2;
+        } else if(getLoser() == 2) {
+            return "The winner is " + soldier1.getName() + " from team " + nameTeam1;
+        } else{
+            return "Any of the contestants survived.";
+        }
+    }
+
+    public String getNameTeam1() {
+        return nameTeam1;
+    }
+
+    public void setNameTeam1(String nameTeam1) {
+        this.nameTeam1 = nameTeam1;
+    }
+
+    public String getNameTeam2() {
+        return nameTeam2;
+    }
+
+    public void setNameTeam2(String nameTeam2) {
+        this.nameTeam2 = nameTeam2;
     }
 
     public void addtoAttackLogs(AttackStats attackStats) {
