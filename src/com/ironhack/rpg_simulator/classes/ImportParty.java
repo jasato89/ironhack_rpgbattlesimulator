@@ -21,6 +21,8 @@ public class ImportParty {
             Scanner scannerCsv = new Scanner(csvFile);
             ArrayList<Character> partyArray = new ArrayList<Character>();
 
+            //Saves the Party name from the File name
+            String partyName = csvFile.getName().substring(0, csvFile.getName().length() - 5);
             //Skips the first line of the CSV with the field names
             scannerCsv.nextLine();
             //The following will be repeated for each line of data
@@ -43,7 +45,7 @@ public class ImportParty {
             }
             //Closes the Scanner and returns the Party
             scannerCsv.close();
-            Party partyCsv = new Party(partyArray);
+            Party partyCsv = new Party(partyName, partyArray);
             return partyCsv;
 
         } catch (FileNotFoundException e) {   //If the file isn't found, it prints an error message and returns null
