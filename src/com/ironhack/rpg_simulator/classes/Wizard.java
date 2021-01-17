@@ -4,9 +4,9 @@ import com.ironhack.rpg_simulator.interfaces.Atacker;
 
 import javax.accessibility.AccessibleTable;
 
-public class Wizard extends Character {
+public class Wizard extends Character implements Atacker {
 
-    //propiedades
+    //propieties
     private int mana;
     private int intelligence;
 
@@ -15,10 +15,9 @@ public class Wizard extends Character {
         super(name, hp, isAlive);
         this.mana = mana;
         this.intelligence = intelligence;
-        setClassName("Wizard");
     }
 
-    //Método attack de mago
+    //Wizard's attack method
     public int[] attack () {
         //We insert the damage into an int
         int[] damage = new int[2];
@@ -33,24 +32,14 @@ public class Wizard extends Character {
         else {
             damage[0] = 2;
             this.mana += 1;
-            damage[1] = 2;
+            damage[1] = 0;
         }
 
+        System.out.println(this.mana);
+        System.out.println(damage);
         return damage;
     }
-    //implementamos damage
-    public void damage(int damage) {
-        int hp = getHp();
-        hp -= damage;
-        if(getHp() <= 0) {
-            boolean isAlive = isAlive();
-            isAlive = false;
-        }
-    }
 
-    public String toString(){
-        return getName() + " " + getClassName() + " " + getHp() + " " + getIntelligence();
-    }
 
     //getters and setters
 

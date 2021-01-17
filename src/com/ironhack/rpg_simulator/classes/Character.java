@@ -4,9 +4,9 @@ import com.ironhack.rpg_simulator.interfaces.Atacker;
 
 public abstract class Character implements Atacker {
 
-        //propiedades
-        //El id es static, porque tiene que ser un idenficador único, independientemente del número de instancias
-        private static int id = 0;
+        //Propieties
+        private static int idStatic = 0;
+        private int id;
         private String name;
         private int hp;
         private boolean isAlive = true;
@@ -22,18 +22,21 @@ public abstract class Character implements Atacker {
         private String className = null;
 
         public Character(String name, int hp, boolean isAlive) {
-                id++;
+                idStatic++;
                 setName(name);
                 setHp(hp);
                 setAlive(isAlive);
+                setId();
         }
 
 
-        //implementamos damage, no sera una clase abstracta porque todos las clases que heredan, lo reciben igual
+        //damage(), will be use to change the hp, after receiving damage
+        //we implemenet damage here, because this method won't change in the child's Classes.
         public void damage(int damage) {
-                this.hp -= damage;
-                if(this.hp <= 0) {
-                        this.isAlive = false;
+                //Changed primitives variables to getters and setters
+                setHp(getHp() - damage);
+                if(getHp() <= 0) {
+                        setAlive(false);
                 }
         }
 
@@ -44,9 +47,11 @@ public abstract class Character implements Atacker {
 
         //getters and setters
 
-        public static int getId() {
-                return id;
+        public static int getIdStatic() {
+                return idStatic;
         }
+
+        public void setId() { this.id = idStatic;}
 
         public String getName() {
                 return name;
