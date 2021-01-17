@@ -1,6 +1,10 @@
 package com.ironhack.rpg_simulator.output;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class Main {
 
@@ -34,8 +38,23 @@ public class Main {
 
     }
 
-    private static void playOptionsMenu(OutputTerminal output) {
-        //TODO OPTION OUTPUT
+    private static void playOptionsMenu(OutputTerminal output) throws IOException, InterruptedException {
+        System.out.println("Option menu, 1 to import, 2 to export, 3 to exit");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String selection = br.readLine();
+        switch (selection){
+            case "1":
+                //TODO Import from CSV
+                break;
+            case "2":
+                //TODO Export to CSV
+                break;
+            case "3":
+                //TODO EXIT
+                break;
+            default:
+                playOptionsMenu(output);
+        }
     }
 
     private static void startPlayMenu(OutputTerminal output) throws IOException, InterruptedException {
@@ -58,43 +77,82 @@ public class Main {
         }
     }
 
-    private static void playCreateTeam(OutputTerminal output) {
-        //TODO TEAM CREATION OUTPUT
-        String selection = null;
-        //TODO CALL OUTPUT UPDATED WITH TEAM NAME
-        selection = null;
-        //TODO analize the string to construct the player to add
-        //TODO ADD A SWITCH TO ADD ONE MORE OR EXIT TO MAIN MENU
+    private static void playCreateTeam(OutputTerminal output) throws IOException, InterruptedException {
+        String teamNamePrompt = "Type new team name:";
+        String[] teamName = output.createTeamRoutine(teamNamePrompt, "" , "");
+        //TODO CREATE TEAM WITH NAME
+
+        String charNamePrompt = "Type new character 'name':";
+        String[] charName = output.createTeamRoutine(charNamePrompt, Arrays.toString(teamName), "" );
+        String charClassPrompt = "Type new character 'class':";
+        String[] charClass = output.createTeamRoutine(charClassPrompt, Arrays.toString(teamName), Arrays.toString(charName) );
+        String charStatsPrompt = "Type: 'hp main_stats second_stats' values:";
+        String charString = Arrays.toString(charName) + Arrays.toString(charClass);
+        String[] charStats = output.createTeamRoutine(charStatsPrompt, Arrays.toString(teamName), charString);
+        charString += Arrays.toString(charStats);
+
+        //TODO ADD CHAR TO TEAM
+
+        //TODO OUTPUT WITH ALL TEAM
+        String continueCreateCharPrompt = "";
+        String[] selection = output.createTeamRoutine(continueCreateCharPrompt, Arrays.toString(teamName), charString);
+
+        switch (selection[0]){
+            case "1":
+                //TODO ADD ONE MORE
+                break;
+            case "2":
+                playMainMenu(output);
+                break;
+
+            default:
+                playMainMenu(output);
+        }
     }
 
     private static void playTeamSelection(OutputTerminal output) throws IOException, InterruptedException {
-        //TODO TEAM SELECTION OUTPUT
-        String selection = null;
-        int indexTeamA = Integer.getInteger(selection);
-        //TODO SELECTION TEAM TWO OUTPUT
-        selection = null;
-        int indexTeamB = Integer.getInteger(selection);
-        playBattle(output, indexTeamA, indexTeamB);
+
+        int indexTeamA = 0, indexTeamB = 0;
+
+        //TODO Print all team INDEX + NAME
+
+        //TODO Ask for index
+
+        //TODO save decision
+
+        //TODO Print all team INDEX + NAME
+
+        //TODO Ask for index
+
+        //TODO save decision
+
+
+        //playBattle(output, indexTeamA, indexTeamB);
+
     }
 
     private static void playBattle(OutputTerminal output, int indexTeamA, int indexTeamB) throws IOException, InterruptedException {
-        //TODO IMPLEMENTS FIGHTS BETWEEN TO RANDOM GENERATED TEAMS
-        String selection = null;
+        //TODO IMPLEMENTS FIGHTS
+
+        System.out.println("Options...");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String selection = br.readLine();
         switch (selection){
             case "1":
+                //todo pick fighters
                 playNextRound(output);
                 break;
             case "2":
-                //TODO
+                //TODO fast battle
                 break;
             case "3":
-                playCreateTeam(output);
+                //TODO NADA
                 break;
             case "4":
                 playMainMenu(output);
                 break;
             default:
-                playBattle(output);
+                //TODO see case 1
         }
     }
 
@@ -103,26 +161,30 @@ public class Main {
 
 
         //TODO IMPLEMENTS FIGHTS BETWEEN TO RANDOM GENERATED TEAMS
-        String selection = null;
+        System.out.println("Options...");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String selection = br.readLine();
         switch (selection){
             case "1":
+                //todo pick fighters
                 playNextRound(output);
                 break;
             case "2":
-                //TODO
+                //TODO fast battle
                 break;
             case "3":
-                playCreateTeam(output);
+                //TODO NADA
                 break;
             case "4":
                 playMainMenu(output);
                 break;
             default:
-                playBattle(output);
+                //TODO see case 1
         }
     }
 
     private static void playNextRound(OutputTerminal output) {
+        //print
     }
 
     private static void playIntro(OutputTerminal output) throws IOException, InterruptedException {
