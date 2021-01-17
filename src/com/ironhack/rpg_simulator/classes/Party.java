@@ -1,16 +1,17 @@
 package com.ironhack.rpg_simulator.classes;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class Party {
-
     private String name;
     private int partySize;
     private List<Character> partyMembers;
     private List<Character> aliveMembers;
-
 
     public Party(String name, List<Character> party) {
         this.name = name;
@@ -18,12 +19,14 @@ public class Party {
         aliveMembers = partyMembers;
     }
 
+
     public Party(int partySize) {
         this.name = RandomDatabaseGenerator.getRandomName();
         this.partySize = partySize;
         partyMembers = generateRandomParty(partySize);
         aliveMembers = partyMembers;
     }
+
 
     public List<Character> getAliveMembers() {
         return aliveMembers;
@@ -41,10 +44,9 @@ public class Party {
         return partySize;
     }
 
-    public void removeAliveMember(){
+    public void removeAliveMember() {
         List<Character> temp = new ArrayList<>();
-        for (Character character : aliveMembers)
-        {
+        for (Character character : aliveMembers) {
             if (character.isAlive())
                 temp.add(character);
         }
@@ -60,8 +62,6 @@ public class Party {
             }
         }
     }
-
-
 
     public List<Character> generateRandomParty(int partySize) {
         partyMembers = new ArrayList<>();
@@ -108,6 +108,42 @@ public class Party {
 
     public List<Character> getPartyMembers() {
         return partyMembers;
+
+    }
+
+    public void exportParty() throws IOException {
+        File dir = new File("src/com/ironhack/rpg_simulator/csv_files");
+        String fileName = getName() + ".csv";
+        String[] pathNames = dir.list();
+        int counter = 0;
+
+        for (String path : pathNames) {
+            if (path.toString().equals(fileName)) {
+                counter++;
+            }
+        }
+        if (counter > 0) {
+            fileName += "_" + counter;
+        }
+
+        File file = new File("src/com/ironhack/rpg_simulator/csv_files/" + fileName);
+        file.createNewFile();
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write("id, name, hp, stamina, strength, mana, intelligence\n");
+
+
+
+        for (Character character : partyMembers) {
+            if (character instanceof Warrior) {
+                Warrior warrior = (Warrior) character;
+                fileWriter.write(String.format("%s, %s, %d, %d, %d, ,\n", warrior.getId(), warrior.getName(), warrior.getHp(), warrior.getStamina(), warrior.getStrength());
+            } else if (character instanceof Wizard) {
+                Wizard wizard = (Wizard) character;
+                fileWriter.write(String.format("%s, %s, %d, , , %d, %d\n", wizard.getId(), wizard.getName(), wizard.getHp(), wizard.getMana(), wizard.getIntelligence()));
+            }
+
+        }
+
 
     }
 

@@ -43,7 +43,7 @@ public class ImportParty {
             }
             //Closes the Scanner and returns the Party
             scannerCsv.close();
-            Party partyCsv = new Party(partyArray);
+            Party partyCsv = new Party("NameOfTheParty", partyArray);
             return partyCsv;
 
         } catch (FileNotFoundException e) {   //If the file isn't found, it prints an error message and returns null
