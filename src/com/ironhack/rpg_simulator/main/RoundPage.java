@@ -65,11 +65,11 @@ public class RoundPage implements Page {
         RoundStats roundStats = battle.fight(fightersIndexes[0], fightersIndexes[1]);
         List<AttackStats> attackStats = roundStats.getAttackLogs();
         System.out.println("Starting round " + battle.getRoundNumber() + "...");
+        String name1 = roundStats.getNameFighter1();
+        String name2 = roundStats.getNameFighter2();
+        String class1 = roundStats.getClass1() < 2 ? "Warrior" : "Wizard";
+        String class2 = roundStats.getClass2() < 2 ? "Warrior" : "Wizard";
         for (AttackStats attack : attackStats ) {
-            String name1 = attack.getName1();
-            String name2 = attack.getName2();
-            String class1 = roundStats.getClass1() < 2 ? "Warrior" : "Wizard";
-            String class2 = roundStats.getClass2() < 2 ? "Warrior" : "Wizard";
             String attackType1 = getAttackName(class1, attack.getAttackType1());
             String attackType2 = getAttackName(class2, attack.getAttackType2());
             int attackValue1 = attack.getAttackValue1();
@@ -77,7 +77,7 @@ public class RoundPage implements Page {
             System.out.println(name1 + " did " + attackValue1 + " damage using " + attackType1 + ".");
             System.out.println(name2 + " did " + attackValue2 + " damage using " + attackType2 + ".");
         }
-        System.out.println(roundStats.getRoundWinner(fighters.get(0), fighters.get(1)));
+        System.out.println(roundStats.getRoundWinner(name1, name2));
 
         return battle;
     }
