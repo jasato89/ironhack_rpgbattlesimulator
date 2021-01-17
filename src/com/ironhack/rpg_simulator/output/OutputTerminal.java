@@ -9,17 +9,15 @@ import com.ironhack.rpg_simulator.fight.classes.RoundStats;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
 
-public class OutputTerminal implements Output{
+public class OutputTerminal implements Output {
 
 
-    MapStorage  mapStorage = new MapStorage();
+    MapStorage mapStorage = new MapStorage();
     char[][] map = mapStorage.blankMap;
     MapBuilder mapBuilder = new MapBuilder();
     private TerminalRenderer terminalRenderer;
-
 
 
     //map 24*15
@@ -61,16 +59,17 @@ public class OutputTerminal implements Output{
         terminalRenderer.drawScreen(mapStorage.mainMenu);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String r = br.readLine();
-        String [] rArray = r.split(" ");
+        String[] rArray = r.split(" ");
         return rArray[0];
     }
+
     public String playMenuRoutine() throws IOException, InterruptedException {
         terminalRenderer = new TerminalRenderer();
         terminalRenderer.clearScreen();
         terminalRenderer.drawScreen(mapStorage.playMenuMap);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String r = br.readLine();
-        String [] rArray = r.split(" ");
+        String[] rArray = r.split(" ");
         return rArray[0];
     }
 
@@ -85,13 +84,13 @@ public class OutputTerminal implements Output{
         System.out.println();
         System.out.println("   Character: " + charString);
         System.out.println();
-        System.out.println( textToPrompt);
+        System.out.println(textToPrompt);
         System.out.println("\n\n\n");
-        System.out.println((char) 27 + "[41m" + "                                " + menuEnter  + (char) 27 + "[0m");
+        System.out.println((char) 27 + "[41m" + "                                " + menuEnter + (char) 27 + "[0m");
         System.out.println("\n\n\n");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String r = br.readLine();
-        String [] rArray = r.split(" ");
+        String[] rArray = r.split(" ");
         return rArray;
     }
 
@@ -102,14 +101,13 @@ public class OutputTerminal implements Output{
         System.out.println();
         System.out.println("  Character" + charString);
         System.out.println();
-        System.out.println( textToPrompt);
+        System.out.println(textToPrompt);
         System.out.println((char) 27 + "[41m" + "                                                  " + (char) 27 + "[0m");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String r = br.readLine();
-        String [] rArray = r.split(" ");
+        String[] rArray = r.split(" ");
         return rArray;
     }
-
 
 
     public String routineOne() throws IOException, InterruptedException {
@@ -121,7 +119,7 @@ public class OutputTerminal implements Output{
         terminalRenderer.drawScreen(mapBuilder.prepareBoard(stc, mapStorage.map));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String r = br.readLine();
-        String [] rArray = r.split(" ");
+        String[] rArray = r.split(" ");
         return rArray[0];
     }
 

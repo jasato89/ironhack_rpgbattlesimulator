@@ -1,9 +1,12 @@
 package com.ironhack.rpg_simulator.classes;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Party {
+
+    private List<Character> aliveMembers;
 
     public String getName() {
         return name;
@@ -22,12 +25,14 @@ public class Party {
     public Party(String name, ArrayList<Character> party) {
         this.name = name;
         this.partyMembers = party;
+        aliveMembers = partyMembers;
     }
 
     public Party(int partySize) {
         this.name = RandomDatabaseGenerator.getRandomName();
-        partyMembers = generateRandomParty(partySize);
         this.partySize = partySize;
+        partyMembers = generateRandomParty(partySize);
+        aliveMembers = partyMembers;
     }
 
 
@@ -35,11 +40,24 @@ public class Party {
         return partySize;
     }
 
+    public List<Character> updateAlive(){
+        List<Character> temp = new ArrayList<>();
+        for (Character character : aliveMembers)
+        {
+            if (character.isAlive())
+                temp.add(character);
+        }
+        aliveMembers = temp;
+        return temp;
+    }
+
     public void printAllMembers() {
         int i = 1;
-        for (Character character : partyMembers) {
-            System.out.println(i + " - " + character.toString());
-            i++;
+        for (Character character : aliveMembers) {
+            if (character.isAlive()) {
+                System.out.println(i + " - " + character.toString());
+                i++;
+            }
         }
     }
 

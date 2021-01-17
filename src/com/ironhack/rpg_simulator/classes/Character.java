@@ -1,8 +1,8 @@
 package com.ironhack.rpg_simulator.classes;
 
-import com.ironhack.rpg_simulator.interfaces.Atacker;
+import com.ironhack.rpg_simulator.interfaces.Attacker;
 
-public abstract class Character implements Atacker {
+public abstract class Character implements Attacker {
 
         //propiedades
         //El id es static, porque tiene que ser un idenficador único, independientemente del número de instancias
