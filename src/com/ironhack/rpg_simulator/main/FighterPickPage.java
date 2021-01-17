@@ -24,7 +24,12 @@ public class FighterPickPage implements Page{
         System.out.println(title);
     }
 
+    @Override
     public void navigation() throws IOException {
+
+    }
+
+    public void navigation(StoredParties storedParties) throws IOException {
         System.out.println(prompt);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String selection = br.readLine().split(" ")[0];
