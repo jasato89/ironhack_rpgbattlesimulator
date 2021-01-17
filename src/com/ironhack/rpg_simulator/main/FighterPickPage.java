@@ -13,12 +13,9 @@ public class FighterPickPage implements Page{
 
     String title = "Fighter Pick Page";
     String prompt = "1 to continue, 3 to main menu";
-    List<Party> parties;
-    List<Character> fighters;
     Battle battle;
 
     public FighterPickPage(Battle battle) throws IOException {
-        this.parties = parties;
         this.battle = battle;
     }
 

@@ -20,7 +20,9 @@ public class Battle {
     }
 
     public RoundStats fight(int fighterIndex1, int fighterIndex2) {
-        RoundStats round = new RoundStats(party1.getAliveMembers().get(fighterIndex1),party2.getAliveMembers().get(fighterIndex2), party1.getName(), party2.getName(), getRoundNumber());
+        RoundStats round = new RoundStats(party1.getAliveMembers().get(fighterIndex1),
+                party2.getAliveMembers().get(fighterIndex2), party1.getName(), party2.getName(),
+                party1.getAliveMembers().get(fighterIndex1).getName(), party2.getAliveMembers().get(fighterIndex2).getName(), getRoundNumber());
         if(round.isValidRound()) {
             Character fighter1 = party1.getAliveMembers().get(fighterIndex1);
             Character fighter2 = party2.getAliveMembers().get(fighterIndex2);
