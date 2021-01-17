@@ -18,7 +18,7 @@ public class PlayMenu implements Page{
         System.out.println(title);
     }
 
-    @Override
+
     public void navigation() throws IOException {
         System.out.println(prompt);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -27,13 +27,14 @@ public class PlayMenu implements Page{
 
         switch (selection){
             case "1":
-                nextPage = new GamePage(new RandomTeamGeneration().generateTwoRandomTeam());
+                nextPage = new GamePage(new RandomTeamGeneration().generateTwoRandomTeam() );
                 break;
             case "2":
                 ; //navigate to -> select from existent parties
                 break;
             case "3":
 //                create a new party
+                nextPage = new createPartyPage();
                 break;
             case "4":
                 nextPage = new MainMenu();

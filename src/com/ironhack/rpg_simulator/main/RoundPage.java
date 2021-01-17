@@ -16,12 +16,11 @@ public class RoundPage implements Page {
     String title;
     String prompt = "1 got to next round 3 to exit";
     List<Party> parties;
-    List<Character> fighters;
+    int[] fightersIndexes;
     Battle battle;
 
-    public RoundPage(Battle battle, List<Party> parties, List<Character> fighters) throws IOException {
-        this.parties = parties;
-        this.fighters = fighters;
+    public RoundPage(Battle battle, int[] fightersIndexes) throws IOException {
+        this.fightersIndexes = fightersIndexes;
         title = String.format("Battle %s VS %s", parties.get(0).getName(), parties.get(0).getName());
         this.battle = doTheRound(battle);
 
@@ -35,6 +34,7 @@ public class RoundPage implements Page {
 
     @Override
     public void navigation() throws IOException {
+
         System.out.println(prompt);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String selection = br.readLine().split(" ")[0];
@@ -44,7 +44,7 @@ public class RoundPage implements Page {
         switch (selection){
             case "1":
                 //continue to chose next fighters
-                nextPage = new FighterPickPage(battle, parties);
+                nextPage = new FighterPickPage(battle);
                 break;
             case "2":
                 ; //navigate to ->
@@ -62,12 +62,12 @@ public class RoundPage implements Page {
 
     public Battle doTheRound(Battle battle) throws IOException {
         render();
-        RoundStats roundStats = battle.fight(fighters.get(0), fighters.get(1));
+        RoundStats roundStats = battle.fight(fightersIndexes[0], fightersIndexes[1]);
         List<AttackStats> attackStats = roundStats.getAttackLogs();
         System.out.println("Starting round " + battle.getRoundNumber() + "...");
         for (AttackStats attack : attackStats ) {
-            String name1 = fighters.get(0).getName();
-            String name2 = fighters.get(1).getName();
+            String name1 = attack.getName1();
+            String name2 = attack.getName2();
             String class1 = roundStats.getClass1() < 2 ? "Warrior" : "Wizard";
             String class2 = roundStats.getClass2() < 2 ? "Warrior" : "Wizard";
             String attackType1 = getAttackName(class1, attack.getAttackType1());

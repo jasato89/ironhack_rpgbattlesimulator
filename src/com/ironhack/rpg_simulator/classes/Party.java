@@ -103,7 +103,7 @@ public class Party {
     }
 
     public Character getMemberFromList(int index) {
-        return partyMembers.get(index - 1);
+        return partyMembers.get(index);
     }
 
     public List<Character> getPartyMembers() {

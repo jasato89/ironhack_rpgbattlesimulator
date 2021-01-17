@@ -17,7 +17,7 @@ public class FighterPickPage implements Page{
     List<Character> fighters;
     Battle battle;
 
-    public FighterPickPage(Battle battle, List<Party> parties) throws IOException {
+    public FighterPickPage(StoredParties storedParties, Battle battle) throws IOException {
         this.parties = parties;
         this.battle = battle;
     }
@@ -29,6 +29,10 @@ public class FighterPickPage implements Page{
 
     @Override
     public void navigation() throws IOException {
+
+    }
+
+    public void navigation(StoredParties storedParties) throws IOException {
         System.out.println(prompt);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String selection = br.readLine().split(" ")[0];
@@ -36,7 +40,7 @@ public class FighterPickPage implements Page{
 
         switch (selection) {
             case "1":
-                nextPage = new RoundPage(battle, parties, fighters);
+                nextPage = new RoundPage(battle, getFighters());
                 break;
             case "2":
                 ; //navigate to ->
@@ -50,24 +54,26 @@ public class FighterPickPage implements Page{
         }
     }
 
+
+
+    public int[] getFighters() throws IOException {
+
+        int[] fightersIndexes = new int[2];
+        showParty(battle.getParty1());
+        fightersIndexes[0] = selectFighter();
+
+        showParty(battle.getParty2());
+        fightersIndexes[1] = selectFighter();
+
+        return fightersIndexes;
+    }
     private void showParty(Party party){
         party.printAllMembers();
-    }
-
-    public List<Character> getFighters() throws IOException {
-
-        showParty(parties.get(0));
-        fighters.add(parties.get(0).getMemberFromList(selectFighter()));
-
-        showParty(parties.get(1));
-        fighters.add(parties.get(1).getMemberFromList(selectFighter()));
-
-        return fighters;
     }
 
     private int selectFighter() throws IOException {
         System.out.println("Chose a fighter from this list: ");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        return Integer.parseInt(br.readLine().split(" ")[0]);
+        return Integer.parseInt(br.readLine().split(" ")[0]) - 1;
     }
 }

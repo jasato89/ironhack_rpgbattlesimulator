@@ -17,14 +17,15 @@ public class GamePage implements Page{
     List<Party> parties;
     List<Character> fighters;
     public GamePage(List<Party> parties) throws IOException {
-        render();
+//        render(storedParties);
         battle = new Battle(parties.get(0), parties.get(1));
         parties = parties;
         navigation();
 
     }
 
-    @Override
+
+
     public void render() throws IOException {
         System.out.println(prompt);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -33,7 +34,7 @@ public class GamePage implements Page{
 
         switch (selection){
             case "1":
-                nextPage = new FighterPickPage(battle, parties);
+                nextPage = new FighterPickPage(battle);
                 break;
             case "2":
                 ; //navigate to ->
@@ -46,6 +47,8 @@ public class GamePage implements Page{
                 throw new IllegalStateException("Unexpected value: " + selection);
         }
     }
+
+
 
     @Override
     public void navigation() throws IOException {

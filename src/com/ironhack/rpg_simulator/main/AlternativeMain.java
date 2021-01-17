@@ -4,6 +4,9 @@ import java.io.IOException;
 
 public class AlternativeMain {
     public static void main(String[] args) throws IOException {
+
+
+
         MainMenu  mm = new MainMenu();
 
 
