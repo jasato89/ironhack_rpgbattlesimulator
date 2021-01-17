@@ -4,16 +4,18 @@ public abstract class Character{
 
         //Propieties
         //The id is static, beacuse the id needs to be unique. it doesn't matter how many instances we create
-        private static int id = 0;
+        private static int idStatic = 0;
+        private int id;
         private String name;
         private int hp;
         private boolean isAlive = true;
 
         public Character(String name, int hp, boolean isAlive) {
-                id++;
+                idStatic++;
                 setName(name);
                 setHp(hp);
                 setAlive(isAlive);
+                setId();
         }
 
 
@@ -29,9 +31,11 @@ public abstract class Character{
 
         //getters and setters
 
-        public static int getId() {
-                return id;
+        public static int getIdStatic() {
+                return idStatic;
         }
+
+        public void setId() { this.id = idStatic;}
 
         public String getName() {
                 return name;
