@@ -1,18 +1,29 @@
 package com.ironhack.rpg_simulator.output;
 
+import com.ironhack.rpg_simulator.classes.Party;
+
 public class SchemaToRender {
-    Team teamA;
-    Team teamB;
-    Soldier soldierA;
-    Soldier soldierB;
+    Party teamA;
+    Party teamB;
+
+    Party[] battleParticipants;
     Graveyard graveyard;
+
+    public SchemaToRender(Party teamA, Party teamB) {
+        this.teamA = teamA;
+        this.teamB = teamB;
+        battleParticipants = new Party[]{teamA, teamB};
+    }
+
+    public SchemaToRender() {
+    }
 
     public int getTeamMaxSize(int team){
         return 0;
     }
 
-    public int getTeamCurrentSize(int team){
-        return 3;
+    public int getTeamCurrentSize(int teamToPick){
+        return battleParticipants[teamToPick].getPartySize();
     }
 
 

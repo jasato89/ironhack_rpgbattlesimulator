@@ -1,6 +1,7 @@
 package com.ironhack.rpg_simulator.main;
 
 
+import com.ironhack.rpg_simulator.classes.Party;
 import com.ironhack.rpg_simulator.output.OutputTerminal;
 
 import java.io.BufferedReader;
@@ -160,6 +161,13 @@ public class Main {
 
     private static void playBattle(OutputTerminal output) throws IOException, InterruptedException {
         //TODO IMPLEMENTS AN OUTPUT FOR BATTLE IS OVER AND IMPLEMENTS A MENU TO GO BACK TO MAIN MENU
+
+        Party teamA = new Party(5);
+        Party teamB = new Party(5);
+
+        //TODO output 2 team and options to start fight
+
+        output.enterBattleRoutine(teamA, teamB);
 
 
         //TODO IMPLEMENTS FIGHTS BETWEEN TO RANDOM GENERATED TEAMS

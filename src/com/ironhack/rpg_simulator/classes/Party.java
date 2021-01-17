@@ -5,63 +5,70 @@ import java.util.Random;
 
 public class Party {
 
-    private final int PARTY_LIMIT = 10;
-    ArrayList<Character> party;
+
+    private int partySize;
+    ArrayList<Character> partyMembers;
 
 
     public Party(ArrayList<Character> party) {
-        this.party = party;
+        this.partyMembers = party;
     }
 
-    public Party() {
-        party = generateRandomParty();
+    public Party(int partySize) {
+        partyMembers = generateRandomParty(partySize);
+        this.partySize = partySize;
+    }
+
+
+    public int getPartySize() {
+        return partySize;
     }
 
     public void getAllMembers() {
         int i = 1;
-        for (Character character : party) {
+        for (Character character : partyMembers) {
             System.out.println(i + " - " + character.toString());
             i++;
         }
     }
 
     public Object getMemberById(int id) {
-        return party.get(id - 1);
+        return partyMembers.get(id - 1);
     }
 
-    public ArrayList<Character> getParty() {
-        return party;
+    public ArrayList<Character> getPartyMembers() {
+        return partyMembers;
 
     }
 
-    public ArrayList<Character> generateRandomParty() {
-        party = new ArrayList<Character>();
-        for (int i = 0; i < PARTY_LIMIT; i++) {
+    public ArrayList<Character> generateRandomParty(int partySize) {
+        partyMembers = new ArrayList<Character>();
+        for (int i = 0; i < partySize; i++) {
             boolean bool = new Random().nextBoolean();
             if (bool) {
                 Character warrior = RandomCharacterDatabase.getRandomWarrior();
-                if (!party.isEmpty()) {
-                    for (Character name : party) {
+                if (!partyMembers.isEmpty()) {
+                    for (Character name : partyMembers) {
                         if (warrior.getName().equals(name.getName())) {
                             warrior.setName(warrior.getName() + " Jr.");
                         }
                     }
                 }
-                party.add(warrior);
+                partyMembers.add(warrior);
             } else {
                 Character wizard = RandomCharacterDatabase.getRandomWizard();
-                if (!party.isEmpty()) {
-                    for (Character name : party) {
+                if (!partyMembers.isEmpty()) {
+                    for (Character name : partyMembers) {
                         if (wizard.getName().equals(name.getName())) {
                             wizard.setName(wizard.getName() + " Jr.");
                         }
                     }
                 }
-                party.add(wizard);
+                partyMembers.add(wizard);
             }
         }
 
-        return party;
+        return partyMembers;
     }
 
 

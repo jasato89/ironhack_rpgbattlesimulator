@@ -1,5 +1,7 @@
 package com.ironhack.rpg_simulator.output;
 
+import com.ironhack.rpg_simulator.classes.Party;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -119,5 +121,11 @@ public class OutputTerminal implements Output{
     }
 
 
-
+    public void enterBattleRoutine(Party teamA, Party teamB) throws IOException, InterruptedException {
+        MapBuilder mapBuilder = new MapBuilder();
+        SchemaToRender stc = new SchemaToRender();
+        terminalRenderer = new TerminalRenderer(stc);
+        terminalRenderer.clearScreen();
+        mapBuilder.prepareBoard(stc, mapStorage.enterBattleMap);
+    }
 }
