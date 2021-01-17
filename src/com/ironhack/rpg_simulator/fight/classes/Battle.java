@@ -11,12 +11,24 @@ public class Battle {
     private Party party1;
     private Party party2;
 
+
     public Battle(Party party1, Party party2) {
         this.party1 = party1;
         this.party2 = party2;
         setRoundNumber(0);
         this.graveyard = new Graveyard();
         //Output.announceTeam(party1, party2);
+    }
+
+    public int checkIfThereIsAWinner(){
+        if ( party1.getAliveMembers().size() > 0 && party2.getAliveMembers().size() < 1)
+            return 1;
+        else if ( party2.getAliveMembers().size() > 0 && party1.getAliveMembers().size() < 1)
+            return 2;
+        else if (party2.getAliveMembers().size() < 1 && party1.getAliveMembers().size() < 1)
+            return 3;
+        else
+            return 0;
     }
 
     public RoundStats fight(int fighterIndex1, int fighterIndex2) {

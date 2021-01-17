@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 public class PlayMenu implements Page{
     String title = "Play Menu";
-    String prompt = "select 1 to play 2 to option 3 to exit";
+    String prompt = "select 1 to play random 2 to chose team 3 create team 4 to exit";
 
     public PlayMenu() throws IOException {
         render();

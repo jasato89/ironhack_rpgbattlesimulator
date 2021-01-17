@@ -24,7 +24,19 @@ public class RoundPage implements Page {
         title = String.format("Battle %s VS %s", parties.get(0).getName(), parties.get(0).getName());
         this.battle = doTheRound(battle);
 
-        navigation();
+        switch (battle.checkIfThereIsAWinner()){
+            case 1:
+                //winner page team 1
+                break;
+            case 2:
+                //winner page team 2
+                break;
+            case 3:
+                //winner page draw
+                break;
+            default:
+                navigation();
+        }
     }
 
     @Override
@@ -35,11 +47,12 @@ public class RoundPage implements Page {
     @Override
     public void navigation() throws IOException {
 
+
+
         System.out.println(prompt);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String selection = br.readLine().split(" ")[0];
         Page nextPage;
-
         //if game still on
         switch (selection){
             case "1":
@@ -90,7 +103,4 @@ public class RoundPage implements Page {
         }
         return attackType;
     }
-
-
-
 }

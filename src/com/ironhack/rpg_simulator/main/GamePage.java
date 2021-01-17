@@ -11,15 +11,14 @@ import java.util.List;
 
 public class GamePage implements Page{
 
-    String title = "Game Page";
     String prompt = "Pick 1 to start fight, 2 to fast fight, 3 to exit";
     Battle battle;
-    List<Party> parties;
-    List<Character> fighters;
+
+
     public GamePage(List<Party> parties) throws IOException {
-//        render(storedParties);
+        //display teams before battle start
+
         battle = new Battle(parties.get(0), parties.get(1));
-        parties = parties;
         navigation();
 
     }
@@ -27,6 +26,13 @@ public class GamePage implements Page{
 
 
     public void render() throws IOException {
+
+    }
+
+
+
+    @Override
+    public void navigation() throws IOException {
         System.out.println(prompt);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String selection = br.readLine().split(" ")[0];
@@ -37,7 +43,7 @@ public class GamePage implements Page{
                 nextPage = new FighterPickPage(battle);
                 break;
             case "2":
-                ; //navigate to ->
+                ; // fast fight
                 break;
             case "3":
                 nextPage = new MainMenu();
@@ -46,12 +52,5 @@ public class GamePage implements Page{
             default:
                 throw new IllegalStateException("Unexpected value: " + selection);
         }
-    }
-
-
-
-    @Override
-    public void navigation() throws IOException {
-
     }
 }

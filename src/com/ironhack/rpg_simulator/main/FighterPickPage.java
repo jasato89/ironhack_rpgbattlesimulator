@@ -17,38 +17,37 @@ public class FighterPickPage implements Page{
 
     public FighterPickPage(Battle battle) throws IOException {
         this.battle = battle;
+        render();
     }
 
     @Override
     public void render() throws IOException {
         System.out.println(title);
+        Page nextPage = new RoundPage(battle, getFighters());
     }
 
     @Override
     public void navigation() throws IOException {
-
-    }
-
-    public void navigation(StoredParties storedParties) throws IOException {
-        System.out.println(prompt);
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String selection = br.readLine().split(" ")[0];
-        Page nextPage;
-
-        switch (selection) {
-            case "1":
-                nextPage = new RoundPage(battle, getFighters());
-                break;
-            case "2":
-                ; //navigate to ->
-                break;
-            case "3":
-                nextPage = new MainMenu();
-                break;
-
-            default:
-                throw new IllegalStateException("Unexpected value: " + selection);
-        }
+//
+//        System.out.println(prompt);
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        String selection = br.readLine().split(" ")[0];
+//        Page nextPage;
+//
+//        switch (selection) {
+//            case "1":
+//                nextPage = new RoundPage(battle, getFighters());
+//                break;
+//            case "2":
+//                ; //navigate to ->
+//                break;
+//            case "3":
+//                nextPage = new MainMenu();
+//                break;
+//
+//            default:
+//                throw new IllegalStateException("Unexpected value: " + selection);
+//        }
     }
 
 
