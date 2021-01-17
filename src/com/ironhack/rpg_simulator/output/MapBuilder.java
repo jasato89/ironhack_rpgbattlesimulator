@@ -7,10 +7,10 @@ public class MapBuilder {
     public char[][] prepareBoard(SchemaToRender stc, char[][] map){
         map = prepareTeamA(stc, map);
         map = prepareTeamB(stc, map);
-        map = prepareSpellA(stc, map, 3);
-        map = prepareSpellB(stc, map, 1);
-        map = prepareDamageA(stc,map);
-        map = prepareDamageB(stc,map);
+//        map = prepareSpellA(stc, map, 3);
+//        map = prepareSpellB(stc, map, 1);
+//        map = prepareDamageA(stc,map);
+//        map = prepareDamageB(stc,map);
 
         return map;
     }
@@ -45,7 +45,7 @@ public class MapBuilder {
     }
 
     private char[][] prepareTeamA(SchemaToRender stc, char[][] map){
-        int size = stc.getTeamCurrentSize(1);
+        int size = stc.getTeamMaxSize(0);
         int i = 0;
         while (i < size && i < 5){
             switch (i){
@@ -66,7 +66,7 @@ public class MapBuilder {
     }
 
     private char[][] prepareTeamB(SchemaToRender stc, char[][] map){
-        int size = stc.getTeamCurrentSize(2);
+        int size = stc.getTeamMaxSize(1);
         int i = 0;
         char[][] rMap = map;
         while (i < size && i < 5){

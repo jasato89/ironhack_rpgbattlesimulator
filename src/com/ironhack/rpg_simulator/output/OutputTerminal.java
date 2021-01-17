@@ -1,10 +1,14 @@
 package com.ironhack.rpg_simulator.output;
 
+import com.ironhack.rpg_simulator.classes.Character;
 import com.ironhack.rpg_simulator.classes.Party;
+import com.ironhack.rpg_simulator.fight.classes.AttackStats;
+import com.ironhack.rpg_simulator.fight.classes.Battle;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 
 public class OutputTerminal implements Output{
@@ -123,9 +127,29 @@ public class OutputTerminal implements Output{
 
     public void enterBattleRoutine(Party teamA, Party teamB) throws IOException, InterruptedException {
         MapBuilder mapBuilder = new MapBuilder();
-        SchemaToRender stc = new SchemaToRender();
+        SchemaToRender stc = new SchemaToRender(teamA, teamB);
         terminalRenderer = new TerminalRenderer(stc);
         terminalRenderer.clearScreen();
-        mapBuilder.prepareBoard(stc, mapStorage.enterBattleMap);
+        terminalRenderer.drawScreen(mapBuilder.prepareBoard(stc, mapStorage.enterBattleMap));
+    }
+
+    public void pickFighterRoutine(Party teamA) throws IOException, InterruptedException {
+        terminalRenderer = new TerminalRenderer();
+        terminalRenderer.clearScreen();
+        System.out.println("   " + "Pick Fighter for " + teamA.getName());
+        System.out.println("\n\n");
+        teamA.printAllMembers();
+    }
+
+    public void roundRoutine(Battle battle, Character fighterTeamA, Character fighterTeamB, AttackStats attackStats) throws IOException, InterruptedException {
+        terminalRenderer.clearScreen();
+        int maxSize1 = battle.getParty1().getPartyMaxSize();
+        //need current size
+        int maxSize2 = battle.getParty2().getPartyMaxSize();
+        //need current size
+        String name1 = fighterTeamA.getName();
+        String name2 = fighterTeamB.getName();
+        String attack1 = attackStats.getAttackType1() < 2 ? "heavy" : "light";
+        String attack2 = attackStats.getAttackType1() < 2 ? "heavy" : "light";
     }
 }

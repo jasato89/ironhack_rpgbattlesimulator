@@ -18,12 +18,16 @@ public class SchemaToRender {
     public SchemaToRender() {
     }
 
-    public int getTeamMaxSize(int team){
-        return 0;
+//    public int getTeamMaxSize(int team){
+//        return 0;
+//    }
+
+    public int getTeamMaxSize(int teamToPick){
+        return battleParticipants[teamToPick].getPartyMaxSize();
     }
 
-    public int getTeamCurrentSize(int teamToPick){
-        return battleParticipants[teamToPick].getPartySize();
+    public String getTeamName(int teamToPick){
+        return battleParticipants[teamToPick].getName();
     }
 
 

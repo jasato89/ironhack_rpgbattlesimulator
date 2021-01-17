@@ -15,6 +15,7 @@ public class Wizard extends Character {
         super(name, hp, isAlive);
         this.mana = mana;
         this.intelligence = intelligence;
+        setClassName("Wizard");
     }
 
     //Método attack de mago
@@ -45,6 +46,10 @@ public class Wizard extends Character {
             boolean isAlive = isAlive();
             isAlive = false;
         }
+    }
+
+    public String toString(){
+        return getName() + " " + getClassName() + " " + getHp() + " " + getIntelligence();
     }
 
     //getters and setters

@@ -57,12 +57,23 @@ public class TerminalRenderer {
             for (int j = 0; j < map[i].length; ++j) {
                 if (map[i][j] == ' ')
                     System.out.print(BLACK_POINT + BLOCK + DEFAULT);
+                else if (map[i][j] == 'N' && map[i][j + 1] == 'a'){
+                    String tempName = stc.getTeamName(0);
+                    System.out.print(tempName);
+                    j += tempName.length() / 2;
+                }
+
+                else if (map[i][j] == 'N' && map[i][j + 1] == 'b'){
+                    String tempName = stc.getTeamName(1);
+                    System.out.print(tempName);
+                    j += tempName.length() / 2;
+                }
                 else if (map[i][j] == 'N' && map[i][j + 1] == 'A'){
-                    System.out.print(stc.getTeamCurrentSize(1) + "/" + stc.getTeamCurrentSize(1));
+                    System.out.print(stc.getTeamMaxSize(0) + "/" + stc.getTeamMaxSize(0));
                     j += 1;
                 }
                 else if (map[i][j] == 'N' && map[i][j + 1] == 'B'){
-                    System.out.print(stc.getTeamCurrentSize(1) + "/" + stc.getTeamMaxSize(1));
+                    System.out.print(stc.getTeamMaxSize(1) + "/" + stc.getTeamMaxSize(1));
                     j += 1;
                 }
                 else if (map[i][j] == 'E' && map[i][j + 1] == 'n'){

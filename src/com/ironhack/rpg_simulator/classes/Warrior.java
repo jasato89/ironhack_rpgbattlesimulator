@@ -13,6 +13,7 @@ public class Warrior extends Character {
         super(name, hp, isAlive);
         this.stamina = stamina;
         this.strength = strength;
+        setClassName("Warrior");
     }
 
     //Implementamos el método attack(), especifico para el guerrero
@@ -32,6 +33,10 @@ public class Warrior extends Character {
             damage[1] = 2;
         }
         return damage;
+    }
+
+    public String toString(){
+        return getName() + " " + getClassName() + " " + getHp() + " " + getStrength();
     }
 
     //getters and setters

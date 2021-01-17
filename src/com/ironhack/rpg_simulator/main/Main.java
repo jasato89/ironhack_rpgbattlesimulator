@@ -1,19 +1,25 @@
 package com.ironhack.rpg_simulator.main;
 
 
+import com.ironhack.rpg_simulator.classes.Character;
 import com.ironhack.rpg_simulator.classes.Party;
+import com.ironhack.rpg_simulator.fight.classes.AttackStats;
+import com.ironhack.rpg_simulator.fight.classes.Battle;
+import com.ironhack.rpg_simulator.fight.classes.RoundStats;
 import com.ironhack.rpg_simulator.output.OutputTerminal;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) throws InterruptedException, IOException {
         OutputTerminal output = new OutputTerminal();
-        startGame(output);
+        playBattle(output);
+//        startGame(output);
     }
 
     private static void startGame(OutputTerminal output) throws InterruptedException, IOException {
@@ -165,19 +171,23 @@ public class Main {
         Party teamA = new Party(5);
         Party teamB = new Party(5);
 
+        Battle battle = new Battle(teamA, teamB);
+
         //TODO output 2 team and options to start fight
 
         output.enterBattleRoutine(teamA, teamB);
 
 
         //TODO IMPLEMENTS FIGHTS BETWEEN TO RANDOM GENERATED TEAMS
-        System.out.println("Options...");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String selection = br.readLine();
         switch (selection){
             case "1":
                 //todo pick fighters
-                playNextRound(output);
+                Character fighterTeamA = pickFighter(output, teamA);
+                Character fighterTeamB = pickFighter(output, teamB);
+                playNextRound(output, battle, fighterTeamA, fighterTeamB );
+                //TODO output fight
                 break;
             case "2":
                 //TODO fast battle
@@ -193,7 +203,28 @@ public class Main {
         }
     }
 
+    private static void playNextRound(OutputTerminal output, Battle battle, Character fighterTeamA, Character fighterTeamB) throws IOException, InterruptedException {
+        RoundStats roundStats = battle.fight(fighterTeamA, fighterTeamB);
+        List<AttackStats> attackStats = roundStats.getAttackLogs();
+        for (AttackStats attack : attackStats ) {
+            output.roundRoutine(battle, fighterTeamA, fighterTeamB, attack);
+        }
+    }
+
+    private static Character pickFighter(OutputTerminal output, Party teamA) throws IOException, InterruptedException {
+        output.pickFighterRoutine(teamA);
+        System.out.println("Enter the index of the fighter u want to pick:");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String r = br.readLine();
+        String [] rArray = r.split(" ");
+        int selection = Integer.parseInt(rArray[0]);
+        return teamA.getMemberFromList(selection);
+    }
+
     private static void playNextRound(OutputTerminal output) {
+
+
+
         //print
     }
 
