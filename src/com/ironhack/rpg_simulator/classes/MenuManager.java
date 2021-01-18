@@ -1,6 +1,7 @@
 package com.ironhack.rpg_simulator.classes;
 
 import com.ironhack.rpg_simulator.fight.classes.Battle;
+import com.ironhack.rpg_simulator.fight.classes.RoundStats;
 import com.ironhack.rpg_simulator.main.StoredParties;
 
 import java.util.ArrayList;
@@ -84,9 +85,6 @@ public class MenuManager {
             default:
                 mainMenu();
         }
-    }
-
-    private void fastBattleMenu() {
     }
 
     public void selectTeamsFromDatabaseMenu() {
@@ -175,11 +173,32 @@ public class MenuManager {
     }
 
     public void battleMenu() {
+        int teamBIndex = 0;
         System.out.println("Battle Menu");
-        System.out.println("Select your fighter: ");
+        while (battle.getParty1().getAliveMembers().size() > 0 && battle.getParty2().getAliveMembers().size() > 0) {
+            System.out.println("The team B fighter is a " + battle.getParty2().getMemberFromAliveList(teamBIndex).getClassName()+ " called " +
+                    battle.getParty2().getMemberFromAliveList(teamBIndex).getName());
+            System.out.println("Select your fighter: ");
+            System.out.println(battle.getParty1().aliveMembersString());
+            int teamAIndex = Integer.parseInt(scanner.nextLine());
+            System.out.println("Starting fight...");
+            RoundStats roundStats = battle.fight(teamAIndex, teamBIndex);
+            roundStats.printAttackLogs();
+        }
+        announceTeamWinner();
+        }
+
+    private void fastBattleMenu() {
 
     }
 
+    public void announceTeamWinner() {
+        if (battle.getParty1().getAliveMembers().size() == 0) {
+            System.out.println("Team " + battle.getParty2().getName() + " has won!!");
+        } else if (battle.getParty2().getAliveMembers().size() == 0) {
+            System.out.println("Team " + battle.getParty1().getName() + " has won!!");
+        }
+    }
     public void mainMenuOption1() {
         teamA = new Party(5);
         teamB = new Party(5);

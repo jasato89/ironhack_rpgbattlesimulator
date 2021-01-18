@@ -40,27 +40,34 @@ public class Battle {
                 attackStats.setFinalHp2(fighter2.getHp());
                 round.addtoAttackLogs(attackStats);
             }
-            if(!fighter1.isAlive()) {
-                graveyard.addSoldier(fighter1, 1);
-                party1.removeAliveMember();
-                round.setLoser(1);
-            } else{
-                party1.updateAliveMember(fighter1, fighterIndex1);
-            }
-            if(!fighter2.isAlive()) {
-                graveyard.addSoldier(fighter2, 2);
-                party2.removeAliveMember();
-                if(round.getLoser() == 1) { //In case both die at the same time, loser value is 3
-                    round.setLoser(3);
-                }else {
-                    round.setLoser(2);
-                }
-            } else {
-                party1.updateAliveMember(fighter2, fighterIndex2);
-            }
+            round.setLoser(findLoserAndSendToGraveyard(fighter1, fighter2, fighterIndex1, fighterIndex2));
+            System.out.println(round.getRoundWinner(fighter1.getName(), fighter2.getName()));
             setRoundNumber(getRoundNumber() + 1);
         }
         return round;
+    }
+
+    private int findLoserAndSendToGraveyard(Character fighter1, Character fighter2, int fighterIndex1, int fighterIndex2) {
+        int loser = 0;
+        if(!fighter1.isAlive()) {
+            graveyard.addSoldier(fighter1, 1);
+            party1.removeAliveMember();
+            loser = 1;
+        } else{
+            party1.updateAliveMember(fighter1, fighterIndex1);
+        }
+        if(!fighter2.isAlive()) {
+            graveyard.addSoldier(fighter2, 2);
+            party2.removeAliveMember();
+            if(loser == 1) { //In case both die at the same time, loser value is 3
+                loser = 3;
+            }else {
+                loser = 2;
+            }
+        } else {
+            party1.updateAliveMember(fighter2, fighterIndex2);
+        }
+        return loser;
     }
 
     public int getRoundNumber() {

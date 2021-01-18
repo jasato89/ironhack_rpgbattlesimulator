@@ -53,16 +53,6 @@ public class Party {
         aliveMembers = temp;
     }
 
-    public void printAllMembers() {
-        int i = 1;
-        for (Character character : aliveMembers) {
-            if (character.isAlive()) {
-                System.out.println(i + " - " + character.toString());
-                i++;
-            }
-        }
-    }
-
     public List<Character> generateRandomParty(int partySize) {
         partyMembers = new ArrayList<>();
 
@@ -106,6 +96,10 @@ public class Party {
         return partyMembers.get(index);
     }
 
+    public Character getMemberFromAliveList(int index) {
+        return aliveMembers.get(index);
+    }
+
     public List<Character> getPartyMembers() {
         return partyMembers;
 
@@ -127,7 +121,7 @@ public class Party {
         }
 
         File file = new File("src/com/ironhack/rpg_simulator/csv_files/" + fileName);
-        file.createNewFile();
+        //file.createNewFile();
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write("id, name, hp, stamina, strength, mana, intelligence\n");
 
@@ -145,12 +139,11 @@ public class Party {
 
     }
 
-    @Override
-    public String toString() {
+    public String aliveMembersString() {
         String result = "Party: " + name + "\n";
-
-        for (Character member : partyMembers) {
-            result += member.toString() + "\n";
+        int memberCount = 0;
+        for (Character member : aliveMembers) {
+            result += memberCount++ +": " + member.toString() + "\n";
         }
         return result;
     }

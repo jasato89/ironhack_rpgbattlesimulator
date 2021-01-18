@@ -51,8 +51,38 @@ public class RoundStats {
         } else if(getLoser() == 2) {
             return "The winner is " + soldier1 + " from team " + nameTeam1;
         } else{
-            return "Any of the contestants survived.";
+            return "None of the contestants survived.";
         }
+    }
+
+    public void printAttackLogs() {
+        String name1 = nameFighter1;
+        String name2 = nameFighter2;
+        String class1 = getClass1() < 2 ? "Warrior" : "Wizard";
+        String class2 = getClass2() < 2 ? "Warrior" : "Wizard";
+        String attackType1;
+        String attackType2;
+
+        for (AttackStats attackStats: attackLogs) {
+            attackType1 = getAttackName(class1, attackStats.getAttackType1());
+
+            attackType2 = getAttackName(class2, attackStats.getAttackType2());
+
+            int attackValue1 = attackStats.getAttackValue1();
+            int attackValue2 = attackStats.getAttackValue2();
+            System.out.println(name1 + " did " + attackValue1 + " damage using " + attackType1 + ".");
+            System.out.println(name2 + " did " + attackValue2 + " damage using " + attackType2 + ".");
+        }
+    }
+
+    private String getAttackName(String class1, int attackType12) {
+        String attackType1;
+        if (class1.equals("Warrior")) {
+            attackType1 = attackType12 < 2 ? "heavy attack" : "light attack";
+        } else {
+            attackType1 = attackType12 < 2 ? "fireball" : "staff attack";
+        }
+        return attackType1;
     }
 
     public String getNameFighter1() {
