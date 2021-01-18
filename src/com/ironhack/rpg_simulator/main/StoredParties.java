@@ -5,11 +5,11 @@ import com.ironhack.rpg_simulator.classes.Party;
 import java.util.ArrayList;
 import java.util.List;
 
-public static class StoredParties {
+public class StoredParties {
 
     private List<Party> theList;
 
-    public static StoredParties() {
+    public StoredParties() {
         this.theList = new ArrayList<>();
     }
 
