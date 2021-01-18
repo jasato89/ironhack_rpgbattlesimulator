@@ -29,13 +29,8 @@
     <list default="true" id="c07b2799-e7b3-4681-b803-8552337172ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Character.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/ImportParty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/ImportParty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/RandomDatabaseGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/RandomDatabaseGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Warrior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Warrior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Wizard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Wizard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/StoredParties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/StoredParties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Party.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Party.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +48,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1n79UO8qhqdvD79uORNImpBeuQG" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="abbreviatePackageNames" value="true" />
     <option name="autoscrollFromSource" value="true" />
@@ -98,6 +96,9 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -120,72 +121,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="-1263" y="139" key="#Main" timestamp="1610998268316">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1263" y="139" key="#Main/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998268316" />
-    <state x="-1263" y="139" key="#Main_(1)" timestamp="1610998038405">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1263" y="139" key="#Main_(1)/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998038405" />
-    <state x="-1155" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1610912354086">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1155" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610912354086" />
-    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610886851971" />
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1610885506652">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610885506652" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1610793995403">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610793995403" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1611002270060">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611002270060" />
-    <state width="1899" height="318" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1611002270060">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611002270060" />
-    <state width="1899" height="318" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1611002270060">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611002270060" />
-    <state width="1899" height="318" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1611002270060">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611002270060" />
-    <state width="1899" height="318" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
-    <state width="1899" height="318" key="GridCell.Tab.1.bottom" timestamp="1610887134781">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="318" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
-    <state width="1899" height="318" key="GridCell.Tab.1.center" timestamp="1610887134781">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="318" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
-    <state width="1899" height="318" key="GridCell.Tab.1.left" timestamp="1610887134781">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="318" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
-    <state width="1899" height="318" key="GridCell.Tab.1.right" timestamp="1610887134781">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="318" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
-    <state x="-1459" y="165" key="SettingsEditor" timestamp="1610879120881">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1459" y="165" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610879120881" />
-    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1611001124580">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611001124580" />
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

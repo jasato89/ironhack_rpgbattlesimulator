@@ -103,7 +103,7 @@ public class MenuManager {
             System.out.println("Creation of member " + (i+1) + ":");
             members.add(createCharacterMenu());
         }
-        storedParties.add(new Party(name, members));q
+        storedParties.add(new Party(name, members));
         System.out.println("The team " + name + " has been created succesfully.");
     }
 
