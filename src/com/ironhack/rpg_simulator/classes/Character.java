@@ -10,18 +10,10 @@ public abstract class Character implements Attacker {
         private String name;
         private int hp;
         private boolean isAlive = true;
-
-        public String getClassName() {
-                return className;
-        }
-
-        public void setClassName(String className) {
-                this.className = className;
-        }
-
         private String className = null;
 
-        public Character(String name, int hp, boolean isAlive) {
+
+        public Character(String name, int hp) {
                 staticId++;
                 setName(name);
                 setHp(hp);
@@ -74,6 +66,14 @@ public abstract class Character implements Attacker {
 
         public void setAlive(boolean alive) {
                 isAlive = alive;
+        }
+
+        public String getClassName() {
+                return className;
+        }
+
+        public void setClassName(String className) {
+                this.className = className;
         }
 }
 

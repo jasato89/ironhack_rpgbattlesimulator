@@ -3,6 +3,8 @@ package com.ironhack.rpg_simulator.classes;
 import com.ironhack.rpg_simulator.fight.classes.Battle;
 import com.ironhack.rpg_simulator.main.StoredParties;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,14 +36,16 @@ public class MenuManager {
 
         switch (selection) {
             case 1:
+                //generate two random teams and show modeMenu
                 mainMenuOption1();
                 break;
             case 2:
-                //TODO: select two teams from database and show modeMenu
+                //select two teams from database and show modeMenu
                 mainMenuOption2();
                 break;
             case 3:
                 //TODO show teamCustomization
+                mainMenuOption3();
                 break;
             case 4:
                 System.out.println("Thanks for playing!");
@@ -87,10 +91,47 @@ public class MenuManager {
 
     public void selectTeamsFromDatabaseMenu() {
 
-        System.out.println("Select Team A");
-        for (Party party: storedParties) {
+    }
 
+    public void createTeamMenu() {
+        System.out.println("Introduce the name of the team: ");
+        String name = scanner.nextLine();
+        System.out.println("Introduce the size of the team");
+        int size = Integer.parseInt(scanner.nextLine());
+        List<Character> members = new ArrayList<>();
+        for (int i = 0; i<size; i++) {
+            System.out.println("Creation of member " + (i+1) + ":");
+            members.add(createCharacterMenu());
         }
+        storedParties.add(new Party(name, members));q
+        System.out.println("The team " + name + " has been created succesfully.");
+    }
+
+    public Character createCharacterMenu() {
+        System.out.println("Name: ");
+        String name = scanner.nextLine();
+        System.out.println("Class (Warrior/Wizard): " );
+        String className = scanner.nextLine();
+        while (!className.equals("Warrior") && !className.equals("Wizard")) {
+            System.out.println("Incorrect class, please enter again: ");
+            className = scanner.nextLine();
+        }
+        System.out.println("Health: ");
+        int health = Integer.parseInt(scanner.nextLine());
+        if (className.equals("Warrior")) {
+            System.out.println("Stamina: ");
+            int stamina = Integer.parseInt(scanner.nextLine());
+            System.out.println("Strength: ");
+            int strength = Integer.parseInt(scanner.nextLine());
+            return new Warrior(name, health, stamina, strength);
+        } else if (className.equals("Wizard")) {
+            System.out.println("Mana: ");
+            int mana = Integer.parseInt(scanner.nextLine());
+            System.out.println("Intelligence: ");
+            int intelligence = Integer.parseInt(scanner.nextLine());
+            return new Warrior(name, health, mana, intelligence);
+        }
+        return null;
     }
 
 
@@ -103,5 +144,11 @@ public class MenuManager {
 
     public void mainMenuOption2() {
         selectTeamsFromDatabaseMenu();
+        modeMenu();
+    }
+
+    public void mainMenuOption3() {
+        createTeamMenu();
+        mainMenu();
     }
 }

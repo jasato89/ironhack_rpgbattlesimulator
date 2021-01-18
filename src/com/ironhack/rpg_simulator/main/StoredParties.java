@@ -13,7 +13,6 @@ public class StoredParties {
         this.theList = new ArrayList<>();
     }
 
-
     public void add (Party partyToAdd){
         theList.add(partyToAdd);
     }
