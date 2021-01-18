@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c07b2799-e7b3-4681-b803-8552337172ae" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ironhack_rpgbattlesimulator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ironhack_rpgbattlesimulator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Party.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Party.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/AlternativeMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/FighterPickPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/GamePage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/MainMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Page.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/PlayMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/RoundPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/StoredParties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/StoredParties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/createPartyPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output/Graveyard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output/InputFromFight.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output/MapBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output/MapStorage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output/Output.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output/OutputTerminal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output/SchemaToRender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output/Soldier.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output/Team.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output/TerminalRenderer.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1n79UO8qhqdvD79uORNImpBeuQG" />
+  <component name="ProjectViewState">
+    <option name="abbreviatePackageNames" value="true" />
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showModules" value="false" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ironhack.rpg_simulator.output.Main" />
+      <module name="ironhack-team5_battleSimulator" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1263" y="139" key="#Main" timestamp="1610998268316">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1263" y="139" key="#Main/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998268316" />
+    <state x="-1263" y="139" key="#Main_(1)" timestamp="1610998038405">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1263" y="139" key="#Main_(1)/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998038405" />
+    <state x="-1155" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1610912354086">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1155" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610912354086" />
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610886851971" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1610885506652">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610885506652" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1610793995403">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610793995403" />
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1610998197556">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998197556" />
+    <state width="1899" height="318" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1610998197556">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998197556" />
+    <state width="1899" height="318" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1610998197556">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998197556" />
+    <state width="1899" height="318" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1610998197556">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998197556" />
+    <state width="1899" height="318" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
+    <state width="1899" height="318" key="GridCell.Tab.1.bottom" timestamp="1610887134781">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="318" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
+    <state width="1899" height="318" key="GridCell.Tab.1.center" timestamp="1610887134781">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="318" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
+    <state width="1899" height="318" key="GridCell.Tab.1.left" timestamp="1610887134781">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="318" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
+    <state width="1899" height="318" key="GridCell.Tab.1.right" timestamp="1610887134781">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="318" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
+    <state x="-1459" y="165" key="SettingsEditor" timestamp="1610879120881">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1459" y="165" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610879120881" />
+  </component>
+</project>
