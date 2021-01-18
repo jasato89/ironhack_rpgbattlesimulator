@@ -1,0 +1,2201 @@
+Index: src/com/ironhack/rpg_simulator/output/MapBuilder.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/output/MapBuilder.java b/src/com/ironhack/rpg_simulator/output/MapBuilder.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/output/MapBuilder.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,89 +0,0 @@
+-package com.ironhack.rpg_simulator.output;
+-
+-public class MapBuilder {
+-
+-
+-
+-    public char[][] prepareBoard(SchemaToRender stc, char[][] map){
+-        map = prepareTeamA(stc, map);
+-        map = prepareTeamB(stc, map);
+-//        map = prepareSpellA(stc, map, 3);
+-//        map = prepareSpellB(stc, map, 1);
+-//        map = prepareDamageA(stc,map);
+-//        map = prepareDamageB(stc,map);
+-
+-        return map;
+-    }
+-
+-    private char[][] prepareDamageA(SchemaToRender stc, char[][] map) {
+-        map[8][8] = 'H';
+-        map[8][9] = 'l';
+-
+-        return map;
+-    }
+-
+-    private char[][] prepareDamageB(SchemaToRender stc, char[][] map) {
+-        map[8][13] = 'H';
+-        map[8][14] = 'r';
+-
+-        return map;
+-    }
+-
+-    // 8.8 8.15
+-    private char[][] prepareSpellA(SchemaToRender stc, char[][] map, int spellId) {
+-        map[4][8] = 'S';
+-        if (spellId == 1) map[4][9] = 'A';
+-        else if (spellId == 2) map[4][9] = 'B';
+-        return map;
+-    }
+-
+-    private char[][] prepareSpellB(SchemaToRender stc, char[][] map, int spellId) {
+-        map[4][13] = 'S';
+-        if (spellId == 1) map[4][14] = 'C';
+-        else if (spellId == 2) map[4][14] = 'D';
+-        return map;
+-    }
+-
+-    private char[][] prepareTeamA(SchemaToRender stc, char[][] map){
+-        int size = stc.getTeamMaxSize(0);
+-        int i = 0;
+-        while (i < size && i < 5){
+-            switch (i){
+-                case 0: map[4][1] = '1';
+-                    break;
+-                case 1: map[6][1] = '1';
+-                    break;
+-                case 2: map[8][1] = '1';
+-                    break;
+-                case 3: map[5][3] = '1';
+-                    break;
+-                case 4: map[7][3] = '1';
+-                    break;
+-            }
+-            i++;
+-        }
+-        return map;
+-    }
+-
+-    private char[][] prepareTeamB(SchemaToRender stc, char[][] map){
+-        int size = stc.getTeamMaxSize(1);
+-        int i = 0;
+-        char[][] rMap = map;
+-        while (i < size && i < 5){
+-            switch (i){
+-                case 0: rMap[4][22] = '2';
+-                    break;
+-                case 1: rMap[6][22] = '2';
+-                    break;
+-                case 2: rMap[8][22] = '2';
+-                    break;
+-                case 3: rMap[5][20] = '2';
+-                    break;
+-                case 4: rMap[7][20] = '2';
+-                    break;
+-            }
+-            i++;
+-        }
+-        return rMap;
+-    }
+-}
+Index: src/com/ironhack/rpg_simulator/output/OutputTerminal.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/output/OutputTerminal.java b/src/com/ironhack/rpg_simulator/output/OutputTerminal.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/output/OutputTerminal.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,176 +0,0 @@
+-package com.ironhack.rpg_simulator.output;
+-
+-import com.ironhack.rpg_simulator.classes.Character;
+-import com.ironhack.rpg_simulator.classes.Party;
+-import com.ironhack.rpg_simulator.fight.classes.AttackStats;
+-import com.ironhack.rpg_simulator.fight.classes.Battle;
+-import com.ironhack.rpg_simulator.fight.classes.RoundStats;
+-
+-import java.io.BufferedReader;
+-import java.io.IOException;
+-import java.io.InputStreamReader;
+-
+-
+-public class OutputTerminal implements Output {
+-
+-
+-    MapStorage mapStorage = new MapStorage();
+-    char[][] map = mapStorage.blankMap;
+-    MapBuilder mapBuilder = new MapBuilder();
+-    private TerminalRenderer terminalRenderer;
+-
+-
+-    //map 24*15
+-
+-
+-    public void introRoutine() throws InterruptedException, IOException {
+-
+-        terminalRenderer = new TerminalRenderer();
+-        terminalRenderer.clearScreen();
+-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+-        Thread.sleep(1000);
+-        terminalRenderer.clearScreen();
+-        System.out.println("\n\n\n\n");
+-        System.out.println("             TEAM A");
+-        System.out.println("\n\n\n\n\n");
+-        Thread.sleep(500);
+-        terminalRenderer.clearScreen();
+-        System.out.println("\n\n\n\n");
+-        System.out.println("             TEAM A");
+-        System.out.println("            presents");
+-        System.out.println("\n\n\n\n");
+-        Thread.sleep(1000);
+-        terminalRenderer.clearScreen();
+-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+-        Thread.sleep(500);
+-        terminalRenderer.clearScreen();
+-        System.out.println("\n\n\n\n\n");
+-        System.out.println("        RPG BATTLE SIMULATOR");
+-        System.out.println("\n\n\n\n\n");
+-        Thread.sleep(1500);
+-        terminalRenderer.clearScreen();
+-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+-        Thread.sleep(500);
+-    }
+-
+-    public String mainMenuRoutine() throws IOException, InterruptedException {
+-        terminalRenderer = new TerminalRenderer();
+-        terminalRenderer.clearScreen();
+-        terminalRenderer.drawScreen(mapStorage.mainMenu);
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String r = br.readLine();
+-        String[] rArray = r.split(" ");
+-        return rArray[0];
+-    }
+-
+-    public String playMenuRoutine() throws IOException, InterruptedException {
+-        terminalRenderer = new TerminalRenderer();
+-        terminalRenderer.clearScreen();
+-        terminalRenderer.drawScreen(mapStorage.playMenuMap);
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String r = br.readLine();
+-        String[] rArray = r.split(" ");
+-        return rArray[0];
+-    }
+-
+-    public String[] createTeamRoutine(String textToPrompt, String teamName, String charString) throws IOException, InterruptedException {
+-        String menuEnter = "Enter to continue";
+-        terminalRenderer = new TerminalRenderer();
+-        terminalRenderer.clearScreen();
+-        System.out.println();
+-        System.out.println("  RPG BATTLE SIMULATOR");
+-        System.out.println("\n");
+-        System.out.println("   Team name: " + teamName);
+-        System.out.println();
+-        System.out.println("   Character: " + charString);
+-        System.out.println();
+-        System.out.println(textToPrompt);
+-        System.out.println("\n\n\n");
+-        System.out.println((char) 27 + "[41m" + "                                " + menuEnter + (char) 27 + "[0m");
+-        System.out.println("\n\n\n");
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String r = br.readLine();
+-        String[] rArray = r.split(" ");
+-        return rArray;
+-    }
+-
+-    public String[] seeTeamRoutine(String textToPrompt, String teamName, String charString) throws IOException, InterruptedException {
+-        terminalRenderer = new TerminalRenderer();
+-        terminalRenderer.clearScreen();
+-        System.out.println("  Team name: " + teamName);
+-        System.out.println();
+-        System.out.println("  Character" + charString);
+-        System.out.println();
+-        System.out.println(textToPrompt);
+-        System.out.println((char) 27 + "[41m" + "                                                  " + (char) 27 + "[0m");
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String r = br.readLine();
+-        String[] rArray = r.split(" ");
+-        return rArray;
+-    }
+-
+-
+-    public String routineOne() throws IOException, InterruptedException {
+-        MapBuilder mapBuilder = new MapBuilder();
+-        SchemaToRender stc = new SchemaToRender();
+-        terminalRenderer = new TerminalRenderer(stc);
+-        terminalRenderer.clearScreen();
+-        mapBuilder.prepareBoard(stc, mapStorage.map);
+-        terminalRenderer.drawScreen(mapBuilder.prepareBoard(stc, mapStorage.map));
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String r = br.readLine();
+-        String[] rArray = r.split(" ");
+-        return rArray[0];
+-    }
+-
+-
+-    public void enterBattleRoutine(Party teamA, Party teamB) throws IOException, InterruptedException {
+-        MapBuilder mapBuilder = new MapBuilder();
+-        SchemaToRender stc = new SchemaToRender(teamA, teamB);
+-        terminalRenderer = new TerminalRenderer(stc);
+-        terminalRenderer.clearScreen();
+-        terminalRenderer.drawScreen(mapBuilder.prepareBoard(stc, mapStorage.enterBattleMap));
+-    }
+-
+-    public void pickFighterRoutine(Party teamA) throws IOException, InterruptedException {
+-        terminalRenderer = new TerminalRenderer();
+-        terminalRenderer.clearScreen();
+-        System.out.println("   " + "Pick Fighter for " + teamA.getName());
+-        System.out.println("\n\n");
+-        teamA.printAllMembers();
+-    }
+-
+-    public void roundRoutine(Battle battle, RoundStats roundStats, Character fighterTeamA, Character fighterTeamB, AttackStats attackStats) throws IOException, InterruptedException {
+-        terminalRenderer.clearScreen();
+-        int maxSize1 = battle.getParty1().getPartyMaxSize();
+-        //need current size
+-        int maxSize2 = battle.getParty2().getPartyMaxSize();
+-        //need current size
+-        int currentRound = battle.getRoundNumber();
+-        String name1 = fighterTeamA.getName();
+-        String name2 = fighterTeamB.getName();
+-        String class1 = roundStats.getClass1() < 2 ? "Warrior" : "Wizard";
+-        String class2 = roundStats.getClass2() < 2 ? "Warrior" : "Wizard";
+-        String attackType1;
+-        String attackType2;
+-        attackType1 = getAttackName(class1, attackStats.getAttackType1());
+-
+-        attackType2 = getAttackName(class2, attackStats.getAttackType2());
+-
+-        int attackValue1 = attackStats.getAttackValue1();
+-        int attackValue2 = attackStats.getAttackValue2();
+-        System.out.println(name1 + " did " + attackValue1 + " damage using " + attackType1 + ".");
+-        System.out.println(name2 + " did " + attackValue2 + " damage using " + attackType2 + ".");
+-
+-    }
+-
+-    private String getAttackName(String class1, int attackType12) {
+-        String attackType1;
+-        if (class1.equals("Warrior")) {
+-            attackType1 = attackType12 < 2 ? "heavy attack" : "light attack";
+-        } else {
+-            attackType1 = attackType12 < 2 ? "fireball" : "staff attack";
+-        }
+-        return attackType1;
+-    }
+-}
+Index: src/com/ironhack/rpg_simulator/output/TerminalRenderer.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/output/TerminalRenderer.java b/src/com/ironhack/rpg_simulator/output/TerminalRenderer.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/output/TerminalRenderer.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,190 +0,0 @@
+-package com.ironhack.rpg_simulator.output;
+-
+-import java.io.IOException;
+-
+-public class TerminalRenderer {
+-
+-    private final String DEFAULT = (char) 27 + "[0m";
+-    private final String RED = (char) 27 + "[31m";
+-    private final String GREEN = (char) 27 + "[32m";
+-    private final String GREEN_BCK = (char) 27 + "[42m";
+-    private final String MAGENTA_BCK = (char) 27 + "[30;45m";
+-    private final String RED_BCK = (char) 27 + "[41m";
+-
+-    private final String BLOCK = "  ";
+-    private final String BLACK_POINT = DEFAULT;
+-    private final String GREEN_POINT = GREEN_BCK;
+-    private final String PURPLE_POINT = MAGENTA_BCK;
+-    private final String RED_POINT = RED_BCK;
+-
+-    SchemaToRender stc = null;
+-    private String textToPrompt;
+-    private String teamAName;
+-    private String teamBName;
+-    private String charString;
+-
+-    public void setTeamAName(String teamAName) {
+-        this.teamAName = teamAName;
+-    }
+-
+-    public void setTeamBName(String teamBName) {
+-        this.teamBName = teamBName;
+-    }
+-
+-    public void setCharString(String charString) {
+-        this.charString = charString;
+-    }
+-
+-    public void setTextToPrompt(String textToPrompt) {
+-        this.textToPrompt = textToPrompt;
+-    }
+-
+-    public TerminalRenderer() {
+-    }
+-
+-    public TerminalRenderer(SchemaToRender stc) {
+-        this.stc = stc;
+-    }
+-
+-    public void clearScreen() throws IOException, InterruptedException {
+-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+-    }
+-
+-
+-
+-    public void drawScreen(char[][] map) {
+-        for (int i = 0; i < map.length; ++i) {
+-            for (int j = 0; j < map[i].length; ++j) {
+-                if (map[i][j] == ' ')
+-                    System.out.print(BLACK_POINT + BLOCK + DEFAULT);
+-                else if (map[i][j] == 'N' && map[i][j + 1] == 'a'){
+-                    String tempName = stc.getTeamName(0);
+-                    System.out.print(tempName);
+-                    j += tempName.length() / 2;
+-                }
+-
+-                else if (map[i][j] == 'N' && map[i][j + 1] == 'b'){
+-                    String tempName = stc.getTeamName(1);
+-                    System.out.print(tempName);
+-                    j += tempName.length() / 2;
+-                }
+-                else if (map[i][j] == 'N' && map[i][j + 1] == 'A'){
+-                    System.out.print(stc.getTeamMaxSize(0) + "/" + stc.getTeamMaxSize(0));
+-                    j += 1;
+-                }
+-                else if (map[i][j] == 'N' && map[i][j + 1] == 'B'){
+-                    System.out.print(stc.getTeamMaxSize(1) + "/" + stc.getTeamMaxSize(1));
+-                    j += 1;
+-                }
+-                else if (map[i][j] == 'E' && map[i][j + 1] == 'n'){
+-                    System.out.print("Team: " + teamAName);
+-                    j += teamAName.length() / 2;
+-                }
+-                else if (map[i][j] == 'C' && map[i][j + 1] == 'h'){
+-                    System.out.print("Character: " + charString);
+-                    j += charString.length() / 2;
+-                }
+-                else if (map[i][j] == 'S' && map[i][j + 1] == 'A'){
+-                    System.out.print("smaAtt");
+-                    j += 2;
+-                }
+-                else if (map[i][j] == 'S' && map[i][j + 1] == 'B'){
+-                    System.out.print("bigAtt");
+-                    j += 2;
+-                }
+-                else if (map[i][j] == 'S' && map[i][j + 1] == 'C'){
+-                    System.out.print("icebal");
+-                    j += 2;
+-                }
+-                else if (map[i][j] == 'B' && map[i][j + 1] == '7'){
+-                    System.out.print(RED_POINT + BLOCK + DEFAULT);
+-                }
+-                else if (map[i][j] == 'B' ){
+-                    if (map[i][j + 1] == '1')
+-                        System.out.print(RED_POINT + "   PLAY   " + DEFAULT);
+-                    else if (map[i][j + 1] == '2')
+-                        System.out.print(RED_POINT + " OPTIONS  " + DEFAULT);
+-                    else if (map[i][j + 1] == '3')
+-                        System.out.print(RED_POINT + "   EXIT   " + DEFAULT);
+-                    else if (map[i][j + 1] == '7'){
+-                        System.out.print(RED_POINT + BLOCK + BLOCK + BLOCK + BLOCK + DEFAULT);
+-                    }
+-                    j += 4;
+-                }
+-                else if (map[i][j] == 'P' ){
+-                    if (map[i][j + 1] == '1')
+-                        System.out.print(RED_POINT + " RND TEAM " + DEFAULT);
+-                    else if (map[i][j + 1] == '2')
+-                        System.out.print(RED_POINT + "SLCT TEAM " + DEFAULT);
+-                    else if (map[i][j + 1] == '3')
+-                        System.out.print(RED_POINT + " NEW TEAM " + DEFAULT);
+-                    else if (map[i][j + 1] == '4')
+-                        System.out.print(RED_POINT + "   EXIT   " + DEFAULT);
+-                    j += 4;
+-                }
+-
+-                else if (map[i][j] == 'I'){
+-                    System.out.print(DEFAULT + textToPrompt + DEFAULT);
+-                    j += 7;
+-                }
+-                else if (map[i][j] == 'S' && map[i][j + 1] == 'D'){
+-                    System.out.print("firbal");
+-                    j += 2;
+-                }
+-                else if (map[i][j] == 'H' && map[i][j + 1] == 'l'){
+-                    System.out.print(RED + stc.getDamageA() + DEFAULT);
+-                    j += 1;
+-                }
+-                else if (map[i][j] == 'H' && map[i][j + 1] == 'r'){
+-                    System.out.print(RED + stc.getDamageB() + DEFAULT);
+-                    j += 1;
+-                }
+-                else if (map[i][j] == 'T'){
+-                    if (map[i][j + 1] == 'T'){
+-                        System.out.println("RPG SIMULATOR");
+-                        j += 4;
+-                    } else if (map[i][j + 1] == 'n'){
+-                        System.out.print("TEAM E");
+-                        j += 2;
+-                    } else {
+-                        System.out.println("RPG SIMULATOR");
+-                        j += 4;
+-                    }
+-                }
+-                else if (map[i][j] == 't'){
+-                    System.out.print("presents");
+-                    j += 3;
+-                }
+-
+-                else if (map[i][j] == 'G'){
+-                    System.out.print(PURPLE_POINT + '+' + DEFAULT + ' ');
+-//                    j += 1;
+-                }
+-                else if (map[i][j] == '1')
+-                    System.out.print(GREEN_POINT + BLOCK + DEFAULT);
+-                else if (map[i][j] == '2')
+-                    System.out.print(PURPLE_POINT + BLOCK + DEFAULT);
+-                else if (map[i][j] == 'a'){
+-                    System.out.print(RED_POINT + " opti a " + DEFAULT);
+-                    j += 3;
+-                }
+-                else if (map[i][j] == 'b'){
+-                    System.out.print(RED_POINT + " opti b " + DEFAULT);
+-                    j += 3;
+-                }
+-                else if (map[i][j] == 'c'){
+-                    System.out.print(RED_POINT + " opti c " + DEFAULT);
+-                    j += 3;
+-                }
+-                else if (map[i][j] == 'd'){
+-                    System.out.print(RED_POINT + " opti d " + DEFAULT);
+-                    j += 3;
+-                }
+-            }
+-            System.out.println();
+-        }
+-    }
+-
+-
+-
+-}
+Index: src/com/ironhack/rpg_simulator/output/SchemaToRender.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/output/SchemaToRender.java b/src/com/ironhack/rpg_simulator/output/SchemaToRender.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/output/SchemaToRender.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,41 +0,0 @@
+-package com.ironhack.rpg_simulator.output;
+-
+-import com.ironhack.rpg_simulator.classes.Party;
+-
+-public class SchemaToRender {
+-    Party teamA;
+-    Party teamB;
+-
+-    Party[] battleParticipants;
+-    Graveyard graveyard;
+-
+-    public SchemaToRender(Party teamA, Party teamB) {
+-        this.teamA = teamA;
+-        this.teamB = teamB;
+-        battleParticipants = new Party[]{teamA, teamB};
+-    }
+-
+-    public SchemaToRender() {
+-    }
+-
+-//    public int getTeamMaxSize(int team){
+-//        return 0;
+-//    }
+-
+-    public int getTeamMaxSize(int teamToPick){
+-        return battleParticipants[teamToPick].getPartyMaxSize();
+-    }
+-
+-    public String getTeamName(int teamToPick){
+-        return battleParticipants[teamToPick].getName();
+-    }
+-
+-
+-    public String getDamageA() {
+-        return "  12";
+-    }
+-
+-    public String getDamageB() {
+-        return "   8";
+-    }
+-}
+Index: src/com/ironhack/rpg_simulator/main/PlayMenu.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/main/PlayMenu.java b/src/com/ironhack/rpg_simulator/main/PlayMenu.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/main/PlayMenu.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,47 +0,0 @@
+-package com.ironhack.rpg_simulator.main;
+-
+-import java.io.BufferedReader;
+-import java.io.IOException;
+-import java.io.InputStreamReader;
+-
+-public class PlayMenu implements Page{
+-    String title = "Play Menu";
+-    String prompt = "select 1 to play 2 to option 3 to exit";
+-
+-    public PlayMenu() throws IOException {
+-        render();
+-        navigation();
+-    }
+-
+-    @Override
+-    public void render() {
+-        System.out.println(title);
+-    }
+-
+-
+-    public void navigation() throws IOException {
+-        System.out.println(prompt);
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String selection = br.readLine().split(" ")[0];
+-        Page nextPage;
+-
+-        switch (selection){
+-            case "1":
+-                nextPage = new GamePage(new RandomTeamGeneration().generateTwoRandomTeam() );
+-                break;
+-            case "2":
+-                ; //navigate to -> select from existent parties
+-                break;
+-            case "3":
+-//                create a new party
+-                nextPage = new createPartyPage();
+-                break;
+-            case "4":
+-                nextPage = new MainMenu();
+-                break;
+-
+-            default:
+-                throw new IllegalStateException("Unexpected value: " + selection);
+-        }
+-    }
+-}
+Index: src/com/ironhack/rpg_simulator/main/MainMenu.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/main/MainMenu.java b/src/com/ironhack/rpg_simulator/main/MainMenu.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/main/MainMenu.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,41 +0,0 @@
+-package com.ironhack.rpg_simulator.main;
+-
+-import java.io.BufferedReader;
+-import java.io.IOException;
+-import java.io.InputStreamReader;
+-
+-public class MainMenu implements Page{
+-
+-    private String title = "Main Menu";
+-    private String prompt = "select 1 to play 2 to option 3 to exit";
+-
+-    public MainMenu() throws IOException {
+-        render();
+-        navigation();
+-    }
+-
+-    @Override
+-    public void render() {
+-        System.out.println(title);
+-    }
+-
+-    @Override
+-    public void navigation() throws IOException {
+-        System.out.println(prompt);
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String selection = br.readLine().split(" ")[0];
+-        Page nextPage;
+-
+-        switch (selection){
+-            case "1":
+-                nextPage = new PlayMenu();
+-                break;
+-            case "2":
+-                ; //navigate to ->
+-                break;
+-
+-            default:
+-                throw new IllegalStateException("Unexpected value: " + selection);
+-        }
+-    }
+-}
+Index: src/com/ironhack/rpg_simulator/main/createPartyPage.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/main/createPartyPage.java b/src/com/ironhack/rpg_simulator/main/createPartyPage.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/main/createPartyPage.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,17 +0,0 @@
+-package com.ironhack.rpg_simulator.main;
+-
+-import java.io.IOException;
+-
+-public class createPartyPage implements Page {
+-
+-
+-    @Override
+-    public void render() throws IOException {
+-
+-    }
+-
+-    @Override
+-    public void navigation() throws IOException {
+-
+-    }
+-}
+Index: src/com/ironhack/rpg_simulator/output/Team.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/output/Team.java b/src/com/ironhack/rpg_simulator/output/Team.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/output/Team.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,4 +0,0 @@
+-package com.ironhack.rpg_simulator.output;
+-
+-public class Team {
+-}
+Index: src/com/ironhack/rpg_simulator/output/Soldier.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/output/Soldier.java b/src/com/ironhack/rpg_simulator/output/Soldier.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/output/Soldier.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,4 +0,0 @@
+-package com.ironhack.rpg_simulator.output;
+-
+-public class Soldier {
+-}
+Index: src/com/ironhack/rpg_simulator/main/FighterPickPage.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/main/FighterPickPage.java b/src/com/ironhack/rpg_simulator/main/FighterPickPage.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/main/FighterPickPage.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,76 +0,0 @@
+-package com.ironhack.rpg_simulator.main;
+-
+-import com.ironhack.rpg_simulator.classes.Character;
+-import com.ironhack.rpg_simulator.classes.Party;
+-import com.ironhack.rpg_simulator.fight.classes.Battle;
+-
+-import java.io.BufferedReader;
+-import java.io.IOException;
+-import java.io.InputStreamReader;
+-import java.util.List;
+-
+-public class FighterPickPage implements Page{
+-
+-    String title = "Fighter Pick Page";
+-    String prompt = "1 to continue, 3 to main menu";
+-    Battle battle;
+-
+-    public FighterPickPage(Battle battle) throws IOException {
+-        this.battle = battle;
+-    }
+-
+-    @Override
+-    public void render() throws IOException {
+-        System.out.println(title);
+-    }
+-
+-    @Override
+-    public void navigation() throws IOException {
+-
+-    }
+-
+-    public void navigation(StoredParties storedParties) throws IOException {
+-        System.out.println(prompt);
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String selection = br.readLine().split(" ")[0];
+-        Page nextPage;
+-
+-        switch (selection) {
+-            case "1":
+-                nextPage = new RoundPage(battle, getFighters());
+-                break;
+-            case "2":
+-                ; //navigate to ->
+-                break;
+-            case "3":
+-                nextPage = new MainMenu();
+-                break;
+-
+-            default:
+-                throw new IllegalStateException("Unexpected value: " + selection);
+-        }
+-    }
+-
+-
+-
+-    public int[] getFighters() throws IOException {
+-
+-        int[] fightersIndexes = new int[2];
+-        showParty(battle.getParty1());
+-        fightersIndexes[0] = selectFighter();
+-
+-        showParty(battle.getParty2());
+-        fightersIndexes[1] = selectFighter();
+-
+-        return fightersIndexes;
+-    }
+-    private void showParty(Party party){
+-        party.printAllMembers();
+-    }
+-
+-    private int selectFighter() throws IOException {
+-        System.out.println("Chose a fighter from this list: ");
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        return Integer.parseInt(br.readLine().split(" ")[0]) - 1;
+-    }
+-}
+Index: src/com/ironhack/rpg_simulator/main/RoundPage.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/main/RoundPage.java b/src/com/ironhack/rpg_simulator/main/RoundPage.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/main/RoundPage.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,96 +0,0 @@
+-package com.ironhack.rpg_simulator.main;
+-
+-import com.ironhack.rpg_simulator.classes.Character;
+-import com.ironhack.rpg_simulator.classes.Party;
+-import com.ironhack.rpg_simulator.fight.classes.AttackStats;
+-import com.ironhack.rpg_simulator.fight.classes.Battle;
+-import com.ironhack.rpg_simulator.fight.classes.RoundStats;
+-
+-import java.io.BufferedReader;
+-import java.io.IOException;
+-import java.io.InputStreamReader;
+-import java.util.List;
+-
+-public class RoundPage implements Page {
+-
+-    String title;
+-    String prompt = "1 got to next round 3 to exit";
+-    List<Party> parties;
+-    int[] fightersIndexes;
+-    Battle battle;
+-
+-    public RoundPage(Battle battle, int[] fightersIndexes) throws IOException {
+-        this.fightersIndexes = fightersIndexes;
+-        title = String.format("Battle %s VS %s", parties.get(0).getName(), parties.get(0).getName());
+-        this.battle = doTheRound(battle);
+-
+-        navigation();
+-    }
+-
+-    @Override
+-    public void render() throws IOException {
+-        System.out.println(title);
+-    }
+-
+-    @Override
+-    public void navigation() throws IOException {
+-
+-        System.out.println(prompt);
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String selection = br.readLine().split(" ")[0];
+-        Page nextPage;
+-
+-        //if game still on
+-        switch (selection){
+-            case "1":
+-                //continue to chose next fighters
+-                nextPage = new FighterPickPage(battle);
+-                break;
+-            case "2":
+-                ; //navigate to ->
+-                break;
+-            case "3":
+-                nextPage = new MainMenu();
+-                break;
+-
+-            default:
+-                throw new IllegalStateException("Unexpected value: " + selection);
+-        }
+-
+-        //else announce winner and go to main menu
+-    }
+-
+-    public Battle doTheRound(Battle battle) throws IOException {
+-        render();
+-        RoundStats roundStats = battle.fight(fightersIndexes[0], fightersIndexes[1]);
+-        List<AttackStats> attackStats = roundStats.getAttackLogs();
+-        System.out.println("Starting round " + battle.getRoundNumber() + "...");
+-        String name1 = roundStats.getNameFighter1();
+-        String name2 = roundStats.getNameFighter2();
+-        String class1 = roundStats.getClass1() < 2 ? "Warrior" : "Wizard";
+-        String class2 = roundStats.getClass2() < 2 ? "Warrior" : "Wizard";
+-        for (AttackStats attack : attackStats ) {
+-            String attackType1 = getAttackName(class1, attack.getAttackType1());
+-            String attackType2 = getAttackName(class2, attack.getAttackType2());
+-            int attackValue1 = attack.getAttackValue1();
+-            int attackValue2 = attack.getAttackValue2();
+-            System.out.println(name1 + " did " + attackValue1 + " damage using " + attackType1 + ".");
+-            System.out.println(name2 + " did " + attackValue2 + " damage using " + attackType2 + ".");
+-        }
+-        System.out.println(roundStats.getRoundWinner(name1, name2));
+-
+-        return battle;
+-    }
+-    private String getAttackName(String className, int attackTypeId) {
+-        String attackType;
+-        if (className.equals("Warrior")) {
+-            attackType = attackTypeId < 2 ? "heavy attack" : "light attack";
+-        } else {
+-            attackType = attackTypeId < 2 ? "fireball" : "staff attack";
+-        }
+-        return attackType;
+-    }
+-
+-
+-
+-}
+Index: src/com/ironhack/rpg_simulator/output/Output.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/output/Output.java b/src/com/ironhack/rpg_simulator/output/Output.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/output/Output.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,4 +0,0 @@
+-package com.ironhack.rpg_simulator.output;
+-
+-public interface Output {
+-}
+Index: src/com/ironhack/rpg_simulator/main/GamePage.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/main/GamePage.java b/src/com/ironhack/rpg_simulator/main/GamePage.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/main/GamePage.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,57 +0,0 @@
+-package com.ironhack.rpg_simulator.main;
+-
+-import com.ironhack.rpg_simulator.classes.Character;
+-import com.ironhack.rpg_simulator.classes.Party;
+-import com.ironhack.rpg_simulator.fight.classes.Battle;
+-
+-import java.io.BufferedReader;
+-import java.io.IOException;
+-import java.io.InputStreamReader;
+-import java.util.List;
+-
+-public class GamePage implements Page{
+-
+-    String title = "Game Page";
+-    String prompt = "Pick 1 to start fight, 2 to fast fight, 3 to exit";
+-    Battle battle;
+-    List<Party> parties;
+-    List<Character> fighters;
+-    public GamePage(List<Party> parties) throws IOException {
+-//        render(storedParties);
+-        battle = new Battle(parties.get(0), parties.get(1));
+-        parties = parties;
+-        navigation();
+-
+-    }
+-
+-
+-
+-    public void render() throws IOException {
+-        System.out.println(prompt);
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String selection = br.readLine().split(" ")[0];
+-        Page nextPage;
+-
+-        switch (selection){
+-            case "1":
+-                nextPage = new FighterPickPage(battle);
+-                break;
+-            case "2":
+-                ; //navigate to ->
+-                break;
+-            case "3":
+-                nextPage = new MainMenu();
+-                break;
+-
+-            default:
+-                throw new IllegalStateException("Unexpected value: " + selection);
+-        }
+-    }
+-
+-
+-
+-    @Override
+-    public void navigation() throws IOException {
+-
+-    }
+-}
+Index: src/com/ironhack/rpg_simulator/output/Graveyard.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/output/Graveyard.java b/src/com/ironhack/rpg_simulator/output/Graveyard.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/output/Graveyard.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,5 +0,0 @@
+-package com.ironhack.rpg_simulator.output;
+-
+-public class Graveyard {
+-
+-}
+Index: src/com/ironhack/rpg_simulator/output/MapStorage.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/output/MapStorage.java b/src/com/ironhack/rpg_simulator/output/MapStorage.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/output/MapStorage.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,170 +0,0 @@
+-package com.ironhack.rpg_simulator.output;
+-
+-public class MapStorage {
+-
+-
+-    public char[][] introMap = {
+-//          {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3'},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'T', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 't', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+-    };
+-
+-    public char[][] titleMap = {
+-//          {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3'},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'T', 'T', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+-    };
+-
+-
+-    public char[][] mainMenuMap = {
+-//          {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3'},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'B', '1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'B', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'B', '3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+-    };
+-
+-    public char[][] playMenuMap = {
+-//          {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3'},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'P', '1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'P', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'P', '3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' , ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'P', '4', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+-    };
+-
+-    //map 24*15
+-    char[][] map = {
+-//          {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3'},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', 'N', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'N', 'A', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', '2', ' ', ' ', ' ', ' ', ' ', ' ', 'S', 'A', ' ', ' ', ' ', 'S', 'B', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2', ' '},
+-            {' ', ' ', ' ', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2', ' ', ' ', ' '},
+-            {' ', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '1', ' ', ' ', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2', ' '},
+-            {' ', ' ', ' ', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2', ' ', ' ', ' '},
+-            {' ', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', 'G', 'G', 'G', 'G', 'G', ' ', ' ', ' ', ' ', ' ', ' ', 'G', 'G', 'G', 'G', 'G', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', 'a', ' ', ' ', ' ', ' ', 'b', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' ', 'd', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+-    };
+-
+-    char[][] enterBattleMap = {
+-//          {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3'},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', 'N', 'a', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'N', 'b', ' ', ' ', ' '},
+-            {' ', 'N', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'N', 'B', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2', ' '},
+-            {' ', ' ', ' ', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2', ' ', ' ', ' '},
+-            {' ', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2', ' '},
+-            {' ', ' ', ' ', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2', ' ', ' ', ' '},
+-            {' ', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '2', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-//            {' ', 'a', ' ', ' ', ' ', ' ', 'b', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' ', 'd', ' ', ' ', ' ', ' '},
+-//            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+-    };
+-
+-
+-    char[][] blankMap = {
+-//          {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3'},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+-    };
+-
+-    char[][] mainMenu = {
+-//          {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3'},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', 'T', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'B', '1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'B', '2', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'B', '3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+-    };
+-
+-    char[][] createTeamLand = {
+-//          {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3'},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', 'T', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', 'E', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', 'C', 'h', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', 'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+-            {' ', 'B', '7', 'B', '7', 'B', '7', 'B', '7', 'B', '7', 'B', '7', 'B', '7', 'B', '7', 'B', '7', 'B', '7', 'B', '7', ' '},
+-            {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+-    };
+-}
+Index: src/com/ironhack/rpg_simulator/main/Page.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/main/Page.java b/src/com/ironhack/rpg_simulator/main/Page.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/main/Page.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,15 +0,0 @@
+-package com.ironhack.rpg_simulator.main;
+-
+-
+-import java.io.IOException;
+-
+-
+-public interface Page {
+-
+-    public abstract void render() throws IOException;
+-
+-    public abstract void navigation() throws IOException;
+-
+-
+-
+-}
+Index: src/com/ironhack/rpg_simulator/output/InputFromFight.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/output/InputFromFight.java b/src/com/ironhack/rpg_simulator/output/InputFromFight.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/output/InputFromFight.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,13 +0,0 @@
+-package com.ironhack.rpg_simulator.output;
+-
+-import java.util.List;
+-
+-public class InputFromFight {
+-
+-//          public void announceTeam(Team teamOne Team teamTwo);
+-//          public void announceFighters(Soldier a , Soldier b);
+-//          public void announceRound(Soldier a, Soldier b, String attackA, String attackB);
+-//          public void announceDeath(int side);
+-//          public void announceEnd(String results);
+-//          public void announceMenuOptions(List<String> menuOptions);
+-}
+Index: src/com/ironhack/rpg_simulator/main/AlternativeMain.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/main/AlternativeMain.java b/src/com/ironhack/rpg_simulator/main/AlternativeMain.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/main/AlternativeMain.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,14 +0,0 @@
+-package com.ironhack.rpg_simulator.main;
+-
+-import java.io.IOException;
+-
+-public class AlternativeMain {
+-    public static void main(String[] args) throws IOException {
+-
+-
+-
+-        MainMenu  mm = new MainMenu();
+-
+-
+-    }
+-}
+Index: src/com/ironhack/rpg_simulator/output/Main.java
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/output/Main.java b/src/com/ironhack/rpg_simulator/output/Main.java
+deleted file mode 100644
+--- a/src/com/ironhack/rpg_simulator/output/Main.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ /dev/null	(revision ee210380698afed78dccc1f53649198bf8535322)
+@@ -1,194 +0,0 @@
+-package com.ironhack.rpg_simulator.output;
+-
+-import java.io.BufferedReader;
+-import java.io.IOException;
+-import java.io.InputStreamReader;
+-import java.lang.reflect.Array;
+-import java.util.Arrays;
+-
+-public class Main {
+-
+-    public static void main(String[] args) throws InterruptedException, IOException {
+-        OutputTerminal output = new OutputTerminal();
+-        startGame(output);
+-    }
+-
+-    private static void startGame(OutputTerminal output) throws InterruptedException, IOException {
+-        playIntro(output);
+-        playMainMenu(output);
+-
+-
+-    }
+-
+-    private static void playMainMenu(OutputTerminal output) throws IOException, InterruptedException {
+-        String selection = output.mainMenuRoutine();
+-        switch (selection){
+-            case "1":
+-                startPlayMenu(output);
+-                break;
+-            case "2":
+-                playOptionsMenu(output);
+-                break;
+-            case "3":
+-                //TODO EXIT
+-                break;
+-            default:
+-                playMainMenu(output);
+-        }
+-
+-    }
+-
+-    private static void playOptionsMenu(OutputTerminal output) throws IOException, InterruptedException {
+-        System.out.println("Option menu, 1 to import, 2 to export, 3 to exit");
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String selection = br.readLine();
+-        switch (selection){
+-            case "1":
+-                //TODO Import from CSV
+-                break;
+-            case "2":
+-                //TODO Export to CSV
+-                break;
+-            case "3":
+-                //TODO EXIT
+-                break;
+-            default:
+-                playOptionsMenu(output);
+-        }
+-    }
+-
+-    private static void startPlayMenu(OutputTerminal output) throws IOException, InterruptedException {
+-        String selection = output.playMenuRoutine();
+-        switch (selection){
+-            case "1":
+-                playBattle(output);
+-                break;
+-            case "2":
+-                playTeamSelection(output);
+-                break;
+-            case "3":
+-                playCreateTeam(output);
+-                break;
+-            case "4":
+-                playMainMenu(output);
+-                break;
+-            default:
+-                startPlayMenu(output);
+-        }
+-    }
+-
+-    private static void playCreateTeam(OutputTerminal output) throws IOException, InterruptedException {
+-        String teamNamePrompt = "Type new team name:";
+-        String[] teamName = output.createTeamRoutine(teamNamePrompt, "" , "");
+-        //TODO CREATE TEAM WITH NAME
+-
+-        String charNamePrompt = "Type new character 'name':";
+-        String[] charName = output.createTeamRoutine(charNamePrompt, Arrays.toString(teamName), "" );
+-        String charClassPrompt = "Type new character 'class':";
+-        String[] charClass = output.createTeamRoutine(charClassPrompt, Arrays.toString(teamName), Arrays.toString(charName) );
+-        String charStatsPrompt = "Type: 'hp main_stats second_stats' values:";
+-        String charString = Arrays.toString(charName) + Arrays.toString(charClass);
+-        String[] charStats = output.createTeamRoutine(charStatsPrompt, Arrays.toString(teamName), charString);
+-        charString += Arrays.toString(charStats);
+-
+-        //TODO ADD CHAR TO TEAM
+-
+-        //TODO OUTPUT WITH ALL TEAM
+-        String continueCreateCharPrompt = "";
+-        String[] selection = output.createTeamRoutine(continueCreateCharPrompt, Arrays.toString(teamName), charString);
+-
+-        switch (selection[0]){
+-            case "1":
+-                //TODO ADD ONE MORE
+-                break;
+-            case "2":
+-                playMainMenu(output);
+-                break;
+-
+-            default:
+-                playMainMenu(output);
+-        }
+-    }
+-
+-    private static void playTeamSelection(OutputTerminal output) throws IOException, InterruptedException {
+-
+-        int indexTeamA = 0, indexTeamB = 0;
+-
+-        //TODO Print all team INDEX + NAME
+-
+-        //TODO Ask for index
+-
+-        //TODO save decision
+-
+-        //TODO Print all team INDEX + NAME
+-
+-        //TODO Ask for index
+-
+-        //TODO save decision
+-
+-
+-        //playBattle(output, indexTeamA, indexTeamB);
+-
+-    }
+-
+-    private static void playBattle(OutputTerminal output, int indexTeamA, int indexTeamB) throws IOException, InterruptedException {
+-        //TODO IMPLEMENTS FIGHTS
+-
+-        System.out.println("Options...");
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String selection = br.readLine();
+-        switch (selection){
+-            case "1":
+-                //todo pick fighters
+-                playNextRound(output);
+-                break;
+-            case "2":
+-                //TODO fast battle
+-                break;
+-            case "3":
+-                //TODO NADA
+-                break;
+-            case "4":
+-                playMainMenu(output);
+-                break;
+-            default:
+-                //TODO see case 1
+-        }
+-    }
+-
+-    private static void playBattle(OutputTerminal output) throws IOException, InterruptedException {
+-        //TODO IMPLEMENTS AN OUTPUT FOR BATTLE IS OVER AND IMPLEMENTS A MENU TO GO BACK TO MAIN MENU
+-
+-
+-        //TODO IMPLEMENTS FIGHTS BETWEEN TO RANDOM GENERATED TEAMS
+-        System.out.println("Options...");
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String selection = br.readLine();
+-        switch (selection){
+-            case "1":
+-                //todo pick fighters
+-                playNextRound(output);
+-                break;
+-            case "2":
+-                //TODO fast battle
+-                break;
+-            case "3":
+-                //TODO NADA
+-                break;
+-            case "4":
+-                playMainMenu(output);
+-                break;
+-            default:
+-                //TODO see case 1
+-        }
+-    }
+-
+-    private static void playNextRound(OutputTerminal output) {
+-        //print
+-    }
+-
+-    private static void playIntro(OutputTerminal output) throws IOException, InterruptedException {
+-        output.introRoutine();
+-    }
+-
+-}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"3ac01ed2-15b0-48e0-9b56-3b4908f921f6\" name=\"Default Changelist\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1n7SbPhnHwsmS5lHEETO65sgF7g\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"Git.Branch.Popup.ShowAllRemotes\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"G:\\Capiro\\Trabajos\\Programación\\Bootcamp Java\\rpg_battlesimulator\\ironhack_rpgbattlesimulator\\src\\com\\ironhack\\rpg_simulator\\csv_files\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"3ac01ed2-15b0-48e0-9b56-3b4908f921f6\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1610739709669</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1610739709669</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Added an example CSV file with a party and version 0.1 of the method to import a party from a CSV file.\">\r\n      <created>1610749943766</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1610749943767</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Added CSV files with parties and updated importParty\">\r\n      <created>1610835060081</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1610835060081</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Added comments on importParty\">\r\n      <created>1610838035744</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1610838035744</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Changed some minor details\">\r\n      <created>1610838273900</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1610838273900</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"ImportParty adapted\">\r\n      <created>1610925739708</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1610925739708</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Merged with Ivan's branch, updated 'ImportParty' and changed CSV files names\">\r\n      <created>1610926608520</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1610926608520</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"7\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"develop-3.0-ivan\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Added an example CSV file with a party and version 0.1 of the method to import a party from a CSV file.\" />\r\n    <MESSAGE value=\"Added CSV files with parties and updated importParty\" />\r\n    <MESSAGE value=\"Added comments on importParty\" />\r\n    <MESSAGE value=\"Changed some minor details\" />\r\n    <MESSAGE value=\"ImportParty adapted\" />\r\n    <MESSAGE value=\"Merged with Ivan's branch, updated 'ImportParty' and changed CSV files names\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Merged with Ivan's branch, updated 'ImportParty' and changed CSV files names\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ b/.idea/workspace.xml	(date 1611000969466)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="3ac01ed2-15b0-48e0-9b56-3b4908f921f6" name="Default Changelist" comment="" />
++    <list default="true" id="c07b2799-e7b3-4681-b803-8552337172ae" name="Default Changelist" comment="" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -17,108 +17,98 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+-  <component name="ProjectId" id="1n7SbPhnHwsmS5lHEETO65sgF7g" />
++  <component name="ProjectId" id="1n79UO8qhqdvD79uORNImpBeuQG" />
+   <component name="ProjectViewState">
++    <option name="abbreviatePackageNames" value="true" />
++    <option name="autoscrollFromSource" value="true" />
++    <option name="autoscrollToSource" value="true" />
+     <option name="hideEmptyMiddlePackages" value="true" />
+-    <option name="showLibraryContents" value="true" />
++    <option name="showExcludedFiles" value="false" />
++    <option name="showModules" value="false" />
++    <option name="sortByType" value="true" />
+   </component>
+   <component name="PropertiesComponent">
+-    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+-  </component>
+-  <component name="RecentsManager">
+-    <key name="CopyFile.RECENT_KEYS">
+-      <recent name="G:\Capiro\Trabajos\Programación\Bootcamp Java\rpg_battlesimulator\ironhack_rpgbattlesimulator\src\com\ironhack\rpg_simulator\csv_files" />
+-    </key>
+-  </component>
+-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-  <component name="TaskManager">
+-    <task active="true" id="Default" summary="Default task">
+-      <changelist id="3ac01ed2-15b0-48e0-9b56-3b4908f921f6" name="Default Changelist" comment="" />
+-      <created>1610739709669</created>
+-      <option name="number" value="Default" />
+-      <option name="presentableId" value="Default" />
+-      <updated>1610739709669</updated>
+-    </task>
+-    <task id="LOCAL-00001" summary="Added an example CSV file with a party and version 0.1 of the method to import a party from a CSV file.">
+-      <created>1610749943766</created>
+-      <option name="number" value="00001" />
+-      <option name="presentableId" value="LOCAL-00001" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1610749943767</updated>
+-    </task>
+-    <task id="LOCAL-00002" summary="Added CSV files with parties and updated importParty">
+-      <created>1610835060081</created>
+-      <option name="number" value="00002" />
+-      <option name="presentableId" value="LOCAL-00002" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1610835060081</updated>
+-    </task>
+-    <task id="LOCAL-00003" summary="Added comments on importParty">
+-      <created>1610838035744</created>
+-      <option name="number" value="00003" />
+-      <option name="presentableId" value="LOCAL-00003" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1610838035744</updated>
+-    </task>
+-    <task id="LOCAL-00004" summary="Changed some minor details">
+-      <created>1610838273900</created>
+-      <option name="number" value="00004" />
+-      <option name="presentableId" value="LOCAL-00004" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1610838273900</updated>
+-    </task>
+-    <task id="LOCAL-00005" summary="ImportParty adapted">
+-      <created>1610925739708</created>
+-      <option name="number" value="00005" />
+-      <option name="presentableId" value="LOCAL-00005" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1610925739708</updated>
+-    </task>
+-    <task id="LOCAL-00006" summary="Merged with Ivan's branch, updated 'ImportParty' and changed CSV files names">
+-      <created>1610926608520</created>
+-      <option name="number" value="00006" />
+-      <option name="presentableId" value="LOCAL-00006" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1610926608520</updated>
+-    </task>
+-    <option name="localTasksCounter" value="7" />
+-    <servers />
++    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+   </component>
+-  <component name="Vcs.Log.Tabs.Properties">
+-    <option name="TAB_STATES">
+-      <map>
+-        <entry key="MAIN">
+-          <value>
+-            <State>
+-              <option name="FILTERS">
+-                <map>
+-                  <entry key="branch">
+-                    <value>
+-                      <list>
+-                        <option value="develop-3.0-ivan" />
+-                      </list>
+-                    </value>
+-                  </entry>
+-                </map>
+-              </option>
+-            </State>
+-          </value>
+-        </entry>
+-      </map>
+-    </option>
+-    <option name="oldMeFiltersMigrated" value="true" />
++  <component name="RunManager">
++    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="com.ironhack.rpg_simulator.output.Main" />
++      <module name="ironhack-team5_battleSimulator" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="Application.Main" />
++      </list>
++    </recent_temporary>
+   </component>
+-  <component name="VcsManagerConfiguration">
+-    <MESSAGE value="Added an example CSV file with a party and version 0.1 of the method to import a party from a CSV file." />
+-    <MESSAGE value="Added CSV files with parties and updated importParty" />
+-    <MESSAGE value="Added comments on importParty" />
+-    <MESSAGE value="Changed some minor details" />
+-    <MESSAGE value="ImportParty adapted" />
+-    <MESSAGE value="Merged with Ivan's branch, updated 'ImportParty' and changed CSV files names" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Merged with Ivan's branch, updated 'ImportParty' and changed CSV files names" />
++  <component name="WindowStateProjectService">
++    <state x="-1263" y="139" key="#Main" timestamp="1610998268316">
++      <screen x="-1920" y="0" width="1920" height="1040" />
++    </state>
++    <state x="-1263" y="139" key="#Main/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998268316" />
++    <state x="-1263" y="139" key="#Main_(1)" timestamp="1610998038405">
++      <screen x="-1920" y="0" width="1920" height="1040" />
++    </state>
++    <state x="-1263" y="139" key="#Main_(1)/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998038405" />
++    <state x="-1155" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1610912354086">
++      <screen x="-1920" y="0" width="1920" height="1040" />
++    </state>
++    <state x="-1155" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610912354086" />
++    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610886851971" />
++    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1610885506652">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610885506652" />
++    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1610793995403">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610793995403" />
++    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1610998197556">
++      <screen x="-1920" y="0" width="1920" height="1040" />
++    </state>
++    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998197556" />
++    <state width="1899" height="318" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
++    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1610998197556">
++      <screen x="-1920" y="0" width="1920" height="1040" />
++    </state>
++    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998197556" />
++    <state width="1899" height="318" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
++    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1610998197556">
++      <screen x="-1920" y="0" width="1920" height="1040" />
++    </state>
++    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998197556" />
++    <state width="1899" height="318" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
++    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1610998197556">
++      <screen x="-1920" y="0" width="1920" height="1040" />
++    </state>
++    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998197556" />
++    <state width="1899" height="318" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
++    <state width="1899" height="318" key="GridCell.Tab.1.bottom" timestamp="1610887134781">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state width="1899" height="318" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
++    <state width="1899" height="318" key="GridCell.Tab.1.center" timestamp="1610887134781">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state width="1899" height="318" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
++    <state width="1899" height="318" key="GridCell.Tab.1.left" timestamp="1610887134781">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state width="1899" height="318" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
++    <state width="1899" height="318" key="GridCell.Tab.1.right" timestamp="1610887134781">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state width="1899" height="318" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610887134781" />
++    <state x="-1459" y="165" key="SettingsEditor" timestamp="1610879120881">
++      <screen x="-1920" y="0" width="1920" height="1040" />
++    </state>
++    <state x="-1459" y="165" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610879120881" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/com/ironhack/rpg_simulator/main/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.ironhack.rpg_simulator.main;\r\n\r\n//<<<<<<< HEAD\r\n//=======\r\n\r\nimport com.ironhack.rpg_simulator.classes.Character;\r\nimport com.ironhack.rpg_simulator.classes.Party;\r\nimport com.ironhack.rpg_simulator.fight.classes.AttackStats;\r\nimport com.ironhack.rpg_simulator.fight.classes.Battle;\r\nimport com.ironhack.rpg_simulator.fight.classes.RoundStats;\r\nimport com.ironhack.rpg_simulator.output.OutputTerminal;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.IOException;\r\nimport java.io.InputStreamReader;\r\nimport java.util.Arrays;\r\nimport java.util.List;\r\n//>>>>>>> 4c2ca25b6b037b41ad74b5365a8a0f37f5b02039\r\n\r\npublic class Main {\r\n\r\n    public static void main(String[] args) throws InterruptedException, IOException {\r\n        OutputTerminal output = new OutputTerminal();\r\n        playBattle(output);\r\n//        startGame(output);\r\n    }\r\n\r\n    private static void startGame(OutputTerminal output) throws InterruptedException, IOException {\r\n        playIntro(output);\r\n        playMainMenu(output);\r\n\r\n\r\n    }\r\n\r\n    private static void playMainMenu(OutputTerminal output) throws IOException, InterruptedException {\r\n        String selection = output.mainMenuRoutine();\r\n        switch (selection){\r\n            case \"1\":\r\n                startPlayMenu(output);\r\n                break;\r\n            case \"2\":\r\n                playOptionsMenu(output);\r\n                break;\r\n            case \"3\":\r\n                //TODO EXIT\r\n                break;\r\n            default:\r\n                playMainMenu(output);\r\n        }\r\n\r\n    }\r\n\r\n    private static void playOptionsMenu(OutputTerminal output) throws IOException, InterruptedException {\r\n        System.out.println(\"Option menu, 1 to import, 2 to export, 3 to exit\");\r\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\r\n        String selection = br.readLine();\r\n        switch (selection){\r\n            case \"1\":\r\n                //TODO Import from CSV\r\n                break;\r\n            case \"2\":\r\n                //TODO Export to CSV\r\n                break;\r\n            case \"3\":\r\n                //TODO EXIT\r\n                break;\r\n            default:\r\n                playOptionsMenu(output);\r\n        }\r\n    }\r\n\r\n    private static void startPlayMenu(OutputTerminal output) throws IOException, InterruptedException {\r\n        String selection = output.playMenuRoutine();\r\n        switch (selection){\r\n            case \"1\":\r\n                playBattle(output);\r\n                break;\r\n            case \"2\":\r\n                playTeamSelection(output);\r\n                break;\r\n            case \"3\":\r\n                playCreateTeam(output);\r\n                break;\r\n            case \"4\":\r\n                playMainMenu(output);\r\n                break;\r\n            default:\r\n                startPlayMenu(output);\r\n        }\r\n    }\r\n\r\n    private static void playCreateTeam(OutputTerminal output) throws IOException, InterruptedException {\r\n        String teamNamePrompt = \"Type new team name:\";\r\n        String[] teamName = output.createTeamRoutine(teamNamePrompt, \"\" , \"\");\r\n        //TODO CREATE TEAM WITH NAME\r\n\r\n        String charNamePrompt = \"Type new character 'name':\";\r\n        String[] charName = output.createTeamRoutine(charNamePrompt, Arrays.toString(teamName), \"\" );\r\n        String charClassPrompt = \"Type new character 'class':\";\r\n        String[] charClass = output.createTeamRoutine(charClassPrompt, Arrays.toString(teamName), Arrays.toString(charName) );\r\n        String charStatsPrompt = \"Type: 'hp main_stats second_stats' values:\";\r\n        String charString = Arrays.toString(charName) + Arrays.toString(charClass);\r\n        String[] charStats = output.createTeamRoutine(charStatsPrompt, Arrays.toString(teamName), charString);\r\n        charString += Arrays.toString(charStats);\r\n\r\n        //TODO ADD CHAR TO TEAM\r\n\r\n        //TODO OUTPUT WITH ALL TEAM\r\n        String continueCreateCharPrompt = \"\";\r\n        String[] selection = output.createTeamRoutine(continueCreateCharPrompt, Arrays.toString(teamName), charString);\r\n\r\n        switch (selection[0]){\r\n            case \"1\":\r\n                //TODO ADD ONE MORE\r\n                break;\r\n            case \"2\":\r\n                playMainMenu(output);\r\n                break;\r\n\r\n            default:\r\n                playMainMenu(output);\r\n        }\r\n    }\r\n\r\n    private static void playTeamSelection(OutputTerminal output) throws IOException, InterruptedException {\r\n\r\n        int indexTeamA = 0, indexTeamB = 0;\r\n\r\n        //TODO Print all team INDEX + NAME\r\n\r\n        //TODO Ask for index\r\n\r\n        //TODO save decision\r\n\r\n        //TODO Print all team INDEX + NAME\r\n\r\n        //TODO Ask for index\r\n\r\n        //TODO save decision\r\n\r\n\r\n        //playBattle(output, indexTeamA, indexTeamB);\r\n\r\n    }\r\n\r\n    private static void playBattle(OutputTerminal output, int indexTeamA, int indexTeamB) throws IOException, InterruptedException {\r\n        //TODO IMPLEMENTS FIGHTS\r\n\r\n        System.out.println(\"Options...\");\r\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\r\n        String selection = br.readLine();\r\n        switch (selection){\r\n            case \"1\":\r\n                //todo pick fighters\r\n                playNextRound(output);\r\n                break;\r\n            case \"2\":\r\n                //TODO fast battle\r\n                break;\r\n            case \"3\":\r\n                //TODO NADA\r\n                break;\r\n            case \"4\":\r\n                playMainMenu(output);\r\n                break;\r\n            default:\r\n                //TODO see case 1\r\n        }\r\n    }\r\n\r\n    private static void playBattle(OutputTerminal output) throws IOException, InterruptedException {\r\n        //TODO IMPLEMENTS AN OUTPUT FOR BATTLE IS OVER AND IMPLEMENTS A MENU TO GO BACK TO MAIN MENU\r\n\r\n        Party teamA = new Party(5);\r\n        Party teamB = new Party(5);\r\n\r\n        Battle battle = new Battle(teamA, teamB);\r\n\r\n        //TODO output 2 team and options to start fight\r\n\r\n        output.enterBattleRoutine(teamA, teamB);\r\n\r\n\r\n        //TODO IMPLEMENTS FIGHTS BETWEEN TO RANDOM GENERATED TEAMS\r\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\r\n        String selection = br.readLine();\r\n        switch (selection){\r\n            case \"1\":\r\n                //todo pick fighters\r\n                Character fighterTeamA = pickFighter(output, teamA);\r\n                Character fighterTeamB = pickFighter(output, teamB);\r\n                playNextRound(output, battle, fighterTeamA, fighterTeamB );\r\n                //TODO output fight\r\n                break;\r\n            case \"2\":\r\n                //TODO fast battle\r\n                break;\r\n            case \"3\":\r\n                //TODO NADA\r\n                break;\r\n            case \"4\":\r\n                playMainMenu(output);\r\n                break;\r\n            default:\r\n                //TODO see case 1\r\n        }\r\n    }\r\n\r\n    private static void playNextRound(OutputTerminal output, Battle battle, Character fighterTeamA, Character fighterTeamB) throws IOException, InterruptedException {\r\n        RoundStats roundStats = battle.fight(fighterTeamA, fighterTeamB);\r\n        if(roundStats.isValidRound()){\r\n            List<AttackStats> attackStats = roundStats.getAttackLogs();\r\n            System.out.println(\"Starting round \" + battle.getRoundNumber() + \"...\");\r\n            for (AttackStats attack : attackStats ) {\r\n                output.roundRoutine(battle, roundStats, fighterTeamA, fighterTeamB, attack);\r\n            }\r\n            System.out.println(roundStats.getRoundWinner(fighterTeamA, fighterTeamB));\r\n        } else {\r\n            System.out.println(\"At least one of the contestants is dead.\");\r\n        }\r\n\r\n    }\r\n\r\n    private static Character pickFighter(OutputTerminal output, Party teamA) throws IOException, InterruptedException {\r\n        output.pickFighterRoutine(teamA);\r\n        System.out.println(\"Enter the index of the fighter u want to pick:\");\r\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\r\n        String r = br.readLine();\r\n        String [] rArray = r.split(\" \");\r\n        int selection = Integer.parseInt(rArray[0]);\r\n        return teamA.getMemberFromList(selection);\r\n    }\r\n\r\n    private static void playNextRound(OutputTerminal output) {\r\n\r\n\r\n\r\n        //print\r\n    }\r\n\r\n    private static void playIntro(OutputTerminal output) throws IOException, InterruptedException {\r\n        output.introRoutine();\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/main/Main.java b/src/com/ironhack/rpg_simulator/main/Main.java
+--- a/src/com/ironhack/rpg_simulator/main/Main.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ b/src/com/ironhack/rpg_simulator/main/Main.java	(date 1611000952867)
+@@ -1,245 +1,11 @@
+ package com.ironhack.rpg_simulator.main;
+ 
+-//<<<<<<< HEAD
+-//=======
+-
+-import com.ironhack.rpg_simulator.classes.Character;
+-import com.ironhack.rpg_simulator.classes.Party;
+-import com.ironhack.rpg_simulator.fight.classes.AttackStats;
+-import com.ironhack.rpg_simulator.fight.classes.Battle;
+-import com.ironhack.rpg_simulator.fight.classes.RoundStats;
+-import com.ironhack.rpg_simulator.output.OutputTerminal;
+-
+-import java.io.BufferedReader;
+-import java.io.IOException;
+-import java.io.InputStreamReader;
+-import java.util.Arrays;
+-import java.util.List;
+-//>>>>>>> 4c2ca25b6b037b41ad74b5365a8a0f37f5b02039
++import com.ironhack.rpg_simulator.classes.MenuManager;
+ 
+ public class Main {
+-
+-    public static void main(String[] args) throws InterruptedException, IOException {
+-        OutputTerminal output = new OutputTerminal();
+-        playBattle(output);
+-//        startGame(output);
+-    }
+-
+-    private static void startGame(OutputTerminal output) throws InterruptedException, IOException {
+-        playIntro(output);
+-        playMainMenu(output);
+-
+-
+-    }
+-
+-    private static void playMainMenu(OutputTerminal output) throws IOException, InterruptedException {
+-        String selection = output.mainMenuRoutine();
+-        switch (selection){
+-            case "1":
+-                startPlayMenu(output);
+-                break;
+-            case "2":
+-                playOptionsMenu(output);
+-                break;
+-            case "3":
+-                //TODO EXIT
+-                break;
+-            default:
+-                playMainMenu(output);
+-        }
+-
+-    }
+-
+-    private static void playOptionsMenu(OutputTerminal output) throws IOException, InterruptedException {
+-        System.out.println("Option menu, 1 to import, 2 to export, 3 to exit");
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String selection = br.readLine();
+-        switch (selection){
+-            case "1":
+-                //TODO Import from CSV
+-                break;
+-            case "2":
+-                //TODO Export to CSV
+-                break;
+-            case "3":
+-                //TODO EXIT
+-                break;
+-            default:
+-                playOptionsMenu(output);
+-        }
+-    }
+-
+-    private static void startPlayMenu(OutputTerminal output) throws IOException, InterruptedException {
+-        String selection = output.playMenuRoutine();
+-        switch (selection){
+-            case "1":
+-                playBattle(output);
+-                break;
+-            case "2":
+-                playTeamSelection(output);
+-                break;
+-            case "3":
+-                playCreateTeam(output);
+-                break;
+-            case "4":
+-                playMainMenu(output);
+-                break;
+-            default:
+-                startPlayMenu(output);
+-        }
+-    }
+-
+-    private static void playCreateTeam(OutputTerminal output) throws IOException, InterruptedException {
+-        String teamNamePrompt = "Type new team name:";
+-        String[] teamName = output.createTeamRoutine(teamNamePrompt, "" , "");
+-        //TODO CREATE TEAM WITH NAME
+-
+-        String charNamePrompt = "Type new character 'name':";
+-        String[] charName = output.createTeamRoutine(charNamePrompt, Arrays.toString(teamName), "" );
+-        String charClassPrompt = "Type new character 'class':";
+-        String[] charClass = output.createTeamRoutine(charClassPrompt, Arrays.toString(teamName), Arrays.toString(charName) );
+-        String charStatsPrompt = "Type: 'hp main_stats second_stats' values:";
+-        String charString = Arrays.toString(charName) + Arrays.toString(charClass);
+-        String[] charStats = output.createTeamRoutine(charStatsPrompt, Arrays.toString(teamName), charString);
+-        charString += Arrays.toString(charStats);
+-
+-        //TODO ADD CHAR TO TEAM
+-
+-        //TODO OUTPUT WITH ALL TEAM
+-        String continueCreateCharPrompt = "";
+-        String[] selection = output.createTeamRoutine(continueCreateCharPrompt, Arrays.toString(teamName), charString);
+-
+-        switch (selection[0]){
+-            case "1":
+-                //TODO ADD ONE MORE
+-                break;
+-            case "2":
+-                playMainMenu(output);
+-                break;
+-
+-            default:
+-                playMainMenu(output);
+-        }
+-    }
+-
+-    private static void playTeamSelection(OutputTerminal output) throws IOException, InterruptedException {
+-
+-        int indexTeamA = 0, indexTeamB = 0;
+-
+-        //TODO Print all team INDEX + NAME
+-
+-        //TODO Ask for index
+-
+-        //TODO save decision
+-
+-        //TODO Print all team INDEX + NAME
+-
+-        //TODO Ask for index
+-
+-        //TODO save decision
+-
+-
+-        //playBattle(output, indexTeamA, indexTeamB);
+-
+-    }
+-
+-    private static void playBattle(OutputTerminal output, int indexTeamA, int indexTeamB) throws IOException, InterruptedException {
+-        //TODO IMPLEMENTS FIGHTS
+-
+-        System.out.println("Options...");
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String selection = br.readLine();
+-        switch (selection){
+-            case "1":
+-                //todo pick fighters
+-                playNextRound(output);
+-                break;
+-            case "2":
+-                //TODO fast battle
+-                break;
+-            case "3":
+-                //TODO NADA
+-                break;
+-            case "4":
+-                playMainMenu(output);
+-                break;
+-            default:
+-                //TODO see case 1
+-        }
+-    }
+-
+-    private static void playBattle(OutputTerminal output) throws IOException, InterruptedException {
+-        //TODO IMPLEMENTS AN OUTPUT FOR BATTLE IS OVER AND IMPLEMENTS A MENU TO GO BACK TO MAIN MENU
+-
+-        Party teamA = new Party(5);
+-        Party teamB = new Party(5);
+-
+-        Battle battle = new Battle(teamA, teamB);
+-
+-        //TODO output 2 team and options to start fight
+-
+-        output.enterBattleRoutine(teamA, teamB);
+-
++    public static void main(String[] args) {
+ 
+-        //TODO IMPLEMENTS FIGHTS BETWEEN TO RANDOM GENERATED TEAMS
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String selection = br.readLine();
+-        switch (selection){
+-            case "1":
+-                //todo pick fighters
+-                Character fighterTeamA = pickFighter(output, teamA);
+-                Character fighterTeamB = pickFighter(output, teamB);
+-                playNextRound(output, battle, fighterTeamA, fighterTeamB );
+-                //TODO output fight
+-                break;
+-            case "2":
+-                //TODO fast battle
+-                break;
+-            case "3":
+-                //TODO NADA
+-                break;
+-            case "4":
+-                playMainMenu(output);
+-                break;
+-            default:
+-                //TODO see case 1
+-        }
++        MenuManager menuManager = new MenuManager();
++        menuManager.mainMenu();
+     }
+-
+-    private static void playNextRound(OutputTerminal output, Battle battle, Character fighterTeamA, Character fighterTeamB) throws IOException, InterruptedException {
+-        RoundStats roundStats = battle.fight(fighterTeamA, fighterTeamB);
+-        if(roundStats.isValidRound()){
+-            List<AttackStats> attackStats = roundStats.getAttackLogs();
+-            System.out.println("Starting round " + battle.getRoundNumber() + "...");
+-            for (AttackStats attack : attackStats ) {
+-                output.roundRoutine(battle, roundStats, fighterTeamA, fighterTeamB, attack);
+-            }
+-            System.out.println(roundStats.getRoundWinner(fighterTeamA, fighterTeamB));
+-        } else {
+-            System.out.println("At least one of the contestants is dead.");
+-        }
+-
+-    }
+-
+-    private static Character pickFighter(OutputTerminal output, Party teamA) throws IOException, InterruptedException {
+-        output.pickFighterRoutine(teamA);
+-        System.out.println("Enter the index of the fighter u want to pick:");
+-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-        String r = br.readLine();
+-        String [] rArray = r.split(" ");
+-        int selection = Integer.parseInt(rArray[0]);
+-        return teamA.getMemberFromList(selection);
+-    }
+-
+-    private static void playNextRound(OutputTerminal output) {
+-
+-
+-
+-        //print
+-    }
+-
+-    private static void playIntro(OutputTerminal output) throws IOException, InterruptedException {
+-        output.introRoutine();
+-    }
+-
+ }
+Index: src/com/ironhack/rpg_simulator/classes/MenuManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/classes/MenuManager.java b/src/com/ironhack/rpg_simulator/classes/MenuManager.java
+new file mode 100644
+--- /dev/null	(date 1611000952862)
++++ b/src/com/ironhack/rpg_simulator/classes/MenuManager.java	(date 1611000952862)
+@@ -0,0 +1,107 @@
++package com.ironhack.rpg_simulator.classes;
++
++import com.ironhack.rpg_simulator.fight.classes.Battle;
++import com.ironhack.rpg_simulator.main.StoredParties;
++
++import java.util.Scanner;
++import java.util.regex.Matcher;
++import java.util.regex.Pattern;
++
++public class MenuManager {
++    Scanner scanner = new Scanner(System.in);
++    Party teamA;
++    Party teamB;
++    Battle battle;
++    StoredParties storedParties;
++
++    public void mainMenu() {
++        System.out.println("Welcome to RPG Battle Simulator");
++        System.out.println("Choose your option: ");
++        System.out.println("1.Play With Random Teams.");
++        System.out.println("2.Play With Custom Teams.");
++        System.out.println("3.Create New Team.");
++        System.out.println("4.Exit the game.");
++
++        String input = scanner.nextLine();
++        Pattern pattern = Pattern.compile("1|2|3|4");
++        Matcher matcher = pattern.matcher(input);
++        while (!matcher.matches()) {
++            System.out.println("The value introduced is not correct:");
++            input = scanner.nextLine();
++            matcher = pattern.matcher(input);
++        }
++        int selection = Integer.parseInt(input);
++
++        switch (selection) {
++            case 1:
++                mainMenuOption1();
++                break;
++            case 2:
++                //TODO: select two teams from database and show modeMenu
++                mainMenuOption2();
++                break;
++            case 3:
++                //TODO show teamCustomization
++                break;
++            case 4:
++                System.out.println("Thanks for playing!");
++                break;
++            default:
++                mainMenu();
++        }
++    }
++
++    public void modeMenu() {
++        System.out.println("Choose game mode:");
++        System.out.println("1.Choose your fighters.");
++        System.out.println("2.The fighters will be chosen randomly.");
++        System.out.println("3.Return to Main Menu.");
++
++        String input = scanner.nextLine();
++        Pattern pattern = Pattern.compile("1|2|3|4");
++        Matcher matcher = pattern.matcher(input);
++        while (!matcher.matches()) {
++            System.out.println("The value introduced is not correct:");
++            input = scanner.nextLine();
++            matcher = pattern.matcher(input);
++        }
++        int selection = Integer.parseInt(input);
++
++        switch (selection) {
++            case 1:
++                //TODO: show battleMenu (where you can select your fighters and see results of each encounter)
++                break;
++            case 2:
++                //TODO: select two teams from database and show gameType
++                break;
++            case 3:
++                //TODO show teamCustomization
++                break;
++            case 4:
++                System.out.println("Thanks for playing!");
++                break;
++            default:
++                mainMenu();
++        }
++    }
++
++    public void selectTeamsFromDatabaseMenu() {
++
++        System.out.println("Select Team A");
++        for (Party party: storedParties) {
++
++        }
++    }
++
++
++    public void mainMenuOption1() {
++        teamA = new Party(5);
++        teamB = new Party(5);
++        battle = new Battle(teamA, teamB);
++        modeMenu();
++    }
++
++    public void mainMenuOption2() {
++        selectTeamsFromDatabaseMenu();
++    }
++}
+Index: src/com/ironhack/rpg_simulator/main/StoredParties.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.ironhack.rpg_simulator.main;\r\n\r\nimport com.ironhack.rpg_simulator.classes.Party;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic static class StoredParties {\r\n\r\n    private List<Party> theList;\r\n\r\n    public static StoredParties() {\r\n        this.theList = new ArrayList<>();\r\n    }\r\n\r\n\r\n    public void add (Party partyToAdd){\r\n        theList.add(partyToAdd);\r\n    }\r\n\r\n    public List<Party> getTheList() {\r\n        return theList;\r\n    }\r\n\r\n    public void setTheList(List<Party> theList) {\r\n        this.theList = theList;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/main/StoredParties.java b/src/com/ironhack/rpg_simulator/main/StoredParties.java
+--- a/src/com/ironhack/rpg_simulator/main/StoredParties.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ b/src/com/ironhack/rpg_simulator/main/StoredParties.java	(date 1611000952868)
+@@ -5,11 +5,11 @@
+ import java.util.ArrayList;
+ import java.util.List;
+ 
+-public static class StoredParties {
++public class StoredParties {
+ 
+     private List<Party> theList;
+ 
+-    public static StoredParties() {
++    public StoredParties() {
+         this.theList = new ArrayList<>();
+     }
+ 
+Index: src/com/ironhack/rpg_simulator/classes/Party.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.ironhack.rpg_simulator.classes;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Random;\r\n\r\npublic class Party {\r\n\r\n    private String name;\r\n    private int partySize;\r\n    private List<Character> partyMembers;\r\n    private List<Character> aliveMembers;\r\n\r\n\r\n    public Party(String name, List<Character> party) {\r\n        this.name = name;\r\n        this.partyMembers = party;\r\n        aliveMembers = partyMembers;\r\n    }\r\n\r\n    public Party(int partySize) {\r\n        this.name = RandomDatabaseGenerator.getRandomName();\r\n        this.partySize = partySize;\r\n        partyMembers = generateRandomParty(partySize);\r\n        aliveMembers = partyMembers;\r\n    }\r\n\r\n    public List<Character> getAliveMembers() {\r\n        return aliveMembers;\r\n    }\r\n\r\n    public void setAliveMembers(List<Character> aliveMembers) {\r\n        this.aliveMembers = aliveMembers;\r\n    }\r\n\r\n    public void updateAliveMember(Character updatedMember, int index) {\r\n        this.aliveMembers.set(index, updatedMember);\r\n    }\r\n\r\n    public int getPartyMaxSize() {\r\n        return partySize;\r\n    }\r\n\r\n    public void removeAliveMember(){\r\n        List<Character> temp = new ArrayList<>();\r\n        for (Character character : aliveMembers)\r\n        {\r\n            if (character.isAlive())\r\n                temp.add(character);\r\n        }\r\n        aliveMembers = temp;\r\n    }\r\n\r\n    public void printAllMembers() {\r\n        int i = 1;\r\n        for (Character character : aliveMembers) {\r\n            if (character.isAlive()) {\r\n                System.out.println(i + \" - \" + character.toString());\r\n                i++;\r\n            }\r\n        }\r\n    }\r\n\r\n\r\n\r\n    public List<Character> generateRandomParty(int partySize) {\r\n        partyMembers = new ArrayList<>();\r\n\r\n        for (int i = 0; i < partySize; i++) {\r\n            boolean bool = new Random().nextBoolean();\r\n            if (bool) {\r\n                Character warrior = RandomDatabaseGenerator.getRandomWarrior();\r\n                if (!partyMembers.isEmpty()) {\r\n                    for (Character name : partyMembers) {\r\n                        if (warrior.getName().equals(name.getName())) {\r\n                            warrior.setName(warrior.getName() + \" Jr.\");\r\n                        }\r\n                    }\r\n                }\r\n                partyMembers.add(warrior);\r\n            } else {\r\n                Character wizard = RandomDatabaseGenerator.getRandomWizard();\r\n                if (!partyMembers.isEmpty()) {\r\n                    for (Character name : partyMembers) {\r\n                        if (wizard.getName().equals(name.getName())) {\r\n                            wizard.setName(wizard.getName() + \" Jr.\");\r\n                        }\r\n                    }\r\n                }\r\n                partyMembers.add(wizard);\r\n            }\r\n        }\r\n\r\n        return partyMembers;\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public Character getMemberFromList(int index) {\r\n        return partyMembers.get(index);\r\n    }\r\n\r\n    public List<Character> getPartyMembers() {\r\n        return partyMembers;\r\n\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/classes/Party.java b/src/com/ironhack/rpg_simulator/classes/Party.java
+--- a/src/com/ironhack/rpg_simulator/classes/Party.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ b/src/com/ironhack/rpg_simulator/classes/Party.java	(date 1611000952863)
+@@ -1,23 +1,25 @@
+ package com.ironhack.rpg_simulator.classes;
+ 
++import java.io.File;
++import java.io.FileWriter;
++import java.io.IOException;
+ import java.util.ArrayList;
+ import java.util.List;
+ import java.util.Random;
+ 
+ public class Party {
+-
+     private String name;
+     private int partySize;
+     private List<Character> partyMembers;
+     private List<Character> aliveMembers;
+ 
+-
+     public Party(String name, List<Character> party) {
+         this.name = name;
+         this.partyMembers = party;
+         aliveMembers = partyMembers;
+     }
+ 
++
+     public Party(int partySize) {
+         this.name = RandomDatabaseGenerator.getRandomName();
+         this.partySize = partySize;
+@@ -25,6 +27,7 @@
+         aliveMembers = partyMembers;
+     }
+ 
++
+     public List<Character> getAliveMembers() {
+         return aliveMembers;
+     }
+@@ -41,10 +44,9 @@
+         return partySize;
+     }
+ 
+-    public void removeAliveMember(){
++    public void removeAliveMember() {
+         List<Character> temp = new ArrayList<>();
+-        for (Character character : aliveMembers)
+-        {
++        for (Character character : aliveMembers) {
+             if (character.isAlive())
+                 temp.add(character);
+         }
+@@ -61,8 +63,6 @@
+         }
+     }
+ 
+-
+-
+     public List<Character> generateRandomParty(int partySize) {
+         partyMembers = new ArrayList<>();
+ 
+@@ -111,5 +111,39 @@
+ 
+     }
+ 
++    public void exportParty() throws IOException {
++        File dir = new File("src/com/ironhack/rpg_simulator/csv_files");
++        String fileName = getName() + ".csv";
++        String[] pathNames = dir.list();
++        int counter = 0;
++
++        for (String path : pathNames) {
++            if (path.toString().equals(fileName)) {
++                counter++;
++            }
++        }
++        if (counter > 0) {
++            fileName += "_" + counter;
++        }
++
++        File file = new File("src/com/ironhack/rpg_simulator/csv_files/" + fileName);
++        file.createNewFile();
++        FileWriter fileWriter = new FileWriter(file);
++        fileWriter.write("id, name, hp, stamina, strength, mana, intelligence\n");
++
++
++        for (Character character : partyMembers) {
++            if (character instanceof Warrior) {
++                Warrior warrior = (Warrior) character;
++                fileWriter.write(String.format("%s, %s, %d, %d, %d, ,\n", warrior.getId(), warrior.getName(), warrior.getHp(), warrior.getStamina(), warrior.getStrength()));
++            } else if (character instanceof Wizard) {
++                Wizard wizard = (Wizard) character;
++                fileWriter.write(String.format("%s, %s, %d, , , %d, %d\n", wizard.getId(), wizard.getName(), wizard.getHp(), wizard.getMana(), wizard.getIntelligence()));
++            }
++
++        }
++
++    }
++
+ 
+ }
+Index: ironhack_rpgbattlesimulator.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ironhack_rpgbattlesimulator.iml b/ironhack_rpgbattlesimulator.iml
+--- a/ironhack_rpgbattlesimulator.iml	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ b/ironhack_rpgbattlesimulator.iml	(date 1611000952834)
+@@ -1,5 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <module type="JAVA_MODULE" version="4">
++  <component name="CheckStyle-IDEA-Module">
++    <option name="configuration">
++      <map />
++    </option>
++  </component>
+   <component name="NewModuleRootManager" inherit-compiler-output="true">
+     <exclude-output />
+     <content url="file://$MODULE_DIR$">
+Index: .idea/runConfigurations/Main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/runConfigurations/Main.xml b/.idea/runConfigurations/Main.xml
+new file mode 100644
+--- /dev/null	(date 1611000952833)
++++ b/.idea/runConfigurations/Main.xml	(date 1611000952833)
+@@ -0,0 +1,8 @@
++<component name="ProjectRunConfigurationManager">
++  <configuration default="false" name="Main" type="Application" factoryName="Application">
++    <option name="MAIN_CLASS_NAME" value="com.ironhack.rpg_simulator.main.Main" />
++    <method v="2">
++      <option name="Make" enabled="true" />
++    </method>
++  </configuration>
++</component>
+\ No newline at end of file
+Index: src/com/ironhack/rpg_simulator/classes/ImportParty.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.ironhack.rpg_simulator.classes;\r\n\r\n\r\nimport java.io.File;   //Import File package to receive by parameter the CSV file to be read\r\nimport java.io.FileNotFoundException;   //Import File Exception to manage exception if the file wasn't found\r\nimport java.util.Scanner;   //Import Scanner package to read the CSV file\r\nimport java.util.ArrayList;   //Import ArrayList package to manage ArrayList\r\n\r\npublic class ImportParty {\r\n\r\n    //Constructor required but the class isn't going to be initialized so it's private\r\n    private ImportParty() {}\r\n\r\n    //The only method in the class. It'll return a Party object created from the information in the CSV file\r\n    //that we'll pass as a parameter\r\n    public static Party importPartyCsv(File csvFile) {\r\n        //To control the appearance of Exceptions, specifically if file isn't found, we start with a 'try'\r\n        //to make sure that the code will be executed if no exceptions appear\r\n        try {\r\n            //Initializes the Scanner and ArrayList objects\r\n            Scanner scannerCsv = new Scanner(csvFile);\r\n            ArrayList<Character> partyArray = new ArrayList<Character>();\r\n\r\n            //Saves the Party name from the File name\r\n            String partyName = csvFile.getName().substring(0, csvFile.getName().length() - 5);\r\n            //Skips the first line of the CSV with the field names\r\n            scannerCsv.nextLine();\r\n            //The following will be repeated for each line of data\r\n            while(scannerCsv.hasNextLine()) {\r\n                //Gets all the Character data and separates them into a String[] for each data\r\n                String stringCharacter = scannerCsv.nextLine();\r\n                String[] dataCharacter = stringCharacter.split(\", \");\r\n\r\n                if(dataCharacter[6].equals(\"\")) {   //If it's a Warrior\r\n                    //Creates a Warrior with the stats obtained and add them to the Character's Array\r\n                    Warrior warrior = new Warrior(dataCharacter[2], Integer.parseInt(dataCharacter[3]), true,\r\n                            Integer.parseInt(dataCharacter[4]), Integer.parseInt(dataCharacter[5]));\r\n                    partyArray.add(warrior);\r\n                } else {   //If it's a Wizard\r\n                    //Creates a Wizard with the stats obtained and add them to the Character's Array\r\n                    Wizard wizard = new Wizard(dataCharacter[2], Integer.parseInt(dataCharacter[3]), true,\r\n                            Integer.parseInt(dataCharacter[6]), Integer.parseInt(dataCharacter[7]));\r\n                    partyArray.add(wizard);\r\n                }\r\n            }\r\n            //Closes the Scanner and returns the Party\r\n            scannerCsv.close();\r\n            Party partyCsv = new Party(partyName, partyArray);\r\n            return partyCsv;\r\n\r\n        } catch (FileNotFoundException e) {   //If the file isn't found, it prints an error message and returns null\r\n            System.out.println(\"An error occurred.\");\r\n            e.printStackTrace();\r\n            return null;\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/classes/ImportParty.java b/src/com/ironhack/rpg_simulator/classes/ImportParty.java
+--- a/src/com/ironhack/rpg_simulator/classes/ImportParty.java	(revision ee210380698afed78dccc1f53649198bf8535322)
++++ b/src/com/ironhack/rpg_simulator/classes/ImportParty.java	(date 1611000952861)
+@@ -1,6 +1,5 @@
+ package com.ironhack.rpg_simulator.classes;
+ 
+-
+ import java.io.File;   //Import File package to receive by parameter the CSV file to be read
+ import java.io.FileNotFoundException;   //Import File Exception to manage exception if the file wasn't found
+ import java.util.Scanner;   //Import Scanner package to read the CSV file
+@@ -19,9 +18,9 @@
+         try {
+             //Initializes the Scanner and ArrayList objects
+             Scanner scannerCsv = new Scanner(csvFile);
+-            ArrayList<Character> partyArray = new ArrayList<Character>();
++            ArrayList<Character> partyArray = new ArrayList<>();
+ 
+-            //Saves the Party name from the File name
++            //Saves the Party name from the File name without '.csv'
+             String partyName = csvFile.getName().substring(0, csvFile.getName().length() - 5);
+             //Skips the first line of the CSV with the field names
+             scannerCsv.nextLine();
+@@ -45,8 +44,7 @@
+             }
+             //Closes the Scanner and returns the Party
+             scannerCsv.close();
+-            Party partyCsv = new Party(partyName, partyArray);
+-            return partyCsv;
++            return new Party(partyName, partyArray);
+ 
+         } catch (FileNotFoundException e) {   //If the file isn't found, it prints an error message and returns null
+             System.out.println("An error occurred.");
+diff --git a/src/com/ironhack/rpg_simulator/csv_files/party5_6characters.csv b/src/com/ironhack/rpg_simulator/csv_files/Red Raiders.csv
+rename from src/com/ironhack/rpg_simulator/csv_files/party5_6characters.csv
+rename to src/com/ironhack/rpg_simulator/csv_files/Red Raiders.csv
+diff --git a/src/com/ironhack/rpg_simulator/csv_files/party4_4characters.csv b/src/com/ironhack/rpg_simulator/csv_files/Stormy Petrels.csv
+rename from src/com/ironhack/rpg_simulator/csv_files/party4_4characters.csv
+rename to src/com/ironhack/rpg_simulator/csv_files/Stormy Petrels.csv
+diff --git a/src/com/ironhack/rpg_simulator/csv_files/party2_5characters.csv b/src/com/ironhack/rpg_simulator/csv_files/Rainbow Warriors.csv
+rename from src/com/ironhack/rpg_simulator/csv_files/party2_5characters.csv
+rename to src/com/ironhack/rpg_simulator/csv_files/Rainbow Warriors.csv
+diff --git a/src/com/ironhack/rpg_simulator/csv_files/party3_4characters.csv b/src/com/ironhack/rpg_simulator/csv_files/Untouchaballs.csv
+rename from src/com/ironhack/rpg_simulator/csv_files/party3_4characters.csv
+rename to src/com/ironhack/rpg_simulator/csv_files/Untouchaballs.csv
+diff --git a/src/com/ironhack/rpg_simulator/csv_files/party6_6characters.csv b/src/com/ironhack/rpg_simulator/csv_files/Golden Bears.csv
+rename from src/com/ironhack/rpg_simulator/csv_files/party6_6characters.csv
+rename to src/com/ironhack/rpg_simulator/csv_files/Golden Bears.csv

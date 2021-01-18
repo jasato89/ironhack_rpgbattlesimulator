@@ -86,11 +86,47 @@ public class MenuManager {
     }
 
     public void selectTeamsFromDatabaseMenu() {
+        Party teamA;
+        Party teamB;
 
         System.out.println("Select Team A");
-        for (Party party: storedParties) {
-
+        int i = 0;
+        for (Party party : storedParties.getTheList()) {
+            System.out.println(i++ + "." + party.getName());
         }
+
+        String input = scanner.nextLine();
+        Pattern pattern = Pattern.compile("\\d");
+        Matcher matcher = pattern.matcher(input);
+        while (!matcher.matches() && Integer.parseInt(input) <= storedParties.getTheList().size()) {
+            System.out.println("The value introduced is not correct:");
+            input = scanner.nextLine();
+            matcher = pattern.matcher(input);
+        }
+        int selection = Integer.parseInt(input);
+
+        teamA = storedParties.getTheList().get(selection - 1);
+
+        System.out.println("Select Team B");
+        i = 0;
+        for (Party party : storedParties.getTheList()) {
+            System.out.println(i++ + "." + party.getName());
+        }
+
+        input = scanner.nextLine();
+        pattern = Pattern.compile("\\d");
+        matcher = pattern.matcher(input);
+        while (!matcher.matches() && Integer.parseInt(input) <= storedParties.getTheList().size()) {
+            System.out.println("The value introduced is not correct:");
+            input = scanner.nextLine();
+            matcher = pattern.matcher(input);
+        }
+        selection = Integer.parseInt(input);
+
+        teamB = storedParties.getTheList().get(selection - 1);
+
+        battle = new Battle(teamA, teamB);
+        modeMenu();
     }
 
 
