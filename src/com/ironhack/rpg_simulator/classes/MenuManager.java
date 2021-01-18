@@ -44,7 +44,7 @@ public class MenuManager {
                 mainMenuOption2();
                 break;
             case 3:
-                //TODO show teamCustomization
+                //show teamCustomization
                 mainMenuOption3();
                 break;
             case 4:
@@ -62,7 +62,7 @@ public class MenuManager {
         System.out.println("3.Return to Main Menu.");
 
         String input = scanner.nextLine();
-        Pattern pattern = Pattern.compile("1|2|3|4");
+        Pattern pattern = Pattern.compile("1|2|3");
         Matcher matcher = pattern.matcher(input);
         while (!matcher.matches()) {
             System.out.println("The value introduced is not correct:");
@@ -74,15 +74,11 @@ public class MenuManager {
         switch (selection) {
             case 1:
                 //TODO: show battleMenu (where you can select your fighters and see results of each encounter)
+                battleMenu();
                 break;
             case 2:
-                //TODO: select two teams from database and show gameType
-                break;
-            case 3:
-                //TODO show teamCustomization
-                break;
-            case 4:
-                System.out.println("Thanks for playing!");
+                //TODO: show battle results
+                fastBattleMenu();
                 break;
             default:
                 mainMenu();
@@ -90,7 +86,7 @@ public class MenuManager {
     }
 
     public void selectTeamsFromDatabaseMenu() {
-
+        //TODO: waiting for Ivan's merge
     }
 
     public void createTeamMenu() {
@@ -103,7 +99,7 @@ public class MenuManager {
             System.out.println("Creation of member " + (i+1) + ":");
             members.add(createCharacterMenu());
         }
-        storedParties.add(new Party(name, members));q
+        storedParties.add(new Party(name, members));
         System.out.println("The team " + name + " has been created succesfully.");
     }
 
@@ -132,6 +128,12 @@ public class MenuManager {
             return new Warrior(name, health, mana, intelligence);
         }
         return null;
+    }
+
+    public void battleMenu() {
+        System.out.println("Battle Menu");
+        System.out.println("Select your fighter: ");
+
     }
 
 
