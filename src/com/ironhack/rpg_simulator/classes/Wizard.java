@@ -45,8 +45,10 @@ public class Wizard extends Character {
     }
 
     public String toString(){
-        return getName() + " " + getClassName() + " " + getHp() + " " + getIntelligence();
-    }
+        public String toString(){
+            return "Name: " +getName()  + "\n Type: Warrior\nHP: " +
+                    getHp() + "\nIntelligence: " + getIntelligence() +"\nMana: " + getMana() + "\n";
+        }    }
 
     //getters and setters
 

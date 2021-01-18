@@ -34,7 +34,8 @@ public class Warrior extends Character {
     }
 
     public String toString(){
-        return getName() + " " + getClassName() + " " + getHp() + " " + getStrength();
+        return "Name: " +getName()  + "\n Type: Warrior\nHP: " +
+                getHp() + "\nStamina: " + getStamina() +"\nStrength: " + getStrength() + "\n";
     }
 
     //getters and setters

@@ -34,9 +34,7 @@ public abstract class Character implements Attacker {
                 this.id = id;
         }
 
-        public String toString(){
-                return "Name: " + getName() + ". Class: " + getClassName() + ". HP: " + getHp();
-        }
+
 
         //getters and setters
 
