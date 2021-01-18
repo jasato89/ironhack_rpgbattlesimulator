@@ -5,7 +5,7 @@ import com.ironhack.rpg_simulator.interfaces.Atacker;
 public abstract class Character implements Atacker {
 
         //Propieties
-        private static int idStatic = 0;
+        private static int counter = 0;
         private int id;
         private String name;
         private int hp;
@@ -22,7 +22,7 @@ public abstract class Character implements Atacker {
         private String className = null;
 
         public Character(String name, int hp, boolean isAlive) {
-                idStatic++;
+                counter++;
                 setName(name);
                 setHp(hp);
                 setAlive(isAlive);
@@ -47,11 +47,11 @@ public abstract class Character implements Atacker {
 
         //getters and setters
 
-        public static int getIdStatic() {
-                return idStatic;
+        public static int counter() {
+                return counter;
         }
 
-        public void setId() { this.id = idStatic;}
+        public void setId() { this.id = counter;}
 
         public String getName() {
                 return name;
