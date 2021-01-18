@@ -3,6 +3,7 @@ package com.ironhack.rpg_simulator.classes;
 import com.ironhack.rpg_simulator.fight.classes.Battle;
 import com.ironhack.rpg_simulator.main.StoredParties;
 
+import java.io.File;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -139,5 +140,18 @@ public class MenuManager {
 
     public void mainMenuOption2() {
         selectTeamsFromDatabaseMenu();
+    }
+
+    public void loadPartiesFromDatabase() {
+        StoredParties storedParties = new StoredParties();
+        File databaseDirParent = new File(".");
+        databaseDirParent = databaseDirParent.getParentFile();
+        File databaseDir = new File(databaseDirParent.getParentFile(),"/csv_files/");
+
+        File[] partiesFiles = databaseDir.listFiles();
+        for (File f: partiesFiles) {
+            storedParties.add(ImportParty.importPartyCsv(f));
+        }
+
     }
 }
