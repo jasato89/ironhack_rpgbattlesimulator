@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3ac01ed2-15b0-48e0-9b56-3b4908f921f6" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1n7SbPhnHwsmS5lHEETO65sgF7g" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\Capiro\Trabajos\Programación\Bootcamp Java\rpg_battlesimulator\ironhack_rpgbattlesimulator\src\com\ironhack\rpg_simulator\csv_files" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3ac01ed2-15b0-48e0-9b56-3b4908f921f6" name="Default Changelist" comment="" />
+      <created>1610739709669</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1610739709669</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Added an example CSV file with a party and version 0.1 of the method to import a party from a CSV file.">
+      <created>1610749943766</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1610749943767</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added CSV files with parties and updated importParty">
+      <created>1610835060081</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1610835060081</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added comments on importParty">
+      <created>1610838035744</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1610838035744</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Changed some minor details">
+      <created>1610838273900</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1610838273900</updated>
+    </task>
+    <task id="LOCAL-00005" summary="ImportParty adapted">
+      <created>1610925739708</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1610925739708</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Merged with Ivan's branch, updated 'ImportParty' and changed CSV files names">
+      <created>1610926608520</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1610926608520</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="develop-3.0-ivan" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added an example CSV file with a party and version 0.1 of the method to import a party from a CSV file." />
+    <MESSAGE value="Added CSV files with parties and updated importParty" />
+    <MESSAGE value="Added comments on importParty" />
+    <MESSAGE value="Changed some minor details" />
+    <MESSAGE value="ImportParty adapted" />
+    <MESSAGE value="Merged with Ivan's branch, updated 'ImportParty' and changed CSV files names" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merged with Ivan's branch, updated 'ImportParty' and changed CSV files names" />
+  </component>
+</project>
