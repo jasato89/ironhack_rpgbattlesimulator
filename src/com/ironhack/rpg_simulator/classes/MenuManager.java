@@ -85,6 +85,9 @@ public class MenuManager {
         }
     }
 
+    private void fastBattleMenu() {
+    }
+
     public void selectTeamsFromDatabaseMenu() {
         //TODO: waiting for Ivan's merge
     }
