@@ -5,6 +5,7 @@ import com.ironhack.rpg_simulator.main.StoredParties;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -62,7 +63,7 @@ public class MenuManager {
         System.out.println("3.Return to Main Menu.");
 
         String input = scanner.nextLine();
-        Pattern pattern = Pattern.compile("1|2|3");
+        Pattern pattern = Pattern.compile("1|2|3|4");
         Matcher matcher = pattern.matcher(input);
         while (!matcher.matches()) {
             System.out.println("The value introduced is not correct:");
@@ -89,7 +90,47 @@ public class MenuManager {
     }
 
     public void selectTeamsFromDatabaseMenu() {
-        //TODO: waiting for Ivan's merge
+        Party teamA;
+        Party teamB;
+
+        System.out.println("Select Team A");
+        int i = 0;
+        for (Party party : storedParties.getTheList()) {
+            System.out.println(i++ + "." + party.getName());
+        }
+
+        String input = scanner.nextLine();
+        Pattern pattern = Pattern.compile("\\d");
+        Matcher matcher = pattern.matcher(input);
+        while (!matcher.matches() && Integer.parseInt(input) <= storedParties.getTheList().size()) {
+            System.out.println("The value introduced is not correct:");
+            input = scanner.nextLine();
+            matcher = pattern.matcher(input);
+        }
+        int selection = Integer.parseInt(input);
+
+        teamA = storedParties.getTheList().get(selection - 1);
+
+        System.out.println("Select Team B");
+        i = 0;
+        for (Party party : storedParties.getTheList()) {
+            System.out.println(i++ + "." + party.getName());
+        }
+
+        input = scanner.nextLine();
+        pattern = Pattern.compile("\\d");
+        matcher = pattern.matcher(input);
+        while (!matcher.matches() && Integer.parseInt(input) <= storedParties.getTheList().size()) {
+            System.out.println("The value introduced is not correct:");
+            input = scanner.nextLine();
+            matcher = pattern.matcher(input);
+        }
+        selection = Integer.parseInt(input);
+
+        teamB = storedParties.getTheList().get(selection - 1);
+
+        battle = new Battle(teamA, teamB);
+        modeMenu();
     }
 
     public void createTeamMenu() {
@@ -139,7 +180,6 @@ public class MenuManager {
 
     }
 
-
     public void mainMenuOption1() {
         teamA = new Party(5);
         teamB = new Party(5);
@@ -155,5 +195,18 @@ public class MenuManager {
     public void mainMenuOption3() {
         createTeamMenu();
         mainMenu();
+    }
+
+    public void loadPartiesFromDatabase() {
+        StoredParties storedParties = new StoredParties();
+        File databaseDirParent = new File(".");
+        databaseDirParent = databaseDirParent.getParentFile();
+        File databaseDir = new File(databaseDirParent.getParentFile(),"/csv_files/");
+
+        File[] partiesFiles = databaseDir.listFiles();
+        for (File f: partiesFiles) {
+            storedParties.add(ImportParty.importPartyCsv(f));
+        }
+
     }
 }
