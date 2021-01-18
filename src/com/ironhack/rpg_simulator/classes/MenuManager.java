@@ -1,6 +1,7 @@
 package com.ironhack.rpg_simulator.classes;
 
 import com.ironhack.rpg_simulator.fight.classes.Battle;
+import com.ironhack.rpg_simulator.main.StoredParties;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -11,6 +12,7 @@ public class MenuManager {
     Party teamA;
     Party teamB;
     Battle battle;
+    StoredParties storedParties;
 
     public void mainMenu() {
         System.out.println("Welcome to RPG Battle Simulator");
@@ -86,11 +88,10 @@ public class MenuManager {
     public void selectTeamsFromDatabaseMenu() {
 
         System.out.println("Select Team A");
-        for () {
+        for (Party party: storedParties) {
+
         }
     }
-
-    public void
 
 
     public void mainMenuOption1() {
