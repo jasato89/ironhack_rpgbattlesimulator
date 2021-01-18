@@ -145,5 +145,13 @@ public class Party {
 
     }
 
+    @Override
+    public String toString() {
+        String result = "Party: " + name + "\n";
 
+        for (Character member : partyMembers) {
+            result += member.toString() + "\n";
+        }
+        return result;
+    }
 }
