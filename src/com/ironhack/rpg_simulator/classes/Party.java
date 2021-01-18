@@ -132,7 +132,6 @@ public class Party {
         fileWriter.write("id, name, hp, stamina, strength, mana, intelligence\n");
 
 
-
         for (Character character : partyMembers) {
             if (character instanceof Warrior) {
                 Warrior warrior = (Warrior) character;
@@ -143,7 +142,6 @@ public class Party {
             }
 
         }
-
 
     }
 

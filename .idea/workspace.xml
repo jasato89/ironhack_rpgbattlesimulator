@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3ac01ed2-15b0-48e0-9b56-3b4908f921f6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/ImportParty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/ImportParty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Party.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Party.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +84,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1610739709669</updated>
-      <workItem from="1610910824796" duration="2377000" />
+      <workItem from="1610910824796" duration="3430000" />
     </task>
     <task id="LOCAL-00001" summary="Added an example CSV file with a party and version 0.1 of the method to import a party from a CSV file.">
       <created>1610749943766</created>
