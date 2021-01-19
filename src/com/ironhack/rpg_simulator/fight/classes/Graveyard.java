@@ -38,5 +38,4 @@ public class Graveyard {
         deadSoldiers.add(graveyard2);
         return deadSoldiers;
     }
-
 }

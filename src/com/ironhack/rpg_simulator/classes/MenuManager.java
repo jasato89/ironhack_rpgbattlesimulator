@@ -52,6 +52,7 @@ public class MenuManager {
                 break;
             case 4:
                 System.out.println("Thanks for playing!");
+                System.exit(0);
                 break;
             default:
                 mainMenu();
@@ -97,7 +98,6 @@ public class MenuManager {
         for (Party party : storedParties.getTheList()) {
             System.out.println(i++ + "." + party.getName());
         }
-
         String input = scanner.nextLine();
         Pattern pattern = Pattern.compile("\\d");
         Matcher matcher = pattern.matcher(input);
@@ -107,15 +107,12 @@ public class MenuManager {
             matcher = pattern.matcher(input);
         }
         int selection = Integer.parseInt(input);
-
         teamA = storedParties.getTheList().get(selection - 1);
-
         System.out.println("Select Team B");
         i = 1;
         for (Party party : storedParties.getTheList()) {
             System.out.println(i++ + "." + party.getName());
         }
-
         input = scanner.nextLine();
         pattern = Pattern.compile("\\d");
         matcher = pattern.matcher(input);
@@ -125,9 +122,7 @@ public class MenuManager {
             matcher = pattern.matcher(input);
         }
         selection = Integer.parseInt(input);
-
         teamB = storedParties.getTheList().get(selection - 1);
-
         battle = new Battle(teamA, teamB);
         modeMenu();
     }
@@ -142,7 +137,9 @@ public class MenuManager {
             System.out.println("Creation of member " + (i+1) + ":");
             members.add(createCharacterMenu());
         }
-        storedParties.add(new Party(name, members));
+        Party newParty = new Party(name, members);
+        storedParties.add(newParty);
+        newParty.exportParty();
         System.out.println("The team " + name + " has been created succesfully.");
     }
 

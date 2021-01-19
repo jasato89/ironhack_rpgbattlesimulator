@@ -105,38 +105,41 @@ public class Party {
 
     }
 
-    public void exportParty() throws IOException {
-        File dir = new File("src/com/ironhack/rpg_simulator/csv_files");
-        String fileName = getName() + ".csv";
-        String[] pathNames = dir.list();
-        int counter = 0;
+    public void exportParty() {
+        try {
+            File dir = new File("src/com/ironhack/rpg_simulator/csv_files");
+            String fileName = getName() + ".csv";
+            String[] pathNames = dir.list();
+            int counter = 0;
 
-        for (String path : pathNames) {
-            if (path.toString().equals(fileName)) {
-                counter++;
+            for (String path : pathNames) {
+                if (path.toString().equals(fileName)) {
+                    counter++;
+                }
             }
-        }
-        if (counter > 0) {
-            fileName += "_" + counter;
-        }
-
-        File file = new File("src/com/ironhack/rpg_simulator/csv_files/" + fileName);
-        //file.createNewFile();
-        FileWriter fileWriter = new FileWriter(file);
-        fileWriter.write("id, name, hp, stamina, strength, mana, intelligence\n");
-
-
-        for (Character character : partyMembers) {
-            if (character instanceof Warrior) {
-                Warrior warrior = (Warrior) character;
-                fileWriter.write(String.format("%s, %s, %d, %d, %d, 0, 0\n", warrior.getId(), warrior.getName(), warrior.getHp(), warrior.getStamina(), warrior.getStrength()));
-            } else if (character instanceof Wizard) {
-                Wizard wizard = (Wizard) character;
-                fileWriter.write(String.format("%s, %s, %d, 0, 0, %d, %d\n", wizard.getId(), wizard.getName(), wizard.getHp(), wizard.getMana(), wizard.getIntelligence()));
+            if (counter > 0) {
+                fileName += "_" + counter;
             }
 
+            File file = new File("src/com/ironhack/rpg_simulator/csv_files/" + fileName);
+            //file.createNewFile();
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write("id, name, hp, stamina, strength, mana, intelligence\n");
+
+            for (Character character : partyMembers) {
+                if (character instanceof Warrior) {
+                    Warrior warrior = (Warrior) character;
+                    fileWriter.write(String.format("%s, %s, %d, %d, %d, 0, 0\n", warrior.getId(), warrior.getName(), warrior.getHp(), warrior.getStamina(), warrior.getStrength()));
+                } else if (character instanceof Wizard) {
+                    Wizard wizard = (Wizard) character;
+                    fileWriter.write(String.format("%s, %s, %d, 0, 0, %d, %d\n", wizard.getId(), wizard.getName(), wizard.getHp(), wizard.getMana(), wizard.getIntelligence()));
+                }
+
+            }
+            fileWriter.close();
+        } catch (IOException e){
+            System.err.println("Unable to export the team to csv file.");
         }
-        fileWriter.close();
     }
 
     public String aliveMembersString() {
