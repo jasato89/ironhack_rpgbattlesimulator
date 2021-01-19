@@ -26,7 +26,13 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c07b2799-e7b3-4681-b803-8552337172ae" name="Default Changelist" comment="" />
+    <list default="true" id="c07b2799-e7b3-4681-b803-8552337172ae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_01_2021_17_31__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_01_2021_17_31__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Party.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Party.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

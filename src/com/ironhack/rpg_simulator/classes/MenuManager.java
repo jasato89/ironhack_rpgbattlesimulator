@@ -237,19 +237,19 @@ public class MenuManager {
     }
 
     public void loadPartiesFromDatabase() {
-        StoredParties storedParties = new StoredParties();
+        storedParties = new StoredParties();
 
-        /*try {*/
-            String fileName = "src/com/ironhack/rpg_simulator/csv_files";
+        try {
+            String fileName = "src/com/ironhack/rpg_simulator/csv_files/";
             File databaseDir = new File(fileName);
 
             File[] partiesFiles = databaseDir.listFiles();
             for (File f : partiesFiles) {
                 storedParties.add(ImportParty.importPartyCsv(f));
             }
-        /*} catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Database not found");
-        }*/
+        }
 
     }
 }
