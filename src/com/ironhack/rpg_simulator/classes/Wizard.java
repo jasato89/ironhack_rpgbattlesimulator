@@ -22,7 +22,7 @@ public class Wizard extends Character {
         //This is a Fireball
         if( getMana() >= 5 ) {
             damage[0] = getIntelligence();
-            setMana(getMana() - 5);
+            setMana(getMana() + 1);
             damage[1] = 1;
         }
         //This is a "Staff hit"
