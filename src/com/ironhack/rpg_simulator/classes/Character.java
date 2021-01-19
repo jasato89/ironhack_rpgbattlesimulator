@@ -1,7 +1,9 @@
 package com.ironhack.rpg_simulator.classes;
 
 
-public abstract class Character {
+import com.ironhack.rpg_simulator.interfaces.Attacker;
+
+public abstract class Character implements Attacker {
 
         //Propieties
         //Counter is static, because we get a fully counter of the total of Character created
@@ -30,6 +32,7 @@ public abstract class Character {
                         setAlive(false);
                 }
         }
+        public abstract int[] attack();
 
         //setId, set the id as the counter number in the moment of the instance
         public void setId() {

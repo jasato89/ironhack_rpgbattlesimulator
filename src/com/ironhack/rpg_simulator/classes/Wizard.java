@@ -1,8 +1,11 @@
 package com.ironhack.rpg_simulator.classes;
 
+import com.ironhack.rpg_simulator.fight.classes.AttackStats;
+import com.ironhack.rpg_simulator.interfaces.Attacker;
+
 public class Wizard extends Character {
 
-    //propieties
+    //properties
     private int mana;
     private int intelligence;
 
@@ -16,7 +19,7 @@ public class Wizard extends Character {
 
     //We implement attack on Wizard, we can get between a Fireball or a Staff hit
     public int[] attack () {
-        //We insert the damage into an int
+        //We insert the damage into an int[]
         int[] damage = new int[2];
 
         //This is a Fireball

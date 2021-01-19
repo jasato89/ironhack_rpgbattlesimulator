@@ -59,12 +59,12 @@ public class MenuManager {
 
     public void modeMenu() {
         System.out.println("Choose game mode:");
-        System.out.println("1.Choose your fighters.");
-        System.out.println("2.The fighters will be chosen randomly.");
+        System.out.println("1.Normal Mode (Choose your fighters).");
+        System.out.println("2.Fast Mode (The fighters will be chosen randomly).");
         System.out.println("3.Return to Main Menu.");
 
         String input = scanner.nextLine();
-        Pattern pattern = Pattern.compile("1|2|3|4");
+        Pattern pattern = Pattern.compile("1|2|3");
         Matcher matcher = pattern.matcher(input);
         while (!matcher.matches()) {
             System.out.println("The value introduced is not correct:");
@@ -75,11 +75,11 @@ public class MenuManager {
 
         switch (selection) {
             case 1:
-                //TODO: show battleMenu (where you can select your fighters and see results of each encounter)
+                //show battleMenu (where you can select your fighters and see results of each encounter)
                 battleMenu();
                 break;
             case 2:
-                //TODO: show battle results
+                //show battle results
                 fastBattleMenu();
                 break;
             default:
@@ -185,14 +185,26 @@ public class MenuManager {
             RoundStats roundStats = battle.fight(teamAIndex, teamBIndex);
             roundStats.printAttackLogs();
         }
-        announceTeamWinner();
+        announceTeamWinner(battle);
+        introToReturnToMainMenu();
         }
 
     private void fastBattleMenu() {
-
+        System.out.println("Starting Fast Battle...");
+        while (battle.getParty1().getAliveMembers().size() > 0 && battle.getParty2().getAliveMembers().size() > 0) {
+            System.out.println("The team A fighter is a " + battle.getParty1().getMemberFromAliveList(0).getClassName()+ " called " +
+                    battle.getParty1().getMemberFromAliveList(0).getName());
+            System.out.println("The team B fighter is a " + battle.getParty2().getMemberFromAliveList(0).getClassName()+ " called " +
+                    battle.getParty2().getMemberFromAliveList(0).getName());
+            System.out.println("Starting round " + battle.getRoundNumber() + "...");
+            RoundStats roundStats = battle.fight(0, 0);
+            roundStats.printAttackLogs();
+        }
+        announceTeamWinner(battle);
+        introToReturnToMainMenu();
     }
 
-    public void announceTeamWinner() {
+    public void announceTeamWinner(Battle battle) {
         if (battle.getParty1().getAliveMembers().size() == 0) {
             System.out.println("Team " + battle.getParty2().getName() + " has won!!");
         } else if (battle.getParty2().getAliveMembers().size() == 0) {
@@ -213,6 +225,13 @@ public class MenuManager {
 
     public void mainMenuOption3() {
         createTeamMenu();
+        mainMenu();
+    }
+
+    public void introToReturnToMainMenu() {
+        System.out.println("Press intro to return to Main Menu");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
         mainMenu();
     }
 
