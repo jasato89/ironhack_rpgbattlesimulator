@@ -29,7 +29,7 @@ public class Warrior extends Character {
         //This is a Weak attack
         else {
             damage[0] = (int)(getStrength()/2);
-            setStamina(getStamina() - 5);
+            setStamina(getStamina() + 1);
             damage[1] = 2;
         }
         return damage;
