@@ -1,6 +1,6 @@
 id, name, hp, stamina, strength, mana, intelligence
-01, Marcus, 180, 40, 3, ,
-02, Brutus, 160, 25, 8, ,
-03, Duncan, 135, 35, 6, ,
-04, Sauron, 80, , , 40, 18
-05, Ailios, 65, , , 25, 36
+01, Marcus, 180, 40, 3, 0, 0
+02, Brutus, 160, 25, 8, 0, 0
+03, Duncan, 135, 35, 6, 0, 0
+04, Sauron, 80, 0, 0, 40, 18
+05, Ailios, 65, 0, 0, 25, 36

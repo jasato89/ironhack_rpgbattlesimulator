@@ -7,6 +7,7 @@ import com.ironhack.rpg_simulator.main.StoredParties;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -237,14 +238,18 @@ public class MenuManager {
 
     public void loadPartiesFromDatabase() {
         StoredParties storedParties = new StoredParties();
-        File databaseDirParent = new File(".");
-        databaseDirParent = databaseDirParent.getParentFile();
-        File databaseDir = new File(databaseDirParent.getParentFile(),"/csv_files/");
 
-        File[] partiesFiles = databaseDir.listFiles();
-        for (File f: partiesFiles) {
-            storedParties.add(ImportParty.importPartyCsv(f));
-        }
+        /*try {*/
+            String fileName = "src/com/ironhack/rpg_simulator/csv_files";
+            File databaseDir = new File(fileName);
+
+            File[] partiesFiles = databaseDir.listFiles();
+            for (File f : partiesFiles) {
+                storedParties.add(ImportParty.importPartyCsv(f));
+            }
+        /*} catch (Exception e) {
+            System.out.println("Database not found");
+        }*/
 
     }
 }

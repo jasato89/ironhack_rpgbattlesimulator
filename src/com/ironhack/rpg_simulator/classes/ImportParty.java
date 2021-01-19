@@ -30,15 +30,15 @@ public class ImportParty {
                 String stringCharacter = scannerCsv.nextLine();
                 String[] dataCharacter = stringCharacter.split(", ");
 
-                if(dataCharacter[6].equals("")) {   //If it's a Warrior
+                if(dataCharacter[5].equals("0")) {   //If it's a Warrior
                     //Creates a Warrior with the stats obtained and add them to the Character's Array
-                    Warrior warrior = new Warrior(dataCharacter[2], Integer.parseInt(dataCharacter[3]),
-                            Integer.parseInt(dataCharacter[4]), Integer.parseInt(dataCharacter[5]));
+                    Warrior warrior = new Warrior(dataCharacter[1], Integer.parseInt(dataCharacter[2]),
+                            Integer.parseInt(dataCharacter[3]), Integer.parseInt(dataCharacter[4]));
                     partyArray.add(warrior);
                 } else {   //If it's a Wizard
                     //Creates a Wizard with the stats obtained and add them to the Character's Array
-                    Wizard wizard = new Wizard(dataCharacter[2], Integer.parseInt(dataCharacter[3]),
-                            Integer.parseInt(dataCharacter[6]), Integer.parseInt(dataCharacter[7]));
+                    Wizard wizard = new Wizard(dataCharacter[1], Integer.parseInt(dataCharacter[2]),
+                            Integer.parseInt(dataCharacter[5]), Integer.parseInt(dataCharacter[6]));
                     partyArray.add(wizard);
                 }
             }

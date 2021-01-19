@@ -1,0 +1,279 @@
+Index: src/com/ironhack/rpg_simulator/classes/MenuManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.ironhack.rpg_simulator.classes;\r\n\r\nimport com.ironhack.rpg_simulator.fight.classes.Battle;\r\nimport com.ironhack.rpg_simulator.main.StoredParties;\r\n\r\nimport java.io.File;\r\nimport java.util.Scanner;\r\nimport java.util.regex.Matcher;\r\nimport java.util.regex.Pattern;\r\n\r\npublic class MenuManager {\r\n    Scanner scanner = new Scanner(System.in);\r\n    Party teamA;\r\n    Party teamB;\r\n    Battle battle;\r\n    StoredParties storedParties;\r\n\r\n    public void mainMenu() {\r\n        System.out.println(\"Welcome to RPG Battle Simulator\");\r\n        System.out.println(\"Choose your option: \");\r\n        System.out.println(\"1.Play With Random Teams.\");\r\n        System.out.println(\"2.Play With Custom Teams.\");\r\n        System.out.println(\"3.Create New Team.\");\r\n        System.out.println(\"4.Exit the game.\");\r\n\r\n        String input = scanner.nextLine();\r\n        Pattern pattern = Pattern.compile(\"1|2|3|4\");\r\n        Matcher matcher = pattern.matcher(input);\r\n        while (!matcher.matches()) {\r\n            System.out.println(\"The value introduced is not correct:\");\r\n            input = scanner.nextLine();\r\n            matcher = pattern.matcher(input);\r\n        }\r\n        int selection = Integer.parseInt(input);\r\n\r\n        switch (selection) {\r\n            case 1:\r\n                mainMenuOption1();\r\n                break;\r\n            case 2:\r\n                //TODO: select two teams from database and show modeMenu\r\n                mainMenuOption2();\r\n                break;\r\n            case 3:\r\n                //TODO show teamCustomization\r\n                break;\r\n            case 4:\r\n                System.out.println(\"Thanks for playing!\");\r\n                break;\r\n            default:\r\n                mainMenu();\r\n        }\r\n    }\r\n\r\n    public void modeMenu() {\r\n        System.out.println(\"Choose game mode:\");\r\n        System.out.println(\"1.Choose your fighters.\");\r\n        System.out.println(\"2.The fighters will be chosen randomly.\");\r\n        System.out.println(\"3.Return to Main Menu.\");\r\n\r\n        String input = scanner.nextLine();\r\n        Pattern pattern = Pattern.compile(\"1|2|3|4\");\r\n        Matcher matcher = pattern.matcher(input);\r\n        while (!matcher.matches()) {\r\n            System.out.println(\"The value introduced is not correct:\");\r\n            input = scanner.nextLine();\r\n            matcher = pattern.matcher(input);\r\n        }\r\n        int selection = Integer.parseInt(input);\r\n\r\n        switch (selection) {\r\n            case 1:\r\n                //TODO: show battleMenu (where you can select your fighters and see results of each encounter)\r\n                break;\r\n            case 2:\r\n                //TODO: select two teams from database and show gameType\r\n                break;\r\n            case 3:\r\n                //TODO show teamCustomization\r\n                break;\r\n            case 4:\r\n                System.out.println(\"Thanks for playing!\");\r\n                break;\r\n            default:\r\n                mainMenu();\r\n        }\r\n    }\r\n\r\n    public void selectTeamsFromDatabaseMenu() {\r\n        Party teamA;\r\n        Party teamB;\r\n\r\n        System.out.println(\"Select Team A\");\r\n        int i = 0;\r\n        for (Party party : storedParties.getTheList()) {\r\n            System.out.println(i++ + \".\" + party.getName());\r\n        }\r\n\r\n        String input = scanner.nextLine();\r\n        Pattern pattern = Pattern.compile(\"\\\\d\");\r\n        Matcher matcher = pattern.matcher(input);\r\n        while (!matcher.matches() && Integer.parseInt(input) <= storedParties.getTheList().size()) {\r\n            System.out.println(\"The value introduced is not correct:\");\r\n            input = scanner.nextLine();\r\n            matcher = pattern.matcher(input);\r\n        }\r\n        int selection = Integer.parseInt(input);\r\n\r\n        teamA = storedParties.getTheList().get(selection - 1);\r\n\r\n        System.out.println(\"Select Team B\");\r\n        i = 0;\r\n        for (Party party : storedParties.getTheList()) {\r\n            System.out.println(i++ + \".\" + party.getName());\r\n        }\r\n\r\n        input = scanner.nextLine();\r\n        pattern = Pattern.compile(\"\\\\d\");\r\n        matcher = pattern.matcher(input);\r\n        while (!matcher.matches() && Integer.parseInt(input) <= storedParties.getTheList().size()) {\r\n            System.out.println(\"The value introduced is not correct:\");\r\n            input = scanner.nextLine();\r\n            matcher = pattern.matcher(input);\r\n        }\r\n        selection = Integer.parseInt(input);\r\n\r\n        teamB = storedParties.getTheList().get(selection - 1);\r\n\r\n        battle = new Battle(teamA, teamB);\r\n        modeMenu();\r\n    }\r\n\r\n\r\n    public void mainMenuOption1() {\r\n        teamA = new Party(5);\r\n        teamB = new Party(5);\r\n        battle = new Battle(teamA, teamB);\r\n        modeMenu();\r\n    }\r\n\r\n    public void mainMenuOption2() {\r\n        selectTeamsFromDatabaseMenu();\r\n    }\r\n\r\n    public void loadPartiesFromDatabase() {\r\n        StoredParties storedParties = new StoredParties();\r\n        File databaseDirParent = new File(\".\");\r\n        databaseDirParent = databaseDirParent.getParentFile();\r\n        File databaseDir = new File(databaseDirParent.getParentFile(),\"/csv_files/\");\r\n\r\n        File[] partiesFiles = databaseDir.listFiles();\r\n        for (File f: partiesFiles) {\r\n            storedParties.add(ImportParty.importPartyCsv(f));\r\n        }\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/classes/MenuManager.java b/src/com/ironhack/rpg_simulator/classes/MenuManager.java
+--- a/src/com/ironhack/rpg_simulator/classes/MenuManager.java	(revision 6933da4f755f31f4c0d27fc3cba0c591ac5fa17a)
++++ b/src/com/ironhack/rpg_simulator/classes/MenuManager.java	(date 1611077350951)
+@@ -4,6 +4,7 @@
+ import com.ironhack.rpg_simulator.main.StoredParties;
+ 
+ import java.io.File;
++import java.io.IOException;
+ import java.util.Scanner;
+ import java.util.regex.Matcher;
+ import java.util.regex.Pattern;
+@@ -144,14 +145,18 @@
+ 
+     public void loadPartiesFromDatabase() {
+         StoredParties storedParties = new StoredParties();
+-        File databaseDirParent = new File(".");
+-        databaseDirParent = databaseDirParent.getParentFile();
+-        File databaseDir = new File(databaseDirParent.getParentFile(),"/csv_files/");
++
++        /*try {*/
++            String fileName = "src/com/ironhack/rpg_simulator/csv_files";
++            File databaseDir = new File(fileName);
+ 
+-        File[] partiesFiles = databaseDir.listFiles();
+-        for (File f: partiesFiles) {
+-            storedParties.add(ImportParty.importPartyCsv(f));
+-        }
++            File[] partiesFiles = databaseDir.listFiles();
++            for (File f : partiesFiles) {
++                storedParties.add(ImportParty.importPartyCsv(f));
++            }
++        /*} catch (Exception e) {
++            System.out.println("Database not found");
++        }*/
+ 
+     }
+ }
+Index: src/com/ironhack/rpg_simulator/csv_files/Dream Crushers.csv
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>id, name, hp, stamina, strength, mana, intelligence\r\n01, Marcus, 180, 40, 3, ,\r\n02, Brutus, 160, 25, 8, ,\r\n03, Duncan, 135, 35, 6, ,\r\n04, Sauron, 80, , , 40, 18\r\n05, Ailios, 65, , , 25, 36
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/csv_files/Dream Crushers.csv b/src/com/ironhack/rpg_simulator/csv_files/Dream Crushers.csv
+--- a/src/com/ironhack/rpg_simulator/csv_files/Dream Crushers.csv	(revision 6933da4f755f31f4c0d27fc3cba0c591ac5fa17a)
++++ b/src/com/ironhack/rpg_simulator/csv_files/Dream Crushers.csv	(date 1611077207980)
+@@ -1,6 +1,6 @@
+ id, name, hp, stamina, strength, mana, intelligence
+-01, Marcus, 180, 40, 3, ,
+-02, Brutus, 160, 25, 8, ,
+-03, Duncan, 135, 35, 6, ,
+-04, Sauron, 80, , , 40, 18
+-05, Ailios, 65, , , 25, 36
+\ No newline at end of file
++01, Marcus, 180, 40, 3, 0, 0
++02, Brutus, 160, 25, 8, 0, 0
++03, Duncan, 135, 35, 6, 0, 0
++04, Sauron, 80, 0, 0, 40, 18
++05, Ailios, 65, 0, 0, 25, 36
+\ No newline at end of file
+Index: src/com/ironhack/rpg_simulator/classes/ImportParty.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.ironhack.rpg_simulator.classes;\r\n\r\nimport java.io.File;   //Import File package to receive by parameter the CSV file to be read\r\nimport java.io.FileNotFoundException;   //Import File Exception to manage exception if the file wasn't found\r\nimport java.util.Scanner;   //Import Scanner package to read the CSV file\r\nimport java.util.ArrayList;   //Import ArrayList package to manage ArrayList\r\n\r\npublic class ImportParty {\r\n\r\n    //Constructor required but the class isn't going to be initialized so it's private\r\n    private ImportParty() {}\r\n\r\n    //The only method in the class. It'll return a Party object created from the information in the CSV file\r\n    //that we'll pass as a parameter\r\n    public static Party importPartyCsv(File csvFile) {\r\n        //To control the appearance of Exceptions, specifically if file isn't found, we start with a 'try'\r\n        //to make sure that the code will be executed if no exceptions appear\r\n        try {\r\n            //Initializes the Scanner and ArrayList objects\r\n            Scanner scannerCsv = new Scanner(csvFile);\r\n            ArrayList<Character> partyArray = new ArrayList<>();\r\n\r\n            //Saves the Party name from the File name without '.csv'\r\n            String partyName = csvFile.getName().substring(0, csvFile.getName().length() - 5);\r\n            //Skips the first line of the CSV with the field names\r\n            scannerCsv.nextLine();\r\n            //The following will be repeated for each line of data\r\n            while(scannerCsv.hasNextLine()) {\r\n                //Gets all the Character data and separates them into a String[] for each data\r\n                String stringCharacter = scannerCsv.nextLine();\r\n                String[] dataCharacter = stringCharacter.split(\", \");\r\n\r\n                if(dataCharacter[6].equals(\"\")) {   //If it's a Warrior\r\n                    //Creates a Warrior with the stats obtained and add them to the Character's Array\r\n                    Warrior warrior = new Warrior(dataCharacter[2], Integer.parseInt(dataCharacter[3]), true,\r\n                            Integer.parseInt(dataCharacter[4]), Integer.parseInt(dataCharacter[5]));\r\n                    partyArray.add(warrior);\r\n                } else {   //If it's a Wizard\r\n                    //Creates a Wizard with the stats obtained and add them to the Character's Array\r\n                    Wizard wizard = new Wizard(dataCharacter[2], Integer.parseInt(dataCharacter[3]), true,\r\n                            Integer.parseInt(dataCharacter[6]), Integer.parseInt(dataCharacter[7]));\r\n                    partyArray.add(wizard);\r\n                }\r\n            }\r\n            //Closes the Scanner and returns the Party\r\n            scannerCsv.close();\r\n            return new Party(partyName, partyArray);\r\n\r\n        } catch (FileNotFoundException e) {   //If the file isn't found, it prints an error message and returns null\r\n            System.out.println(\"An error occurred.\");\r\n            e.printStackTrace();\r\n            return null;\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/classes/ImportParty.java b/src/com/ironhack/rpg_simulator/classes/ImportParty.java
+--- a/src/com/ironhack/rpg_simulator/classes/ImportParty.java	(revision 6933da4f755f31f4c0d27fc3cba0c591ac5fa17a)
++++ b/src/com/ironhack/rpg_simulator/classes/ImportParty.java	(date 1611077441048)
+@@ -30,7 +30,7 @@
+                 String stringCharacter = scannerCsv.nextLine();
+                 String[] dataCharacter = stringCharacter.split(", ");
+ 
+-                if(dataCharacter[6].equals("")) {   //If it's a Warrior
++                if(dataCharacter[6].equals("0")) {   //If it's a Warrior
+                     //Creates a Warrior with the stats obtained and add them to the Character's Array
+                     Warrior warrior = new Warrior(dataCharacter[2], Integer.parseInt(dataCharacter[3]), true,
+                             Integer.parseInt(dataCharacter[4]), Integer.parseInt(dataCharacter[5]));
+@@ -38,7 +38,7 @@
+                 } else {   //If it's a Wizard
+                     //Creates a Wizard with the stats obtained and add them to the Character's Array
+                     Wizard wizard = new Wizard(dataCharacter[2], Integer.parseInt(dataCharacter[3]), true,
+-                            Integer.parseInt(dataCharacter[6]), Integer.parseInt(dataCharacter[7]));
++                            Integer.parseInt(dataCharacter[5]), Integer.parseInt(dataCharacter[6]));
+                     partyArray.add(wizard);
+                 }
+             }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"3ac01ed2-15b0-48e0-9b56-3b4908f921f6\" name=\"Default Changelist\" comment=\"Commit unversioned Files\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Main.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1n79UO8qhqdvD79uORNImpBeuQG\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"abbreviatePackageNames\" value=\"true\" />\r\n    <option name=\"autoscrollFromSource\" value=\"true\" />\r\n    <option name=\"autoscrollToSource\" value=\"true\" />\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showExcludedFiles\" value=\"false\" />\r\n    <option name=\"showModules\" value=\"false\" />\r\n    <option name=\"sortByType\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"Git.Branch.Popup.ShowAllRemotes\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"preferences.lookFeel\" />\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.ironhack.rpg_simulator.output.Main\" />\r\n      <module name=\"ironhack-team5_battleSimulator\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task id=\"LOCAL-00001\" summary=\"Added selectTeamsFromDatabaseMenu\">\r\n      <created>1611001952756</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1611001952756</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Added selectTeamsFromDatabaseMenu\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Added selectTeamsFromDatabaseMenu\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 6933da4f755f31f4c0d27fc3cba0c591ac5fa17a)
++++ b/.idea/workspace.xml	(date 1611077319657)
+@@ -3,8 +3,14 @@
+   <component name="ChangeListManager">
+     <list default="true" id="3ac01ed2-15b0-48e0-9b56-3b4908f921f6" name="Default Changelist" comment="Commit unversioned Files">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/ImportParty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/ImportParty.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Dream Crushers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Dream Crushers.csv" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Golden Bears.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Golden Bears.csv" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Rainbow Warriors.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Rainbow Warriors.csv" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Red Raiders.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Red Raiders.csv" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Stormy Petrels.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Stormy Petrels.csv" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Untouchaballs.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Untouchaballs.csv" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -53,6 +59,7 @@
+       </list>
+     </recent_temporary>
+   </component>
++  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task id="LOCAL-00001" summary="Added selectTeamsFromDatabaseMenu">
+       <created>1611001952756</created>
+@@ -61,7 +68,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1611001952756</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="Added loadPartiesFromDatabase">
++      <created>1611003159514</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1611003159514</updated>
++    </task>
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="3ac01ed2-15b0-48e0-9b56-3b4908f921f6" name="Default Changelist" comment="Commit unversioned Files" />
++      <created>1611076771423</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1611076771423</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -78,6 +99,7 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Added selectTeamsFromDatabaseMenu" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Added selectTeamsFromDatabaseMenu" />
++    <MESSAGE value="Added loadPartiesFromDatabase" />
++    <option name="LAST_COMMIT_MESSAGE" value="Added loadPartiesFromDatabase" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/com/ironhack/rpg_simulator/csv_files/Red Raiders.csv
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>id, name, hp, stamina, strength, mana, intelligence\r\n01, Kane, 175, 38, 4, ,\r\n02, Kamara, 142, 31, 7, ,\r\n03, Gunnar, 168, 26, 6, ,\r\n04, Arwyn, 55, , , 46, 37\r\n05, Nerys, 76, , , 34, 22\r\n06, Saruman, 89, , , 26, 17
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/csv_files/Red Raiders.csv b/src/com/ironhack/rpg_simulator/csv_files/Red Raiders.csv
+--- a/src/com/ironhack/rpg_simulator/csv_files/Red Raiders.csv	(revision 6933da4f755f31f4c0d27fc3cba0c591ac5fa17a)
++++ b/src/com/ironhack/rpg_simulator/csv_files/Red Raiders.csv	(date 1611077272819)
+@@ -1,7 +1,7 @@
+ id, name, hp, stamina, strength, mana, intelligence
+-01, Kane, 175, 38, 4, ,
+-02, Kamara, 142, 31, 7, ,
+-03, Gunnar, 168, 26, 6, ,
+-04, Arwyn, 55, , , 46, 37
+-05, Nerys, 76, , , 34, 22
+-06, Saruman, 89, , , 26, 17
+\ No newline at end of file
++01, Kane, 175, 38, 4, 0, 0
++02, Kamara, 142, 31, 7, 0, 0
++03, Gunnar, 168, 26, 6, 0, 0
++04, Arwyn, 55, 0, 0, 46, 37
++05, Nerys, 76, 0, 0, 34, 22
++06, Saruman, 89, 0, 0, 26, 17
+\ No newline at end of file
+Index: src/com/ironhack/rpg_simulator/csv_files/Stormy Petrels.csv
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>id, name, hp, stamina, strength, mana, intelligence\r\n01, Khalon, 140, 28, 7, ,\r\n02, Endora, 68, , , 42, 13\r\n03, Ciaran, 90, , , 28, 29\r\n04, Ogun, 85, , , 31, 28\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/csv_files/Stormy Petrels.csv b/src/com/ironhack/rpg_simulator/csv_files/Stormy Petrels.csv
+--- a/src/com/ironhack/rpg_simulator/csv_files/Stormy Petrels.csv	(revision 6933da4f755f31f4c0d27fc3cba0c591ac5fa17a)
++++ b/src/com/ironhack/rpg_simulator/csv_files/Stormy Petrels.csv	(date 1611077285914)
+@@ -1,5 +1,5 @@
+ id, name, hp, stamina, strength, mana, intelligence
+-01, Khalon, 140, 28, 7, ,
+-02, Endora, 68, , , 42, 13
+-03, Ciaran, 90, , , 28, 29
+-04, Ogun, 85, , , 31, 28
++01, Khalon, 140, 28, 7, 0, 0
++02, Endora, 68, 0, 0, 42, 13
++03, Ciaran, 90, 0, 0, 28, 29
++04, Ogun, 85, 0, 0, 31, 28
+Index: src/com/ironhack/rpg_simulator/csv_files/Rainbow Warriors.csv
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>id, name, hp, stamina, strength, mana, intelligence\r\n01, Callan, 150, 35, 4, ,\r\n02, Ainia, 120, 42, 3, ,\r\n03, Hiral, 85, , , 40, 29\r\n04, Jadis, 76, , , 28, 34\r\n05, Maelor, 96, , , 28, 17
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/csv_files/Rainbow Warriors.csv b/src/com/ironhack/rpg_simulator/csv_files/Rainbow Warriors.csv
+--- a/src/com/ironhack/rpg_simulator/csv_files/Rainbow Warriors.csv	(revision 6933da4f755f31f4c0d27fc3cba0c591ac5fa17a)
++++ b/src/com/ironhack/rpg_simulator/csv_files/Rainbow Warriors.csv	(date 1611077255173)
+@@ -1,6 +1,6 @@
+ id, name, hp, stamina, strength, mana, intelligence
+-01, Callan, 150, 35, 4, ,
+-02, Ainia, 120, 42, 3, ,
+-03, Hiral, 85, , , 40, 29
+-04, Jadis, 76, , , 28, 34
+-05, Maelor, 96, , , 28, 17
+\ No newline at end of file
++01, Callan, 150, 35, 4, 0, 0
++02, Ainia, 120, 42, 3, 0, 0
++03, Hiral, 85, 0, 0, 40, 29
++04, Jadis, 76, 0, 0, 28, 34
++05, Maelor, 96, 0, 0, 28, 17
+\ No newline at end of file
+Index: src/com/ironhack/rpg_simulator/csv_files/Untouchaballs.csv
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>id, name, hp, stamina, strength, mana, intelligence\r\n01, Edson, 165, 34, 6, ,\r\n02, Sorcha, 145, 28, 8, ,\r\n03, Kondo, 120, 32, 9, ,\r\n04, Yara, 65, , , 34, 40\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/csv_files/Untouchaballs.csv b/src/com/ironhack/rpg_simulator/csv_files/Untouchaballs.csv
+--- a/src/com/ironhack/rpg_simulator/csv_files/Untouchaballs.csv	(revision 6933da4f755f31f4c0d27fc3cba0c591ac5fa17a)
++++ b/src/com/ironhack/rpg_simulator/csv_files/Untouchaballs.csv	(date 1611077303201)
+@@ -1,5 +1,5 @@
+ id, name, hp, stamina, strength, mana, intelligence
+-01, Edson, 165, 34, 6, ,
+-02, Sorcha, 145, 28, 8, ,
+-03, Kondo, 120, 32, 9, ,
+-04, Yara, 65, , , 34, 40
++01, Edson, 165, 34, 6, 0, 0
++02, Sorcha, 145, 28, 8, 0, 0
++03, Kondo, 120, 32, 9, 0, 0
++04, Yara, 65, 0, 0, 34, 40
+Index: src/com/ironhack/rpg_simulator/csv_files/Golden Bears.csv
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>id, name, hp, stamina, strength, mana, intelligence\r\n01, Kondo, 120, 45, 5, ,\r\n02, Vidar, 110, 48, 5, ,\r\n03, Xena, 195, 25, 3, ,\r\n04, Freyja, 64, , , 29, 24\r\n05, Zatara, 80, , , 18, 24\r\n06, Ionor, 55, , , 43, 38
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/csv_files/Golden Bears.csv b/src/com/ironhack/rpg_simulator/csv_files/Golden Bears.csv
+--- a/src/com/ironhack/rpg_simulator/csv_files/Golden Bears.csv	(revision 6933da4f755f31f4c0d27fc3cba0c591ac5fa17a)
++++ b/src/com/ironhack/rpg_simulator/csv_files/Golden Bears.csv	(date 1611077237853)
+@@ -1,7 +1,7 @@
+ id, name, hp, stamina, strength, mana, intelligence
+-01, Kondo, 120, 45, 5, ,
+-02, Vidar, 110, 48, 5, ,
+-03, Xena, 195, 25, 3, ,
+-04, Freyja, 64, , , 29, 24
+-05, Zatara, 80, , , 18, 24
+-06, Ionor, 55, , , 43, 38
+\ No newline at end of file
++01, Kondo, 120, 45, 5, 0, 0
++02, Vidar, 110, 48, 5, 0, 0
++03, Xena, 195, 25, 3, 0, 0
++04, Freyja, 64, 0, 0, 29, 24
++05, Zatara, 80, 0, 0, 18, 24
++06, Ionor, 55, 0, 0, 43, 38
+\ No newline at end of file
