@@ -25,7 +25,7 @@ public class Wizard extends Character {
         //This is a Fireball
         if( getMana() >= 5 ) {
             damage[0] = getIntelligence();
-            setMana(getMana() - 5);
+            setMana(getMana() + 1);
             damage[1] = 1;
         }
         //This is a "Staff hit"
@@ -40,8 +40,8 @@ public class Wizard extends Character {
 
     //we use this method to show a wizard in console
     public String toString(){
-        return "Name: " +getName()  + "\n Type: Warrior\nHP: " +
-                getHp() + "\nIntelligence: " + getIntelligence() +"\nMana: " + getMana() + "\n";
+        return "Name: " +getName()  + " Type: Wizard HP: " +
+                getHp() + " Intelligence: " + getIntelligence() +" Mana: " + getMana() + "\n";
     }
 
     //getters and setters

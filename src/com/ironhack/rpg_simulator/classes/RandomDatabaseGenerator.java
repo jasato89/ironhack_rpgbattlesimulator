@@ -10,7 +10,7 @@ public class RandomDatabaseGenerator {
     stamina: random between 10-50
     strength: random between 1-10
     mana: random between 10-50
-intelligence: random between 1-50*/
+    intelligence: random between 1-50*/
 
     private static final int HP_WARRIOR_MIN = 100;
     private static final int HP_WARRIOR_MAX = 200;

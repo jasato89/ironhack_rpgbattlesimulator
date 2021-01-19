@@ -73,6 +73,8 @@ public class RoundStats {
             System.out.println(name1 + " did " + attackValue1 + " damage using " + attackType1 + ".");
             System.out.println(name2 + " did " + attackValue2 + " damage using " + attackType2 + ".");
         }
+        System.out.println(getRoundWinner(nameFighter1, nameFighter2));
+
     }
 
     private String getAttackName(String class1, int attackType12) {

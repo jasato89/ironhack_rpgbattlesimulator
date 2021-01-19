@@ -93,7 +93,7 @@ public class MenuManager {
         Party teamB;
 
         System.out.println("Select Team A");
-        int i = 0;
+        int i = 1;
         for (Party party : storedParties.getTheList()) {
             System.out.println(i++ + "." + party.getName());
         }
@@ -111,7 +111,7 @@ public class MenuManager {
         teamA = storedParties.getTheList().get(selection - 1);
 
         System.out.println("Select Team B");
-        i = 0;
+        i = 1;
         for (Party party : storedParties.getTheList()) {
             System.out.println(i++ + "." + party.getName());
         }
@@ -183,8 +183,9 @@ public class MenuManager {
             System.out.println(battle.getParty1().aliveMembersString());
             int teamAIndex = Integer.parseInt(scanner.nextLine());
             System.out.println("Starting fight...");
-            RoundStats roundStats = battle.fight(teamAIndex, teamBIndex);
+            RoundStats roundStats = battle.fight(teamAIndex - 1, teamBIndex);
             roundStats.printAttackLogs();
+            introToContinue();
         }
         announceTeamWinner(battle);
         introToReturnToMainMenu();
@@ -229,6 +230,11 @@ public class MenuManager {
         mainMenu();
     }
 
+    public void introToContinue() {
+        System.out.println("Press intro to select the next fighter");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+    }
     public void introToReturnToMainMenu() {
         System.out.println("Press intro to return to Main Menu");
         Scanner scanner = new Scanner(System.in);
