@@ -98,6 +98,7 @@ public class MenuManager {
         for (Party party : storedParties.getTheList()) {
             System.out.println(i++ + "." + party.getName());
         }
+
         String input = scanner.nextLine();
         Pattern pattern = Pattern.compile("\\d");
         Matcher matcher = pattern.matcher(input);
@@ -108,11 +109,25 @@ public class MenuManager {
         }
         int selection = Integer.parseInt(input);
         teamA = storedParties.getTheList().get(selection - 1);
+        int selectionA = Integer.parseInt(input);
+
+        teamA = storedParties.getTheList().get(selectionA - 1);
+
         System.out.println("Select Team B");
         i = 1;
         for (Party party : storedParties.getTheList()) {
-            System.out.println(i++ + "." + party.getName());
+            if (i == selectionA) {   //We don't want to print the Team A selected
+                //We can't change 'i' cause we use it on the print so we change the selection for Team A
+                //to not enter on a infinite loop
+                selectionA = 0;
+            } else {
+                System.out.println(i++ + "." + party.getName());
+            }
         }
+
+        //We need to recover the selection to Team A to select correctly the Team B from storedParties
+        selectionA = Integer.parseInt(input);
+
         input = scanner.nextLine();
         pattern = Pattern.compile("\\d");
         matcher = pattern.matcher(input);
@@ -121,8 +136,13 @@ public class MenuManager {
             input = scanner.nextLine();
             matcher = pattern.matcher(input);
         }
-        selection = Integer.parseInt(input);
-        teamB = storedParties.getTheList().get(selection - 1);
+        int selectionB = Integer.parseInt(input);
+
+        if(selectionB < selectionA) {
+            teamB = storedParties.getTheList().get(selectionB - 1);
+        } else {
+            teamB = storedParties.getTheList().get(selectionB + 1 - 1);
+        }
         battle = new Battle(teamA, teamB);
         modeMenu();
     }
