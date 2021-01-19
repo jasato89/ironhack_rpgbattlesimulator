@@ -2,7 +2,7 @@ package com.ironhack.rpg_simulator.classes;
 
 public class Warrior extends Character {
 
-    //propiedades
+    //propieties
     private int stamina;
     private int strength;
 
@@ -14,25 +14,26 @@ public class Warrior extends Character {
         setClassName("Warrior");
     }
 
-    //Implementamos el método attack(), especifico para el guerrero
+    //Implement attack into warrior. we can get between a heavy attack and a weak attack
     public int[] attack() {
         //We insert the damage into an int
         int[] damage = new int[2];
         //This is a heavy attack
-        if( this.stamina >= 5 ) {
-            damage[0] = this.strength;
-            this.stamina -= 5;
+        if( getStamina()>= 5 ) {
+            damage[0] = getStrength();
+            setStamina(getStamina() - 5);
             damage[1] = 1;
         }
         //This is a Weak attack
         else {
-            damage[0] = (int)(this.strength/2);
-            this.stamina += 1;
+            damage[0] = (int)(getStrength()/2);
+            setStamina(getStamina() - 5);
             damage[1] = 2;
         }
         return damage;
     }
 
+    //we use this method to show a warrior in console
     public String toString(){
         return "Name: " +getName()  + "\n Type: Warrior\nHP: " +
                 getHp() + "\nStamina: " + getStamina() +"\nStrength: " + getStrength() + "\n";
