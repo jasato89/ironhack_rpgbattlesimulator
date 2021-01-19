@@ -26,7 +26,17 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c07b2799-e7b3-4681-b803-8552337172ae" name="Default Changelist" comment="" />
+    <list default="true" id="c07b2799-e7b3-4681-b803-8552337172ae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_01_2021_17_31__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_01_2021_17_31__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Party.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Party.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/RandomDatabaseGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/RandomDatabaseGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Warrior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Warrior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Wizard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/Wizard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/fight/classes/Battle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/fight/classes/Battle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/fight/classes/RoundStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/fight/classes/RoundStats.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,7 +73,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ironhack.rpg_simulator.main.Main" />
       <module name="ironhack_rpgbattlesimulator" />
@@ -91,24 +101,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="TaskManager">
-    <task id="LOCAL-00001" summary="Solved error on loadPartiesFromDatabase and ImportParty">
-      <created>1611077773165</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1611077773165</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Solved error on loadpartiesFromDatabase and changed exported party">
-      <created>1611078829242</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1611078829242</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
-    <servers />
-  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -135,8 +127,77 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merge branch 'develop-3.0' of https://github.com/salvatorecorsaro/ironhack_rpgbattlesimulator into develop-3.0&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
-    <MESSAGE value="Solved error on loadPartiesFromDatabase and ImportParty" />
-    <MESSAGE value="Solved error on loadpartiesFromDatabase and changed exported party" />
-    <option name="LAST_COMMIT_MESSAGE" value="Solved error on loadpartiesFromDatabase and changed exported party" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'develop-3.0' of https://github.com/salvatorecorsaro/ironhack_rpgbattlesimulator into develop-3.0&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1263" y="139" key="#Main" timestamp="1611069589903">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1263" y="139" key="#Main/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611069589903" />
+    <state x="-1263" y="139" key="#Main_(1)" timestamp="1610998038405">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1263" y="139" key="#Main_(1)/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998038405" />
+    <state x="-1155" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1610912354086">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1155" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610912354086" />
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610886851971" />
+    <state width="469" height="466" key="DebuggerActiveHint" timestamp="1611081833156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="469" height="466" key="DebuggerActiveHint/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611081833156" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1610885506652">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610885506652" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1610793995403">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610793995403" />
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1611082285053">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611008424837" />
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611082285053" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1611082285053">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611008424836" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611082285053" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1611082285053">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611008424836" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611082285053" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1611082285053">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611008424837" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611082285053" />
+    <state width="1899" height="318" key="GridCell.Tab.1.bottom" timestamp="1611081877791">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="318" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611081877791" />
+    <state width="1899" height="318" key="GridCell.Tab.1.center" timestamp="1611081877791">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="318" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611081877791" />
+    <state width="1899" height="318" key="GridCell.Tab.1.left" timestamp="1611081877791">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="318" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611081877791" />
+    <state width="1899" height="318" key="GridCell.Tab.1.right" timestamp="1611081877791">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="318" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611081877791" />
+    <state x="-1459" y="165" key="SettingsEditor" timestamp="1610879120881">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1459" y="165" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610879120881" />
+    <state x="-1461" y="233" key="git4idea.branch.GitSmartOperationDialog" timestamp="1611004570812">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1461" y="233" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611004570812" />
   </component>
 </project>

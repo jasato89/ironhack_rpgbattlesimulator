@@ -28,8 +28,8 @@ public class Warrior extends Character {
         }
         //This is a Weak attack
         else {
-            damage[0] = (int)(getStrength()/2);
-            setStamina(getStamina() - 5);
+            damage[0] = getStrength()/2;
+            setStamina(getStamina() + 1);
             damage[1] = 2;
         }
         return damage;
@@ -37,8 +37,8 @@ public class Warrior extends Character {
 
     //we use this method to show a warrior in console
     public String toString(){
-        return "Name: " +getName()  + "\n Type: Warrior\nHP: " +
-                getHp() + "\nStamina: " + getStamina() +"\nStrength: " + getStrength() + "\n";
+        return "Name: " +getName()  + " Type: Warrior HP: " +
+                getHp() + " Stamina: " + getStamina() +" Strength: " + getStrength() + "\n";
     }
 
     //getters and setters

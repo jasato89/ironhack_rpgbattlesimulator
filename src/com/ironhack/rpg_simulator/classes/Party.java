@@ -141,7 +141,7 @@ public class Party {
 
     public String aliveMembersString() {
         String result = "Party: " + name + "\n";
-        int memberCount = 0;
+        int memberCount = 1;
         for (Character member : aliveMembers) {
             result += memberCount++ +": " + member.toString() + "\n";
         }
