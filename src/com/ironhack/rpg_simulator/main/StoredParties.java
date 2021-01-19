@@ -24,4 +24,10 @@ public class StoredParties {
     public void setTheList(List<Party> theList) {
         this.theList = theList;
     }
+
+    public String toString() {
+        return "StoredParties{" +
+                "theList=" + theList +
+                '}';
+    }
 }

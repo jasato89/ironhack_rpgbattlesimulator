@@ -105,4 +105,13 @@ public class Battle {
     public void setParty2(Party party2) {
         this.party2 = party2;
     }
+
+    public String toString() {
+        return "Battle{" +
+                "roundNumber=" + roundNumber +
+                ", graveyard=" + graveyard +
+                ", party1=" + party1 +
+                ", party2=" + party2 +
+                '}';
+    }
 }

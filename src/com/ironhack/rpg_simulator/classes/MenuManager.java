@@ -92,7 +92,6 @@ public class MenuManager {
     public void selectTeamsFromDatabaseMenu() {
         Party teamA;
         Party teamB;
-
         System.out.println("Select Team A");
         int i = 1;
         for (Party party : storedParties.getTheList()) {
@@ -205,6 +204,7 @@ public class MenuManager {
             introToContinue();
         }
         announceTeamWinner(battle);
+        loadPartiesFromDatabase();
         introToReturnToMainMenu();
         }
 
@@ -220,6 +220,7 @@ public class MenuManager {
             roundStats.printAttackLogs();
         }
         announceTeamWinner(battle);
+        loadPartiesFromDatabase();
         introToReturnToMainMenu();
     }
 

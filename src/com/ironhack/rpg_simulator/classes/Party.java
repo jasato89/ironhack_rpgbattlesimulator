@@ -150,4 +150,13 @@ public class Party {
         }
         return result;
     }
+
+    public String toString() {
+        return "Party{" +
+                "name='" + name + '\'' +
+                ", partySize=" + partySize +
+                ", partyMembers=" + partyMembers +
+                ", aliveMembers=" + aliveMembers +
+                '}';
+    }
 }
