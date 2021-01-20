@@ -1,6 +1,6 @@
 id, name, hp, stamina, strength, mana, intelligence
-01, Callan, 150, 35, 4, 0, 0
-02, Ainia, 120, 42, 3, 0, 0
-03, Hiral, 85, 0, 0, 40, 29
-04, Jadis, 76, 0, 0, 28, 34
-05, Maelor, 96, 0, 0, 28, 17
+12, Callan, 150, 35, 4, 0, 0
+13, Ainia, 120, 42, 3, 0, 0
+14, Hiral, 85, 0, 0, 40, 29
+15, Jadis, 76, 0, 0, 28, 34
+16, Maelor, 96, 0, 0, 28, 17
