@@ -8,6 +8,23 @@ import java.util.regex.Pattern;
 public abstract class Ressources {
 
     //We use this function to validate a menu
+    //here if we need a message
+    public static int validateMenu(String sout, String arg) {
+        Scanner scanner = new Scanner(System.in);
+        int selection;
+
+        String input = scanner.nextLine();
+        Pattern pattern = Pattern.compile(arg);
+        Matcher matcher = pattern.matcher(input);
+        while (!matcher.matches()) {
+            System.out.println(sout);
+            input = scanner.nextLine();
+            matcher = pattern.matcher(input);
+        }
+        selection = Integer.parseInt(input);
+        return selection;
+    }
+    //here if we doesn't
     public static int validateMenu(String arg) {
         Scanner scanner = new Scanner(System.in);
         int selection;
@@ -16,11 +33,11 @@ public abstract class Ressources {
         Pattern pattern = Pattern.compile(arg);
         Matcher matcher = pattern.matcher(input);
         while (!matcher.matches()) {
-            System.out.println("The value introduced is not correct:");
             input = scanner.nextLine();
             matcher = pattern.matcher(input);
         }
-        return selection = Integer.parseInt(input);
+        selection = Integer.parseInt(input);
+        return selection;
     }
 
 }
