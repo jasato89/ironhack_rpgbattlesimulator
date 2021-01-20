@@ -29,7 +29,6 @@
     <list default="true" id="c07b2799-e7b3-4681-b803-8552337172ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/ressources/Ressources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/ressources/Ressources.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +71,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Main (1)">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ironhack.rpg_simulator.main.Main" />
       <module name="ironhack_rpgbattlesimulator" />
