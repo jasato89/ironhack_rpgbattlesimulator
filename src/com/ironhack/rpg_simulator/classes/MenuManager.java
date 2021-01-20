@@ -164,12 +164,20 @@ public class MenuManager {
     //This menu let us create an own fighter
     public Character createCharacterMenu() {
 
+        //properties
+        String name;
+        int health = 0;
+        int stamina = 0;
+        int strength = 0;
+        int mana = 0;
+        int intelligence = 0;
+        String className = null;
+
         //add a name to our fighter
         System.out.println("Name: ");
-        String name = scanner.nextLine();
+        name = scanner.nextLine();
         //Choose between a Warrior or a Wizard
-        System.out.println("Choose 1 for a Warrior or 2 a Wizard: " );
-        String className = null;
+        System.out.println("Choose 1 for a Warrior or 2 a Wizard: ");
         switch (Ressources.validateMenu("Choose 1 for a Warrior or 2 a Wizard: ", "1|2")) {
             case 1:
                 //show battleMenu (where you can select your fighters and see results of each encounter)
@@ -185,44 +193,67 @@ public class MenuManager {
 
         //we add a Health to our fighter
         System.out.println("Health: ");
-        int health = 0;
-
         //Here we validate a good Health for our fighter, depending on the class
         switch (className) {
             case "Warrior":
                 //TODO: que no haya que hacer dos enter si el numero no es correcto
                 String warriorHealthString = "Choose a life for your warrior, it should be bethween " + RandomDatabaseGenerator.getHpWarriorMin() + " and " + RandomDatabaseGenerator.getHpWarriorMax();
                 System.out.println(warriorHealthString);
-                health = Ressources.validateMenu("Choose a correct option \n" + warriorHealthString,"[0-9]+");
-                if(Ressources.validateMenu("[0-9]+") > RandomDatabaseGenerator.getHpWarriorMax() || Ressources.validateMenu("[0-9]+") < RandomDatabaseGenerator.getHpWarriorMin()){
-                    health = Ressources.validateMenu("Choose a correct option " + warriorHealthString,"[0-9]+");
+                health = Ressources.validateMenu("Choose a correct option \n" + warriorHealthString, "[0-9]+");
+                if (Ressources.validateMenu("[0-9]+") > RandomDatabaseGenerator.getHpWarriorMax() || Ressources.validateMenu("[0-9]+") < RandomDatabaseGenerator.getHpWarriorMin()) {
+                    health = Ressources.validateMenu("Choose a correct option " + warriorHealthString, "[0-9]+");
                 }
                 break;
             case "Wizard":
                 String wizardHealthString = "Choose a life for your warrior, it should be bethween " + RandomDatabaseGenerator.getHpWizardMin() + " and " + RandomDatabaseGenerator.getHpWizardMax();
                 System.out.println(wizardHealthString);
-                health = Ressources.validateMenu("Choose a correct option \n" + wizardHealthString,"[0-9]+");
-                if(Ressources.validateMenu("[0-9]+") > RandomDatabaseGenerator.getHpWizardMax() || Ressources.validateMenu("[0-9]+") < RandomDatabaseGenerator.getHpWizardMin()){
-                    health = Ressources.validateMenu("Choose a correct option","[0-9]+");
+                health = Ressources.validateMenu("Choose a correct option \n" + wizardHealthString, "[0-9]+");
+                if (Ressources.validateMenu("[0-9]+") > RandomDatabaseGenerator.getHpWizardMax() || Ressources.validateMenu("[0-9]+") < RandomDatabaseGenerator.getHpWizardMin()) {
+                    health = Ressources.validateMenu("Choose a correct option", "[0-9]+");
                 }
                 break;
             default:
-                Ressources.validateMenu("Choose a correct option \n","[0-9]+");
+                Ressources.validateMenu("Choose a correct option \n", "[0-9]+");
         }
 
+        //we add Stamina + Strength if we get a warrior or Mana + Inteligence if we get a Wizard
+        switch (className) {
+            case "Warrior":
+                //we check the stamina
+                System.out.println("Stamina: ");
+                stamina = Ressources.validateMenu("Choose a correct option \n" + "Stamina", "[0-9]+");
+                if (Ressources.validateMenu("[0-9]+") > RandomDatabaseGenerator.getStaminaMax() || Ressources.validateMenu("[0-9]+") < RandomDatabaseGenerator.getStaminaMin()) {
+                    health = Ressources.validateMenu("Choose a correct option \n" + "stamina", "[0-9]+");
+                }
+                //we check the strength
+                System.out.println("Strength: ");
+                strength = Ressources.validateMenu("Choose a correct option \n" + "strength", "[0-9]+");
+                if (Ressources.validateMenu("[0-9]+") > RandomDatabaseGenerator.getStrengthMax() || Ressources.validateMenu("[0-9]+") < RandomDatabaseGenerator.getStrengthMin()) {
+                    health = Ressources.validateMenu("Choose a correct option \n" + "strength", "[0-9]+");
+                }
+                break;
+            case "Wizard":
+                //we check the mana
+                System.out.println("Mana: ");
+                mana = Ressources.validateMenu("Choose a correct option \n" + "Mana", "[0-9]+");
+                if (Ressources.validateMenu("[0-9]+") > RandomDatabaseGenerator.getManaMax() || Ressources.validateMenu("[0-9]+") < RandomDatabaseGenerator.getManaMin()) {
+                    health = Ressources.validateMenu("Choose a correct option \n" + "mana", "[0-9]+");
+                }
+                //we check the intelligence
+                System.out.println("Intelligence: ");
+                intelligence = Ressources.validateMenu("Choose a correct option \n" + "Intelligence", "[0-9]+");
+                if (Ressources.validateMenu("[0-9]+") > RandomDatabaseGenerator.getIntelligenceMax() || Ressources.validateMenu("[0-9]+") < RandomDatabaseGenerator.getIntelligenceMin()) {
+                    health = Ressources.validateMenu("Choose a correct option \n" + "Intelligence", "[0-9]+");
+                }
+                break;
+            default:
+                System.out.println("algo paso con la clase");
+        }
 
-        if (className.equals("Warrior")) {
-            System.out.println("Stamina: ");
-            int stamina = Integer.parseInt(scanner.nextLine());
-            System.out.println("Strength: ");
-            int strength = Integer.parseInt(scanner.nextLine());
+        if (className == "Warrior") {
             return new Warrior(name, health, stamina, strength);
-        } else if (className.equals("Wizard")) {
-            System.out.println("Mana: ");
-            int mana = Integer.parseInt(scanner.nextLine());
-            System.out.println("Intelligence: ");
-            int intelligence = Integer.parseInt(scanner.nextLine());
-            return new Warrior(name, health, mana, intelligence);
+        } else if (className == "Wizard") {
+            return new Wizard(name, health, mana, intelligence);
         }
         return null;
     }
