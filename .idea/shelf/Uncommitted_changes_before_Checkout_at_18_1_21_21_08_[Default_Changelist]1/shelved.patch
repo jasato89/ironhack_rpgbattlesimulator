@@ -1,0 +1,496 @@
+Index: src/com/ironhack/rpg_simulator/fight/classes/Graveyard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/fight/classes/Graveyard.java b/src/com/ironhack/rpg_simulator/fight/classes/Graveyard.java
+new file mode 100644
+--- /dev/null	
++++ b/src/com/ironhack/rpg_simulator/fight/classes/Graveyard.java	
+@@ -0,0 +1,43 @@
++package com.ironhack.rpg_simulator.fight.classes;
++
++import com.ironhack.rpg_simulator.classes.Character;
++import com.ironhack.rpg_simulator.interfaces.Atacker;
++
++import java.util.ArrayList;
++import java.util.List;
++
++public class Graveyard {
++    private List<Character> graveyard1;
++    private List<Character> graveyard2;
++
++    public Graveyard() {
++        this.graveyard1 = new ArrayList<>();
++        this.graveyard2 = new ArrayList<>();
++    }
++
++    public void addSoldier(int team, Character soldier) {
++        if(team == 1) {
++            this.graveyard1.add(soldier);
++        } else if (team == 2) {
++            this.graveyard2.add(soldier);
++        }
++    }
++
++    public Character getSoldierByIndex(int team, int index) {
++        if(team == 1) {
++            return graveyard1.get(index);
++        } else if (team == 2) {
++            return graveyard2.get(index);
++        } else {
++            return null;
++        }
++    }
++
++    public List<List<Character>> getAllSoldiers() {
++        List<List<Character>> deadSoldiers = new ArrayList<>();
++        deadSoldiers.add(graveyard1);
++        deadSoldiers.add(graveyard2);
++        return deadSoldiers;
++    }
++
++}
+Index: src/com/ironhack/rpg_simulator/fight/classes/Battle.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/fight/classes/Battle.java b/src/com/ironhack/rpg_simulator/fight/classes/Battle.java
+new file mode 100644
+--- /dev/null	
++++ b/src/com/ironhack/rpg_simulator/fight/classes/Battle.java	
+@@ -0,0 +1,88 @@
++package com.ironhack.rpg_simulator.fight.classes;
++
++import com.ironhack.rpg_simulator.classes.Character;
++import com.ironhack.rpg_simulator.classes.Party;
++import com.ironhack.rpg_simulator.classes.Warrior;
++import com.ironhack.rpg_simulator.classes.Wizard;
++import com.ironhack.rpg_simulator.interfaces.Atacker;
++
++public class Battle {
++    private int roundNumber;
++    private Graveyard graveyard;
++    private Party party1;
++    private Party party2;
++
++    public Battle(Party party1, Party party2) {
++        this.party1 = party1;
++        this.party2 = party2;
++        setRoundNumber(0);
++        this.graveyard = new Graveyard();
++        //Output.announceTeam(party1, party2);
++    }
++
++    public RoundStats fight(Character soldier1, Character soldier2) {
++        RoundStats round = new RoundStats(soldier1, soldier2, party1.getName(), party2.getName(), getRoundNumber());
++        if(round.isValidRound()) {
++            while(soldier1.isAlive() && soldier2.isAlive()) {
++                AttackStats attackStats = new AttackStats(soldier1.getHp(), soldier2.getHp());
++                int[] damageValue1 = soldier1.attack(); //Saving the attack value of each soldier
++                int[] damageValue2 = soldier2.attack();
++                soldier1.damage(damageValue2[0]); //Damaging the soldiers
++                soldier2.damage(damageValue1[0]);
++                attackStats.setAttackValue1(damageValue1[0]); //Saving the attack value to attackStats
++                attackStats.setAttackValue2(damageValue2[0]);
++                attackStats.setAttackType1(damageValue1[1]); //Saving type of attack, 1 for heavy and 2 for weak
++                attackStats.setAttackType2(damageValue2[1]);
++                attackStats.setFinalHp1(soldier1.getHp()); //Saving final hp of each soldier
++                attackStats.setFinalHp2(soldier2.getHp());
++                round.addtoAttackLogs(attackStats);
++            }
++            if(!soldier1.isAlive()) {
++                graveyard.addSoldier(1,soldier1);
++                round.setLoser(1);
++            }
++            if(!soldier2.isAlive()) {
++                graveyard.addSoldier(2,soldier2);
++                if(round.getLoser() == 1) { //In case both die at the same time, loser value is 3
++                    round.setLoser(3);
++                }else {
++                    round.setLoser(2);
++                }
++            }
++            setRoundNumber(getRoundNumber() + 1);
++        }
++        return round;
++    }
++
++    public int getRoundNumber() {
++        return roundNumber;
++    }
++
++    public void setRoundNumber(int roundNumber) {
++        this.roundNumber = roundNumber;
++    }
++
++    public Graveyard getGraveyard() {
++        return graveyard;
++    }
++
++    public void setGraveyard(Graveyard graveyard) {
++        this.graveyard = graveyard;
++    }
++
++    public Party getParty1() {
++        return party1;
++    }
++
++    public void setParty1(Party party1) {
++        this.party1 = party1;
++    }
++
++    public Party getParty2() {
++        return party2;
++    }
++
++    public void setParty2(Party party2) {
++        this.party2 = party2;
++    }
++}
+Index: src/com/ironhack/rpg_simulator/fight/classes/RoundStats.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/fight/classes/RoundStats.java b/src/com/ironhack/rpg_simulator/fight/classes/RoundStats.java
+new file mode 100644
+--- /dev/null	
++++ b/src/com/ironhack/rpg_simulator/fight/classes/RoundStats.java	
+@@ -0,0 +1,121 @@
++package com.ironhack.rpg_simulator.fight.classes;
++
++import com.ironhack.rpg_simulator.classes.Character;
++import com.ironhack.rpg_simulator.classes.Warrior;
++
++import java.util.ArrayList;
++import java.util.List;
++
++public class RoundStats {
++
++    private int class1; //1 for Warrior, 2 for Wizard
++    private int class2;
++    private String nameTeam1;
++    private String nameTeam2;
++    private int loser;//1 for character of team 1, 2 for character of team 2, and 3 if both die
++    private List<AttackStats> attackLogs;
++    private int roundNumber;
++    private boolean validRound;//false if at least one of the soldiers is already dead
++
++
++    public RoundStats (Character char1, Character char2, String nameTeam1, String nameTeam2, int roundNumber) {
++        if(char1.isAlive() && char2.isAlive()) {
++            if(char1 instanceof Warrior) {
++                setClass1(1);
++            } else{
++                setClass1(2);
++            }
++            if(char2 instanceof Warrior) {
++                setClass2(1);
++            } else{
++                setClass2(2);
++            }
++            attackLogs = new ArrayList<>();
++            setNameTeam1(nameTeam1);
++            setNameTeam2(nameTeam2);
++            setRoundNumber(roundNumber);
++            setValidRound(true);
++        } else {
++            setValidRound(false);
++        }
++
++    }
++
++    public String getRoundWinner(Character soldier1, Character soldier2) {
++        if(getLoser() == 1) {
++            return "The winner is " + soldier2.getName() + " from team " + nameTeam2;
++        } else if(getLoser() == 2) {
++            return "The winner is " + soldier1.getName() + " from team " + nameTeam1;
++        } else{
++            return "Any of the contestants survived.";
++        }
++    }
++
++    public String getNameTeam1() {
++        return nameTeam1;
++    }
++
++    public void setNameTeam1(String nameTeam1) {
++        this.nameTeam1 = nameTeam1;
++    }
++
++    public String getNameTeam2() {
++        return nameTeam2;
++    }
++
++    public void setNameTeam2(String nameTeam2) {
++        this.nameTeam2 = nameTeam2;
++    }
++
++    public void addtoAttackLogs(AttackStats attackStats) {
++        attackLogs.add(attackStats);
++    }
++
++    public int getRoundNumber() {
++        return roundNumber;
++    }
++
++    public void setRoundNumber(int roundNumber) {
++        this.roundNumber = roundNumber;
++    }
++
++    public boolean isValidRound() {
++        return validRound;
++    }
++
++    public void setValidRound(boolean validRound) {
++        this.validRound = validRound;
++    }
++
++    public List<AttackStats> getAttackLogs() {
++        return attackLogs;
++    }
++
++    public void setAttackLogs(List<AttackStats> attackLogs) {
++        this.attackLogs = attackLogs;
++    }
++
++    public int getLoser() {
++        return loser;
++    }
++
++    public void setLoser(int loser) {
++        this.loser = loser;
++    }
++
++    public int getClass1() {
++        return class1;
++    }
++
++    public void setClass1(int class1) {
++        this.class1 = class1;
++    }
++
++    public int getClass2() {
++        return class2;
++    }
++
++    public void setClass2(int class2) {
++        this.class2 = class2;
++    }
++}
+Index: src/com/ironhack/rpg_simulator/fight/classes/AttackStats.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/fight/classes/AttackStats.java b/src/com/ironhack/rpg_simulator/fight/classes/AttackStats.java
+new file mode 100644
+--- /dev/null	
++++ b/src/com/ironhack/rpg_simulator/fight/classes/AttackStats.java	
+@@ -0,0 +1,84 @@
++package com.ironhack.rpg_simulator.fight.classes;
++
++public class AttackStats {
++
++    private int initialHp1;
++    private int finalHp1;
++    private int initialHp2;
++    private int finalHp2;
++    private int attackValue1;
++    private int attackType1; //1 for heavy, 2 for weak
++    private int attackValue2;
++    private int attackType2;
++
++    public AttackStats(int initialHp1, int initialHp2) {
++        setInitialHp1(initialHp1);
++        setInitialHp2(initialHp2);
++    }
++
++    public int getInitialHp1() {
++        return initialHp1;
++    }
++
++    public void setInitialHp1(int initialHp1) {
++        this.initialHp1 = initialHp1;
++    }
++
++    public int getFinalHp1() {
++        return finalHp1;
++    }
++
++    public void setFinalHp1(int finalHp1) {
++        this.finalHp1 = finalHp1;
++    }
++
++    public int getInitialHp2() {
++        return initialHp2;
++    }
++
++    public void setInitialHp2(int initialHp2) {
++        this.initialHp2 = initialHp2;
++    }
++
++    public int getFinalHp2() {
++        return finalHp2;
++    }
++
++    public void setFinalHp2(int finalHp2) {
++        this.finalHp2 = finalHp2;
++    }
++
++    public int getAttackValue1() {
++        return attackValue1;
++    }
++
++    public void setAttackValue1(int attackValue1) {
++        this.attackValue1 = attackValue1;
++    }
++
++    public int getAttackType1() {
++        return attackType1;
++    }
++
++    public void setAttackType1(int attackType1) {
++        this.attackType1 = attackType1;
++    }
++
++    public int getAttackType2() {
++        return attackType2;
++    }
++
++    public void setAttackType2(int attackType2) {
++        this.attackType2 = attackType2;
++    }
++
++    public int getAttackValue2() {
++        return attackValue2;
++    }
++
++    public void setAttackValue2(int attackValue2) {
++        this.attackValue2 = attackValue2;
++    }
++
++
++}
+Index: src/com/ironhack/rpg_simulator/classes/RandomCharacterDatabase.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/ironhack/rpg_simulator/classes/RandomCharacterDatabase.java b/src/com/ironhack/rpg_simulator/classes/RandomDatabaseGenerator.java
+rename from src/com/ironhack/rpg_simulator/classes/RandomCharacterDatabase.java
+rename to src/com/ironhack/rpg_simulator/classes/RandomDatabaseGenerator.java
+--- a/src/com/ironhack/rpg_simulator/classes/RandomCharacterDatabase.java	
++++ b/src/com/ironhack/rpg_simulator/classes/RandomDatabaseGenerator.java	
+@@ -2,7 +2,7 @@
+ 
+ import java.util.Random;
+ 
+-public class RandomCharacterDatabase  {
++public class RandomDatabaseGenerator {
+         /*Create a full party of randomly generated Wizards and Warriors with randomized stats considering this limits.
+ 
+         name: based on an array of names, pick random position and if is already in the party add Jr at the end.
+@@ -12,8 +12,10 @@
+     mana: random between 10-50
+ intelligence: random between 1-50*/
+ 
+-    private static final int HP_MIN = 100;
+-    private static final int HP_MAX = 200;
++    private static final int HP_WARRIOR_MIN = 100;
++    private static final int HP_WARRIOR_MAX = 200;
++    private static final int HP_WIZARD_MIN = 50;
++    private static final int HP_WIZARD_MAX = 100;
+     private static final int STAMINA_MIN = 10;
+     private static final int STAMINA_MAX = 50;
+     private static final int STRENGTH_MIN = 1;
+@@ -86,20 +88,58 @@
+             "Uhobarin",
+             "Orin"
+     };
++    private static final String[] PARTY_NAME = {"Avengers",
++            "Goal Diggers",
++            "Hot Shots",
++            "Masters",
++            "Titans",
++            "Ringmasters",
++            "Brute Force",
++            "Pulverizers",
++            "Ambassadors",
++            "Barbarians",
++            "Black Knights",
++            "Cavaliers",
++            "Crusaders",
++            "Dream Crushers",
++            "Exterminators",
++            "Firing Squad",
++            "Ghost Riders",
++            "Golden Eagles",
++            "Head Hunters",
++            "Laser Beams",
++            "Neck Breakers",
++            "Novastars",
++            "Peacekeepers",
++            "Prairie Wolves",
++            "Puppet Masters",
++            "Razorbacks",
++            "Retrievers",
++            "Scrappers",
++            "Speed Demons",
++            "Thunder Bolts",
++            "Unlimited",
++            "Untouchables",
++            "White Walkers"
++    };
+ 
+     public static Warrior getRandomWarrior() {
+ 
+         return new Warrior(WARRIOR_NAME[new Random().nextInt(WARRIOR_NAME.length)],
+-                new Random().nextInt(HP_MIN + 1) + HP_MAX - HP_MIN, true,
++                new Random().nextInt(HP_WARRIOR_MIN + 1) + HP_WARRIOR_MAX - HP_WARRIOR_MIN, true,
+                 new Random().nextInt(STAMINA_MIN + 1) + STAMINA_MAX - STAMINA_MIN,
+                 new Random().nextInt(STRENGTH_MIN + 1) + STRENGTH_MAX - STRENGTH_MIN);
+     }
+ 
+     public static Wizard getRandomWizard() {
+         return new Wizard(WIZARD_NAME[new Random().nextInt(WARRIOR_NAME.length)],
+-                new Random().nextInt(HP_MIN + 1) + HP_MAX - HP_MIN, true,
++                new Random().nextInt(HP_WIZARD_MIN + 1) + HP_WIZARD_MAX - HP_WIZARD_MIN, true,
+                 new Random().nextInt(MANA_MIN + 1) + MANA_MAX - MANA_MIN,
+                 new Random().nextInt(INTELLIGENCE_MIN + 1) + INTELLIGENCE_MAX - INTELLIGENCE_MIN);
+ 
++    }
++
++    public static String getRandomName() {
++        return PARTY_NAME[new Random().nextInt(PARTY_NAME.length)];
+     }
+ }
+Index: .idea/checkstyle-idea.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/checkstyle-idea.xml b/.idea/checkstyle-idea.xml
+new file mode 100644
+--- /dev/null	
++++ b/.idea/checkstyle-idea.xml	
+@@ -0,0 +1,16 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CheckStyle-IDEA">
++    <option name="configuration">
++      <map>
++        <entry key="checkstyle-version" value="8.33" />
++        <entry key="copy-libs" value="true" />
++        <entry key="location-0" value="BUNDLED:(bundled):Sun Checks" />
++        <entry key="location-1" value="BUNDLED:(bundled):Google Checks" />
++        <entry key="scan-before-checkin" value="false" />
++        <entry key="scanscope" value="JavaOnly" />
++        <entry key="suppress-errors" value="false" />
++      </map>
++    </option>
++  </component>
++</project>
+\ No newline at end of file

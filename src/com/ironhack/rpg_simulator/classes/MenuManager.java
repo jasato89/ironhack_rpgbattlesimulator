@@ -3,6 +3,7 @@ package com.ironhack.rpg_simulator.classes;
 import com.ironhack.rpg_simulator.fight.classes.Battle;
 import com.ironhack.rpg_simulator.fight.classes.RoundStats;
 import com.ironhack.rpg_simulator.main.StoredParties;
+import com.ironhack.rpg_simulator.ressources.Ressources;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,15 +12,21 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+//We will manage all the menus in this class
 public class MenuManager {
+
+    //Properties
     Scanner scanner = new Scanner(System.in);
     Party teamA;
     Party teamB;
     Battle battle;
     StoredParties storedParties;
 
+    //This class doesn't need any constructor.
+
+    //This method manage the main menu
     public void mainMenu() {
+        //Here we print the main menu.
         System.out.println("Welcome to RPG Battle Simulator");
         System.out.println("Choose your option: ");
         System.out.println("1.Play With Random Teams.");
@@ -27,16 +34,10 @@ public class MenuManager {
         System.out.println("3.Create New Team.");
         System.out.println("4.Exit the game.");
 
-        String input = scanner.nextLine();
-        Pattern pattern = Pattern.compile("1|2|3|4");
-        Matcher matcher = pattern.matcher(input);
-        while (!matcher.matches()) {
-            System.out.println("The value introduced is not correct:");
-            input = scanner.nextLine();
-            matcher = pattern.matcher(input);
-        }
-        int selection = Integer.parseInt(input);
+        //this method validate the switch options
+        int selection = Ressources.validateMenu("1|2|3|4");
 
+        //This switch let us drive around the menu
         switch (selection) {
             case 1:
                 //generate two random teams and show modeMenu
@@ -51,6 +52,7 @@ public class MenuManager {
                 mainMenuOption3();
                 break;
             case 4:
+                //finish the program
                 System.out.println("Thanks for playing!");
                 System.exit(0);
                 break;
@@ -59,22 +61,19 @@ public class MenuManager {
         }
     }
 
+    //This menu appear, when we choose a fight with customs or randoms teams
     public void modeMenu() {
+
+        //Here we print modeMenu
         System.out.println("Choose game mode:");
         System.out.println("1.Normal Mode (Choose your fighters).");
         System.out.println("2.Fast Mode (The fighters will be chosen randomly).");
         System.out.println("3.Return to Main Menu.");
 
-        String input = scanner.nextLine();
-        Pattern pattern = Pattern.compile("1|2|3");
-        Matcher matcher = pattern.matcher(input);
-        while (!matcher.matches()) {
-            System.out.println("The value introduced is not correct:");
-            input = scanner.nextLine();
-            matcher = pattern.matcher(input);
-        }
-        int selection = Integer.parseInt(input);
+        //this method validate the switch options
+        int selection = Ressources.validateMenu("1|2|3");
 
+        //This switch let us drive around the menu
         switch (selection) {
             case 1:
                 //show battleMenu (where you can select your fighters and see results of each encounter)
