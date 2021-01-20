@@ -88,22 +88,22 @@ public class Output {
                         switch (screen[i][j + 1]){
                             case '1':
                                 System.out.print(RED_BCK + BLOCK + screen[i][j + 1] + BLOCK
-                                        + insertText(PreRendering.getMenuOption1(), 10, 1) + BLOCK + DEFAULT);
+                                        + insertText(PreRendering.getMenuOption1(), 25, 0) + BLOCK + DEFAULT);
                                 j+= 11;
                                 break;
                             case '2':
                                 System.out.print(RED_BCK + BLOCK + screen[i][j + 1] + BLOCK
-                                        + insertText(PreRendering.getMenuOption2(), 10, 1) + BLOCK + DEFAULT);
+                                        + insertText(PreRendering.getMenuOption2(), 25, 0) + BLOCK + DEFAULT);
                                 j+= 11;
                                 break;
                             case '3':
                                 System.out.print(RED_BCK + BLOCK + screen[i][j + 1] + BLOCK
-                                        + insertText(PreRendering.getMenuOption3(), 10, 1) + BLOCK + DEFAULT);
+                                        + insertText(PreRendering.getMenuOption3(), 25, 0) + BLOCK + DEFAULT);
                                 j+= 11;
                                 break;
                             case '4':
                                 System.out.print(RED_BCK + BLOCK + screen[i][j + 1] + BLOCK
-                                        + insertText(PreRendering.getMenuOption4(), 10, 1) + BLOCK + DEFAULT);
+                                        + insertText(PreRendering.getMenuOption4(), 25, 0) + BLOCK + DEFAULT);
                                 j+= 11;
                                 break;
                         }
@@ -142,7 +142,8 @@ public class Output {
         int strLen = text.length();
         String rString = "";
         text = strLen > len ? text.substring(0, len) : text;
-        if (side < 1) rString += text + Output.fillWithSpaces(len - strLen) + Output.fillWithSpaces(len);
+        if (side < 0) rString += text + Output.fillWithSpaces(len - strLen) + Output.fillWithSpaces(len);
+        if (side == 0) rString += Output.fillWithSpaces(len /2) + text + Output.fillWithSpaces(len - strLen) + Output.fillWithSpaces(len /2);
         else rString += Output.fillWithSpaces(len) + text + Output.fillWithSpaces(len - strLen);
         return rString;
     }
@@ -151,6 +152,7 @@ public class Output {
         text = strLen > len ? text.substring(0, len) : text;
         if (side == 0) System.out.print(text + Output.fillWithSpaces(len - strLen ) + Output.fillWithSpaces(len));
         else if (side == 1) System.out.print(Output.fillWithSpaces(len) + text + Output.fillWithSpaces(len - strLen ));
+
 
         return len - 1;
     }

@@ -3,6 +3,8 @@ package com.ironhack.rpg_simulator.classes;
 import com.ironhack.rpg_simulator.fight.classes.Battle;
 import com.ironhack.rpg_simulator.fight.classes.RoundStats;
 import com.ironhack.rpg_simulator.main.StoredParties;
+import com.ironhack.rpg_simulator.output_lib.Output;
+import com.ironhack.rpg_simulator.output_lib.PreRendering;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +21,22 @@ public class MenuManager {
     Battle battle;
     StoredParties storedParties;
 
-    public void mainMenu() {
-        System.out.println("Welcome to RPG Battle Simulator");
-        System.out.println("Choose your option: ");
-        System.out.println("1.Play With Random Teams.");
-        System.out.println("2.Play With Custom Teams.");
-        System.out.println("3.Create New Team.");
-        System.out.println("4.Exit the game.");
+    public void mainMenu() throws IOException, InterruptedException {
+        char [][] screen = PreRendering.prepareScreenMenuCentral(PreRendering.getScreenEmpty(),
+                new String []{
+                        "Play Random Teams.",
+                        "Play selected Teams.",
+                        "Create a new Team.",
+                        "Exit the game."});
+        PreRendering.setTitle("RPG BATTLE SIMULATOR");
+        Output.clearConsole();
+        Output.printScreen(screen);
+//        System.out.println("Welcome to RPG Battle Simulator");
+//        System.out.println("Choose your option: ");
+//        System.out.println("1.Play With Random Teams.");
+//        System.out.println("2.Play With Custom Teams.");
+//        System.out.println("3.Create New Team.");
+//        System.out.println("4.Exit the game.");
 
         String input = scanner.nextLine();
         Pattern pattern = Pattern.compile("1|2|3|4");
@@ -59,11 +70,19 @@ public class MenuManager {
         }
     }
 
-    public void modeMenu() {
-        System.out.println("Choose game mode:");
-        System.out.println("1.Normal Mode (Choose your fighters).");
-        System.out.println("2.Fast Mode (The fighters will be chosen randomly).");
-        System.out.println("3.Return to Main Menu.");
+    public void modeMenu() throws IOException, InterruptedException {
+        char [][] screen = PreRendering.prepareScreenMenuCentral(PreRendering.getScreenEmpty(),
+                new String []{
+                        "Normal Mode (Choose your fighters)",
+                        "Fast Mode (The fighters will be chosen randomly)",
+                        "Return to Main Menu",});
+        PreRendering.setTitle("RPG BATTLE SIMULATOR");
+        Output.clearConsole();
+        Output.printScreen(screen);
+//        System.out.println("Choose game mode:");
+//        System.out.println("1.Normal Mode (Choose your fighters).");
+//        System.out.println("2.Fast Mode (The fighters will be chosen randomly).");
+//        System.out.println("3.Return to Main Menu.");
 
         String input = scanner.nextLine();
         Pattern pattern = Pattern.compile("1|2|3");
@@ -89,15 +108,20 @@ public class MenuManager {
         }
     }
 
-    public void selectTeamsFromDatabaseMenu() {
+    public void selectTeamsFromDatabaseMenu() throws IOException, InterruptedException {
         Party teamA;
         Party teamB;
-        System.out.println("Select Team A");
+        Output.clearConsole();
+        Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+        Output.printEmptyLines(3);
+//        System.out.println("Select Team A");
         int i = 1;
         for (Party party : storedParties.getTheList()) {
-            System.out.println(i++ + "." + party.getName());
+            Output.printStringCentered(i++ + "." + party.getName(), 6);
+//            System.out.println(i++ + "." + party.getName());
         }
-
+        Output.printEmptyLines(1);
+        Output.printCentralBottomUniqueMenu("Select Team A");
         String input = scanner.nextLine();
         Pattern pattern = Pattern.compile("\\d");
         Matcher matcher = pattern.matcher(input);
@@ -112,7 +136,10 @@ public class MenuManager {
 
         teamA = storedParties.getTheList().get(selectionA - 1);
 
-        System.out.println("Select Team B");
+        Output.clearConsole();
+        Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+        Output.printEmptyLines(3);
+//        System.out.println("Select Team B");
         i = 1;
         for (Party party : storedParties.getTheList()) {
             if (i == selectionA) {   //We don't want to print the Team A selected
@@ -120,9 +147,11 @@ public class MenuManager {
                 //to not enter on a infinite loop
                 selectionA = 0;
             } else {
-                System.out.println(i++ + "." + party.getName());
+                Output.printStringCentered(i++ + "." + party.getName(), 6);
             }
         }
+        Output.printEmptyLines(1);
+        Output.printCentralBottomUniqueMenu("Select Team A");
 
         //We need to recover the selection to Team A to select correctly the Team B from storedParties
         selectionA = Integer.parseInt(input);
@@ -146,50 +175,106 @@ public class MenuManager {
         modeMenu();
     }
 
-    public void createTeamMenu() {
-        System.out.println("Introduce the name of the team: ");
+    public void createTeamMenu() throws IOException, InterruptedException {
+        Output.clearConsole();
+        Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+        Output.printEmptyLines(3);
+        Output.printStringCentered("Introduce the name of the team: ", 6);
+        Output.printEmptyLines(10);
+//        System.out.println("Introduce the name of the team: ");
         String name = scanner.nextLine();
-        System.out.println("Introduce the size of the team");
+        Output.clearConsole();
+        Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+        Output.printEmptyLines(3);
+        Output.printStringCentered("Introduce the size of the team: ", 6);
+        Output.printEmptyLines(10);
+//        System.out.println("Introduce the size of the team");
         int size = Integer.parseInt(scanner.nextLine());
         List<Character> members = new ArrayList<>();
+        Output.clearConsole();
+        Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+        Output.printEmptyLines(3);
         for (int i = 0; i<size; i++) {
-            System.out.println("Creation of member " + (i+1) + ":");
+            Output.printStringCentered("Creation of member " + (i+1) + ": ", 6);
+//            System.out.println("Creation of member " + (i+1) + ":");
             members.add(createCharacterMenu());
         }
         Party newParty = new Party(name, members);
         storedParties.add(newParty);
         newParty.exportParty();
-        System.out.println("The team " + name + " has been created succesfully.");
+        Output.clearConsole();
+        Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+        Output.printEmptyLines(3);
+        Output.printStringCentered("The team " + name + " has been created succesfully.", 6);
+        Output.printEmptyLines(10);
+//        System.out.println("The team " + name + " has been created succesfully.");
     }
 
-    public Character createCharacterMenu() {
-        System.out.println("Name: ");
+    public Character createCharacterMenu() throws IOException, InterruptedException {
+        //TODO need to refactor this method in shorter ones also it would be good to print the character while is being created with a to string
+
+        Output.clearConsole();
+        Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+        Output.printEmptyLines(3);
+        Output.printStringCentered("Name: ", 6);
+        Output.printEmptyLines(10);
+//        System.out.println("Name: ");
         String name = scanner.nextLine();
-        System.out.println("Class (Warrior/Wizard): " );
+        Output.clearConsole();
+        Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+        Output.printEmptyLines(3);
+        Output.printStringCentered("Class (Warrior/Wizard): ", 6);
+        Output.printEmptyLines(10);
+//        System.out.println("Class (Warrior/Wizard): " );
         String className = scanner.nextLine();
         while (!className.equals("Warrior") && !className.equals("Wizard")) {
             System.out.println("Incorrect class, please enter again: ");
             className = scanner.nextLine();
         }
-        System.out.println("Health: ");
+        Output.clearConsole();
+        Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+        Output.printEmptyLines(3);
+        Output.printStringCentered("Health: ", 6);
+        Output.printEmptyLines(10);
+//        System.out.println("Health: ");
         int health = Integer.parseInt(scanner.nextLine());
         if (className.equals("Warrior")) {
-            System.out.println("Stamina: ");
+            Output.clearConsole();
+            Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+            Output.printEmptyLines(3);
+            Output.printStringCentered("Stamina: ", 6);
+            Output.printEmptyLines(10);
+//            System.out.println("Stamina: ");
             int stamina = Integer.parseInt(scanner.nextLine());
-            System.out.println("Strength: ");
+            Output.clearConsole();
+            Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+            Output.printEmptyLines(3);
+            Output.printStringCentered("Strength: ", 6);
+            Output.printEmptyLines(10);
+//            System.out.println("Strength: ");
             int strength = Integer.parseInt(scanner.nextLine());
             return new Warrior(name, health, stamina, strength);
         } else if (className.equals("Wizard")) {
-            System.out.println("Mana: ");
+            Output.clearConsole();
+            Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+            Output.printEmptyLines(3);
+            Output.printStringCentered("Mana: ", 6);
+            Output.printEmptyLines(10);
+//            System.out.println("Mana: ");
             int mana = Integer.parseInt(scanner.nextLine());
-            System.out.println("Intelligence: ");
+            Output.clearConsole();
+            Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
+            Output.printEmptyLines(3);
+            Output.printStringCentered("Intelligence: ", 6);
+            Output.printEmptyLines(10);
+//            System.out.println("Intelligence: ");
             int intelligence = Integer.parseInt(scanner.nextLine());
             return new Warrior(name, health, mana, intelligence);
         }
         return null;
     }
 
-    public void battleMenu() {
+    public void battleMenu() throws IOException, InterruptedException {
         int teamBIndex = 0;
         System.out.println("Battle Menu");
         while (battle.getParty1().getAliveMembers().size() > 0 && battle.getParty2().getAliveMembers().size() > 0) {
@@ -208,7 +293,7 @@ public class MenuManager {
         introToReturnToMainMenu();
         }
 
-    private void fastBattleMenu() {
+    private void fastBattleMenu() throws IOException, InterruptedException {
         System.out.println("Starting Fast Battle...");
         while (battle.getParty1().getAliveMembers().size() > 0 && battle.getParty2().getAliveMembers().size() > 0) {
             System.out.println("The team A fighter is a " + battle.getParty1().getMemberFromAliveList(0).getClassName()+ " called " +
@@ -231,19 +316,19 @@ public class MenuManager {
             System.out.println("Team " + battle.getParty1().getName() + " has won!!");
         }
     }
-    public void mainMenuOption1() {
+    public void mainMenuOption1() throws IOException, InterruptedException {
         teamA = new Party(5);
         teamB = new Party(5);
         battle = new Battle(teamA, teamB);
         modeMenu();
     }
 
-    public void mainMenuOption2() {
+    public void mainMenuOption2() throws IOException, InterruptedException {
         selectTeamsFromDatabaseMenu();
         modeMenu();
     }
 
-    public void mainMenuOption3() {
+    public void mainMenuOption3() throws IOException, InterruptedException {
         createTeamMenu();
         mainMenu();
     }
@@ -253,7 +338,7 @@ public class MenuManager {
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
     }
-    public void introToReturnToMainMenu() {
+    public void introToReturnToMainMenu() throws IOException, InterruptedException {
         System.out.println("Press intro to return to Main Menu");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
