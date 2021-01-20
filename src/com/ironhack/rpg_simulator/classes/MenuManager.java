@@ -34,11 +34,8 @@ public class MenuManager {
         System.out.println("3.Create New Team.");
         System.out.println("4.Exit the game.");
 
-        //this method validate the switch options
-        int selection = Ressources.validateMenu("1|2|3|4");
-
         //This switch let us drive around the menu
-        switch (selection) {
+        switch (Ressources.validateMenu("1|2|3|4")) {
             case 1:
                 //generate two random teams and show modeMenu
                 mainMenuOption1();
@@ -70,11 +67,8 @@ public class MenuManager {
         System.out.println("2.Fast Mode (The fighters will be chosen randomly).");
         System.out.println("3.Return to Main Menu.");
 
-        //this method validate the switch options
-        int selection = Ressources.validateMenu("1|2|3");
-
         //This switch let us drive around the menu
-        switch (selection) {
+        switch (Ressources.validateMenu("1|2|3|4")) {
             case 1:
                 //show battleMenu (where you can select your fighters and see results of each encounter)
                 battleMenu();
@@ -161,17 +155,22 @@ public class MenuManager {
         System.out.println("The team " + name + " has been created succesfully.");
     }
 
+    //This menu let us create an own fighter
     public Character createCharacterMenu() {
         System.out.println("Name: ");
         String name = scanner.nextLine();
         System.out.println("Class (Warrior/Wizard): " );
         String className = scanner.nextLine();
+        //Here, we validate the class name
         while (!className.equals("Warrior") && !className.equals("Wizard")) {
             System.out.println("Incorrect class, please enter again: ");
             className = scanner.nextLine();
         }
         System.out.println("Health: ");
-        int health = Integer.parseInt(scanner.nextLine());
+        int health = Ressources.validateMenu("[0-9]+");
+        /*while (health != Ressources.validateMenu("[0-9]")) {
+            health = Integer.parseInt(scanner.nextLine());
+        }*/
         if (className.equals("Warrior")) {
             System.out.println("Stamina: ");
             int stamina = Integer.parseInt(scanner.nextLine());
