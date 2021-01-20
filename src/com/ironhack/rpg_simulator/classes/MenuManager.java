@@ -27,15 +27,17 @@ public class MenuManager {
     //This method manage the main menu
     public void mainMenu() {
         //Here we print the main menu.
-        System.out.println("Welcome to RPG Battle Simulator");
-        System.out.println("Choose your option: ");
-        System.out.println("1.Play With Random Teams.");
-        System.out.println("2.Play With Custom Teams.");
-        System.out.println("3.Create New Team.");
-        System.out.println("4.Exit the game.");
+        //We insert the menu into a String so we can recall it in future if something goes wrong
+        String mainMenuString = "Welcome to RPG Battle Simulator \n " +
+                "Choose your option: \n " +
+                "1.Play With Random Teams. \n " +
+                "2.Play With Custom Teams. \n " +
+                "3.Create New Team. \n " +
+                "4.Exit the game.";
+        System.out.println(mainMenuString);
 
         //This switch let us drive around the menu
-        switch (Ressources.validateMenu("1|2|3|4")) {
+        switch (Ressources.validateMenu("Elige una opcion correcta \n\n" + mainMenuString, "1|2|3|4")) {
             case 1:
                 //generate two random teams and show modeMenu
                 mainMenuOption1();
@@ -61,13 +63,15 @@ public class MenuManager {
     public void modeMenu() {
 
         //Here we print modeMenu
-        System.out.println("Choose game mode:");
-        System.out.println("1.Normal Mode (Choose your fighters).");
-        System.out.println("2.Fast Mode (The fighters will be chosen randomly).");
-        System.out.println("3.Return to Main Menu.");
+        String modeMenuString = "Choose game mode: \n " +
+                "1.Normal Mode (Choose your fighters). \n " +
+                "2.Fast Mode (The fighters will be chosen randomly). \n " +
+                "3.Return to Main Menu.";
+        System.out.println(modeMenuString);
+
 
         //This switch let us drive around the menu
-        switch (Ressources.validateMenu("1|2")) {
+        switch (Ressources.validateMenu("Choose a correct option " + modeMenuString, "1|2|3")) {
             case 1:
                 //show battleMenu (where you can select your fighters and see results of each encounter)
                 battleMenu();
@@ -76,8 +80,10 @@ public class MenuManager {
                 //show battle results
                 fastBattleMenu();
                 break;
-            default:
+            case 3:
                 mainMenu();
+            default:
+                Ressources.validateMenu("Choose a correct option", "1|2|3");
         }
     }
 
@@ -148,7 +154,7 @@ public class MenuManager {
         //Choose between a Warrior or a Wizard
         System.out.println("Choose 1 for a Warrior or 2 a Wizard: " );
         String className = null;
-        switch (Ressources.validateMenu("1|2")) {
+        switch (Ressources.validateMenu("Choose 1 for a Warrior or 2 a Wizard: ", "1|2")) {
             case 1:
                 //show battleMenu (where you can select your fighters and see results of each encounter)
                 className = "Warrior";
@@ -158,7 +164,7 @@ public class MenuManager {
                 className = "Wizard";
                 break;
             default:
-                Ressources.validateMenu("1|2");
+                Ressources.validateMenu("Choose 1 for a Warrior or 2 a Wizard: ", "1|2");
         }
 
         //we add a Health to our fighter
@@ -168,21 +174,24 @@ public class MenuManager {
         //Here we validate a good Health for our fighter, depending on the class
         switch (className) {
             case "Warrior":
-                System.out.println("Choose a life for your warrior, it should be bethween " + RandomDatabaseGenerator.getHpWarriorMin() + " and " + RandomDatabaseGenerator.getHpWarriorMax());
-                health = Ressources.validateMenu("[0-9]+");
+                //TODO: que no haya que hacer dos enter si el numero no es correcto
+                String warriorHealthString = "Choose a life for your warrior, it should be bethween " + RandomDatabaseGenerator.getHpWarriorMin() + " and " + RandomDatabaseGenerator.getHpWarriorMax();
+                System.out.println(warriorHealthString);
+                health = Ressources.validateMenu("Choose a correct option \n" + warriorHealthString,"[0-9]+");
                 if(Ressources.validateMenu("[0-9]+") > RandomDatabaseGenerator.getHpWarriorMax() || Ressources.validateMenu("[0-9]+") < RandomDatabaseGenerator.getHpWarriorMin()){
-                    health = Ressources.validateMenu("[0-9]+");
+                    health = Ressources.validateMenu("Choose a correct option " + warriorHealthString,"[0-9]+");
                 }
                 break;
             case "Wizard":
-                health = Ressources.validateMenu("[0-9]+");
+                String wizardHealthString = "Choose a life for your warrior, it should be bethween " + RandomDatabaseGenerator.getHpWizardMin() + " and " + RandomDatabaseGenerator.getHpWizardMax();
+                System.out.println(wizardHealthString);
+                health = Ressources.validateMenu("Choose a correct option \n" + wizardHealthString,"[0-9]+");
                 if(Ressources.validateMenu("[0-9]+") > RandomDatabaseGenerator.getHpWizardMax() || Ressources.validateMenu("[0-9]+") < RandomDatabaseGenerator.getHpWizardMin()){
-                    health = Ressources.validateMenu("[0-9]+");
+                    health = Ressources.validateMenu("Choose a correct option","[0-9]+");
                 }
                 break;
             default:
-                System.out.println("introduce una salud correcta");
-                Ressources.validateMenu("[0-9]+");
+                Ressources.validateMenu("Choose a correct option \n","[0-9]+");
         }
 
 
