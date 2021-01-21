@@ -69,7 +69,7 @@ If you select the options 1 or 2, the following new options will be displayed:
 3. Return to Main Menu
    
 If you select the option 3 on the Main Menu (Create New Team), it will display the instructions step by step to create a new party with the desired name and size.
-Then, it will be the same to each fighter (name, HP, stamina/mana, strength/intelligence). When you finish to create a party, the game will create a CSV file on the
+Then, it will be the same for each fighter (name, HP, stamina/mana, strength/intelligence). When you finish to create a party, the game will create a CSV file on the
 next path:
 
 ```bash
