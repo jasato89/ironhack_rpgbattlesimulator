@@ -14,6 +14,20 @@ RPG Battle Simulator is a RPG game where you can select or create a party formed
  ./src/com/ironhack/rpg_simulator/main
 ```
 
+## Games Modes
+
+1. Play With Random Teams
+
+  1.1. Normal Mode (choosing fighters)
+  
+  1.2. Random Mode
+
+2. Play with Custom Teams
+
+  2.1. Normal Mode (choosing fighters)
+  
+  2.2. Random Mode
+  
 ## Usage
 
 ```python
