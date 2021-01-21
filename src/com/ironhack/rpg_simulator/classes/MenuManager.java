@@ -81,10 +81,8 @@ public class MenuManager {
                 //show battle results
                 fastBattleMenu();
                 break;
-            case 3:
-                mainMenu();
             default:
-                Ressources.validateIntMenu("Choose a correct option", "1|2|3");
+                mainMenu();
         }
     }
 
@@ -147,7 +145,7 @@ public class MenuManager {
 
     public void createTeamMenu() {
         System.out.println("Introduce the name of the team: ");
-        String name = Ressources.validateStringMenu("Name must only contain letters. Please choose a valid name:", "[a-zA-Z]+");
+        String name = Ressources.validateStringMenu("Name must only contain letters. Please choose a valid name:", "[a-zA-ZÀ-ÿ\\u00f1\\u00d1\\s]+");
         System.out.println("Introduce the size of the team");
         int size = Ressources.validateIntMenu("Size must be an integer. Please choose a valid size:", "[0-9]+");
         List<Character> members = new ArrayList<>();
@@ -175,7 +173,7 @@ public class MenuManager {
 
         //add a name to our fighter
         System.out.println("Name: ");
-        name = Ressources.validateStringMenu("Name must only contain letters. Please choose a valid name:", "[a-zA-Z]+");
+        name = Ressources.validateStringMenu("Name must only contain letters. Please choose a valid name:", "[a-zA-ZÀ-ÿ\\u00f1\\u00d1\\s]+");
         //Choose between a Warrior or a Wizard
         System.out.println("Choose 1 for a Warrior or 2 a Wizard: ");
         switch (Ressources.validateIntMenu("Invalid selection.\nChoose 1 for a Warrior or 2 a Wizard: ", "1|2")) {
@@ -196,7 +194,6 @@ public class MenuManager {
         //Here we validate a good Health for our fighter, depending on the class
         switch (className) {
             case "Warrior":
-                //TODO: que no haya que hacer dos enter si el numero no es correcto
                 String warriorHealthString = "Choose the health for your warrior, it should be between " + RandomDatabaseGenerator.getHpWarriorMin() + " and " + RandomDatabaseGenerator.getHpWarriorMax();
                 System.out.println(warriorHealthString);
                 health = Ressources.validateIntMenu("Choose a correct option \n" + warriorHealthString, "[0-9]+");
@@ -272,13 +269,13 @@ public class MenuManager {
 
     public void battleMenu() {
         int teamBIndex = 0;
+        int graveyardOption = 1;
         System.out.println("Battle Menu");
-        while (battle.getParty1().getAliveMembers().size() > 0 && battle.getParty2().getAliveMembers().size() > 0) {
+        while (battle.getParty1().getAliveMembers().size() > 0 && battle.getParty2().getAliveMembers().size() > 0 && graveyardOption == 1) {
             System.out.println("The team B fighter is a " + battle.getParty2().getMemberFromAliveList(teamBIndex).getClassName()+ " called " +
                     battle.getParty2().getMemberFromAliveList(teamBIndex).getName());
             System.out.println("Select your fighter: ");
             System.out.println(battle.getParty1().aliveMembersString());
-            System.out.println(battle.getParty1().getAliveMembers().size());
             int teamAIndex = Ressources.validateIntMenu("Invalid index.", "[0-9]+");
             while (teamAIndex > battle.getParty1().getAliveMembers().size() || teamAIndex <= 0) {
                 System.out.println("Invalid index.");
@@ -287,12 +284,66 @@ public class MenuManager {
             System.out.println("Starting fight...");
             RoundStats roundStats = battle.fight(teamAIndex - 1, teamBIndex);
             roundStats.printAttackLogs();
-            introToContinue();
+            if (battle.getParty1().getAliveMembers().size() > 0 && battle.getParty2().getAliveMembers().size() > 0) {
+                graveyardOption = battleMenuWithGraveyard();
+                while ( graveyardOption == 2 ) {
+                    showGraveyard();
+                    graveyardOption = battleMenuWithGraveyard();
+                }
+            }
         }
-        announceTeamWinner(battle);
-        loadPartiesFromDatabase();
-        introToReturnToMainMenu();
+        if (graveyardOption == 3) {
+            loadPartiesFromDatabase();
+            mainMenu();
+        } else {
+            announceTeamWinner(battle);
+            introToReturnToMainMenu();
         }
+        }
+
+    private int battleMenuWithGraveyard() {
+        System.out.println("Battle Menu");
+        //Here we print battleMenuWithGraveyard
+        String battleMenuWithGraveyardString = "Choose your option: \n " +
+                "1.Select next fighter. \n " +
+                "2.Check the graveyard. \n " +
+                "3.Return to Main Menu.";
+        System.out.println(battleMenuWithGraveyardString);
+
+        //This switch let us drive around the menu
+        switch (Ressources.validateIntMenu("Choose a correct option.\n" + battleMenuWithGraveyardString, "1|2|3")) {
+            case 1:
+                return 1;
+            case 2:
+                return 2;
+            default:
+                return 3;
+        }
+    }
+
+    private void showGraveyard() {
+        System.out.println("Graveyard of Team " + battle.getParty1().getName() + ":");
+        if (battle.getGraveyard().getGraveyard1().size()>0) {
+            for (Character soldier: battle.getGraveyard().getGraveyard1()) {
+                System.out.println(soldier.getName());
+            }
+        } else {
+            System.out.println("No deaths.");
+        }
+        System.out.println();
+        System.out.println("Graveyard of Team " + battle.getParty2().getName() + ":");
+        if (battle.getGraveyard().getGraveyard2().size()>0) {
+            for (Character soldier: battle.getGraveyard().getGraveyard2()) {
+                System.out.println(soldier.getName());
+            }
+        } else {
+            System.out.println("No deaths.");
+        }
+        System.out.println();
+
+        introToContinue();
+
+    }
 
     private void fastBattleMenu() {
         System.out.println("Starting Fast Battle...");
@@ -335,7 +386,7 @@ public class MenuManager {
     }
 
     public void introToContinue() {
-        System.out.println("Press intro to select the next fighter");
+        System.out.println("Press intro to continue");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
     }
