@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 //We use this class to get method that's help us in the flow of the game
-public abstract class Ressources {
+public abstract class Resources {
 
     //We use this function to validate a correct int in a menu
     //here if we need a message

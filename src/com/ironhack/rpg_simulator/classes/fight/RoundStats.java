@@ -70,8 +70,13 @@ public class RoundStats {
 
             int attackValue1 = attackStats.getAttackValue1();
             int attackValue2 = attackStats.getAttackValue2();
+            System.out.println("The fighters attack each other!");
             System.out.println(name1 + " did " + attackValue1 + " damage using " + attackType1 + ".");
             System.out.println(name2 + " did " + attackValue2 + " damage using " + attackType2 + ".");
+            try {
+                Thread.sleep(600);
+            } catch (InterruptedException e) {
+            }
         }
         System.out.println(getRoundWinner(nameFighter1, nameFighter2));
 

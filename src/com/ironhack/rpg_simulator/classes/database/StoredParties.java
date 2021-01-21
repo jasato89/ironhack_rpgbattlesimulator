@@ -17,7 +17,7 @@ public class StoredParties {
         theList.add(partyToAdd);
     }
 
-    public List<Party> getTheList() {
+    public List<Party> getPartyList() {
         return theList;
     }
 
