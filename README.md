@@ -80,7 +80,7 @@ And then, it will display the Main Menu.
    
 ## Screenshots
 
-
+![alt text](http://url/to/img.png)
 
 ## Authors
 **The Excepcionalist Team**: Adrià López, Jaume Sánchez, Salvatore Corsaro, Antonio Navarro, Iván Trujillo.
