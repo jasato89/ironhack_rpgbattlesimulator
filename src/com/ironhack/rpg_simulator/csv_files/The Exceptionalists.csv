@@ -1,3 +1,4 @@
 id, name, hp, stamina, strength, mana, intelligence
 31, Adria, 200, 20, 20, 0, 0
 32, Ivan, 200, 20, 20, 0, 0
+33, Salva, 200, 0, 0, 20, 20

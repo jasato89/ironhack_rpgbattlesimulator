@@ -1,7 +1,7 @@
 id, name, hp, stamina, strength, mana, intelligence
-01, Kondo, 120, 45, 5, 0, 0
+01, Kondo, 100, 45, 5, 0, 0
 02, Vidar, 110, 48, 5, 0, 0
-03, Xena, 195, 25, 3, 0, 0
+03, Xena, 105, 25, 3, 0, 0
 04, Freyja, 64, 0, 0, 29, 24
 05, Zatara, 80, 0, 0, 18, 24
 06, Ionor, 55, 0, 0, 43, 38

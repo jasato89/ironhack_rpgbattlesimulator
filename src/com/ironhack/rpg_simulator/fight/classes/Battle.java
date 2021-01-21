@@ -16,7 +16,6 @@ public class Battle {
         this.party2 = party2;
         setRoundNumber(0);
         this.graveyard = new Graveyard();
-        //Output.announceTeam(party1, party2);
     }
 
     public RoundStats fight(int fighterIndex1, int fighterIndex2) {

@@ -8,9 +8,12 @@ import java.util.List;
 public class Output {
     private static final String DEFAULT = (char) 27 + "[0m";
     private static final String BLACK = (char) 27 + "[30m";
+    private static final String BLUE = (char) 27 + "[34m";
+    private static final String MAGENTA = (char) 27 + "[35m";
     private static final String RED = (char) 27 + "[31m";
     private static final String GREEN = (char) 27 + "[32m";
     private static final String GREEN_BCK = (char) 27 + "[42m";
+    private static final String BLUE_BCK = (char) 27 + "[44m";
     private static final String MAGENTA_BCK = (char) 27 + "[30;45m";
     private static final String RED_BCK = (char) 27 + "[41m";
     private static final String YELLOW_BCK = (char) 27 + "[30;43m";
@@ -20,6 +23,18 @@ public class Output {
     private static final String CYAN_BCK = (char) 27 + "[46m";
 
 
+
+    public static void printMainMenu(String [] menu) throws IOException, InterruptedException {
+        Output.clearConsole();
+        System.out.println(fillWithSpaces(25) +  PreRendering.getTitle());
+        System.out.println();
+        printLogo();
+        System.out.println();
+        for (int i = 0; i < menu.length; i++){
+            System.out.println(fillWithSpaces(15) + MAGENTA_BCK + BLOCK + (i + 1) + BLOCK + insertText(menu[i], 20, 0) + BLOCK + DEFAULT);
+            System.out.println();
+        }
+    }
 
     public static void printCentralMenu(String [] menu) throws IOException, InterruptedException {
         Output.clearConsole();
@@ -36,9 +51,18 @@ public class Output {
         System.out.println(fillWithSpaces(25) +  PreRendering.getTitle());
         printEmptyLines(3);
         printElementListLike(header, 1);
-//        System.out.println(fillWithSpaces(15) + GREEN_BCK + BLOCK + insertText(header, 25, 99) + BLOCK + DEFAULT);
         printEmptyLines(8);
 
+    }
+
+    public static void printGraveyard(int graveyardSize){
+        printEmptyLines(1);
+        System.out.print(fillWithSpaces(5) + "Graveyard:  ");
+
+        for (int i = 0; i < graveyardSize; i++){
+            System.out.print(BLUE_BCK + "+" + DEFAULT + BLOCK);
+        }
+        printEmptyLines(2);
     }
 
     public static void printHeader(String header, boolean emptyLines) throws IOException, InterruptedException {
@@ -46,37 +70,94 @@ public class Output {
         System.out.println(fillWithSpaces(25) +  PreRendering.getTitle());
         printEmptyLines(2);
         printElementListLike(header, 1);
-//        System.out.println(fillWithSpaces(15) + GREEN_BCK + BLOCK + insertText(header, 25, 99) + BLOCK + DEFAULT);
         System.out.println();
         if (emptyLines == true) printEmptyLines(8);
 
     }
 
-    public static void printHeaderPlusList(String header, List<Party> storedParties, int i) throws IOException, InterruptedException {
-        Output.clearConsole();
-        System.out.println(fillWithSpaces(25) +  PreRendering.getTitle());
-        printEmptyLines(3);
-        System.out.println(fillWithSpaces(15) + GREEN_BCK + BLOCK + insertText(header, 20, 0) + BLOCK + DEFAULT);
-        System.out.println();
-        for (Party party : storedParties) {
-            System.out.println(fillWithSpaces(3) + i++ + "." + BLOCK + party.getName());
-            System.out.println();
-        }
+    public static void printIntro() throws IOException, InterruptedException {
+        printDisclaimer();
+        printPresentation();
+        printGameName();
+
     }
 
-    public static void printHeaderPlusList(String header, List<Party> storedParties, int i, int selection) throws IOException, InterruptedException {
-        Output.clearConsole();
-        System.out.println(fillWithSpaces(25) +  PreRendering.getTitle());
-        printEmptyLines(3);
-        System.out.println(fillWithSpaces(15) + GREEN_BCK + BLOCK + insertText(header, 20, 0) + BLOCK + DEFAULT);
-        System.out.println();
-        for (Party party : storedParties) {
-            if (i != selection) {
-                System.out.println(fillWithSpaces(3) + i++ + "." + BLOCK + party.getName());
-                System.out.println();
-            }
-        }
+    private static void printGameName() throws IOException, InterruptedException {
+        clearConsole();
+        Output.printEmptyLines(3);
+        Output.printElementListLike(fillWithSpaces(13) + "RPG BATTLE SIMULATOR", 99);
+        printLogo();
+        Output.printEmptyLines(2);
+        Output.printElementListLike(fillWithSpaces(13) + "RPG BATTLE SIMULATOR", 99);
+        Output.printEmptyLines(2);
+        Thread.sleep(2000);
+        clearConsole();
     }
+
+    private static void printPresentation() throws IOException, InterruptedException {
+        Output.clearConsole();
+        Output.printEmptyLines(7);
+        Output.printElementListLike(fillWithSpaces(13 ) + GREEN + "The" + MAGENTA + " Exe" + BLUE + "ption" + RED + "alist" + DEFAULT, 99);
+        Output.printEmptyLines(9);
+        Thread.sleep(1000);
+        clearConsole();
+        Output.printEmptyLines(7);
+        Output.printElementListLike(fillWithSpaces(13 ) + GREEN + "The" + MAGENTA + " Exe" + BLUE + "ption" + RED + "alist" + DEFAULT, 99);
+        Output.printElementListLike(fillWithSpaces(18) + "present", 0);
+        Output.printEmptyLines(9);
+        Thread.sleep(1000);
+    }
+
+    private static void printDisclaimer() throws IOException, InterruptedException {
+        Output.clearConsole();
+        Output.printEmptyLines(7);
+        System.out.println(fillWithSpaces(10) + "For a better experience resize your terminal");
+        Output.printEmptyLines(9);
+        Thread.sleep(1000);
+    }
+
+    public static void printLogo(){
+        char[][] logo = {
+                {' ',' ', ' ',' ',' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ',' ', ' ',' ',' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ', 'G', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ',' ', ' ',' ',' ', ' ',' ', 'R', 'R','R', ' ', 'R','R', 'R', ' ','R', 'R', 'R',' ', ' ', ' ','G', ' ', ' ', 'G', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ',' ', ' ',' ',' ', ' ',' ', 'R', ' ','R', ' ', 'R',' ', 'R', ' ','R', ' ', ' ',' ', ' ', ' ','G', 'G', 'G', 'Y', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'},
+                {' ',' ', ' ',' ',' ', ' ',' ', 'R', 'R','p', ' ', 'R','R', 'p', ' ','R', 'r', 'R',' ', ' ', ' ','G', ' ', ' ', 'Y', ' ', ' ', ' ', 'B', 'B', 'B', 'B', ' ', ' ', ' '},
+                {' ',' ', ' ',' ',' ', ' ',' ', 'R', ' ','R', ' ', 'R',' ', ' ', ' ','R', ' ', 'R',' ', ' ', ' ',' ', ' ', ' ', 'G', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ',' ', ' ',' ',' ', ' ',' ', 'R', ' ','R', ' ', 'R',' ', ' ', ' ','R', 'R', 'R',' ', ' ', ' ',' ', ' ', ' ', 'G', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+        };
+        for (int i = 0; i < logo.length; i++){
+            for (int j = 0; j < logo[i].length; j++){
+                switch (logo[i][j]){
+                    case 'G':
+                        System.out.print(BLUE_BCK + BLOCK + BLOCK + DEFAULT);
+                        break;
+                    case 'Y':
+                        System.out.print(YELLOW_BCK + BLOCK + BLOCK + DEFAULT);
+                        break;
+                    case 'B':
+                        System.out.print(WHITE_BCK + BLOCK + BLOCK + DEFAULT);
+                        break;
+                    case 'R':
+                        System.out.print(RED_BCK + BLOCK + BLOCK + DEFAULT);
+                        break;
+                    case 'r':
+                        System.out.print(BLOCK + RED_BCK + BLOCK + DEFAULT);
+                        break;
+                    case 'p':
+                        System.out.print(RED_BCK + BLOCK + DEFAULT +  BLOCK);
+                        break;
+                    default:
+                        System.out.print(BLOCK + BLOCK);
+                }
+
+            }
+            System.out.println();
+        }
+
+    }
+
+
 
     public static void printBottomPrompt(String text){
         System.out.println(fillWithSpaces(15) + RED_BCK + BLOCK + insertText(text, 20, 0) + BLOCK + DEFAULT);
