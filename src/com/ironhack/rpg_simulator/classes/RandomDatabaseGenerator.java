@@ -143,4 +143,64 @@ public class RandomDatabaseGenerator {
     public static String getRandomName() {
         return PARTY_NAME[new Random().nextInt(PARTY_NAME.length)];
     }
+
+    public static int getHpWarriorMin() {
+        return HP_WARRIOR_MIN;
+    }
+
+    public static int getHpWarriorMax() {
+        return HP_WARRIOR_MAX;
+    }
+
+    public static int getHpWizardMin() {
+        return HP_WIZARD_MIN;
+    }
+
+    public static int getHpWizardMax() {
+        return HP_WIZARD_MAX;
+    }
+
+    public static int getStaminaMin() {
+        return STAMINA_MIN;
+    }
+
+    public static int getStaminaMax() {
+        return STAMINA_MAX;
+    }
+
+    public static int getStrengthMin() {
+        return STRENGTH_MIN;
+    }
+
+    public static int getManaMin() {
+        return MANA_MIN;
+    }
+
+    public static int getManaMax() {
+        return MANA_MAX;
+    }
+
+    public static int getStrengthMax() {
+        return STRENGTH_MAX;
+    }
+
+    public static int getIntelligenceMin() {
+        return INTELLIGENCE_MIN;
+    }
+
+    public static int getIntelligenceMax() {
+        return INTELLIGENCE_MAX;
+    }
+
+    public static String[] getWarriorName() {
+        return WARRIOR_NAME;
+    }
+
+    public static String[] getWizardName() {
+        return WIZARD_NAME;
+    }
+
+    public static String[] getPartyName() {
+        return PARTY_NAME;
+    }
 }

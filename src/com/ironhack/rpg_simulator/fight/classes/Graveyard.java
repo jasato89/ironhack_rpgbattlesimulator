@@ -38,4 +38,20 @@ public class Graveyard {
         deadSoldiers.add(graveyard2);
         return deadSoldiers;
     }
+
+    public List<Character> getGraveyard1() {
+        return graveyard1;
+    }
+
+    public void setGraveyard1(List<Character> graveyard1) {
+        this.graveyard1 = graveyard1;
+    }
+
+    public List<Character> getGraveyard2() {
+        return graveyard2;
+    }
+
+    public void setGraveyard2(List<Character> graveyard2) {
+        this.graveyard2 = graveyard2;
+    }
 }

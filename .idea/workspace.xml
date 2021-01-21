@@ -26,16 +26,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c07b2799-e7b3-4681-b803-8552337172ae" name="Default Changelist" comment="need to implement the graveyard">
+    <list default="true" id="c07b2799-e7b3-4681-b803-8552337172ae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/classes/MenuManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Dream Crushers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Dream Crushers.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Golden Bears.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Golden Bears.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Red Raiders.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/Red Raiders.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/The Exceptionalists.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/csv_files/The Exceptionalists.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/fight/classes/Battle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/fight/classes/Battle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output_lib/Output.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/output_lib/Output.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/fight/classes/Graveyard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ironhack/rpg_simulator/fight/classes/Graveyard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,11 +44,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="develop-3.0" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1n79UO8qhqdvD79uORNImpBeuQG" />
@@ -79,7 +68,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ironhack.rpg_simulator.main.Main" />
       <module name="ironhack_rpgbattlesimulator" />
@@ -100,55 +89,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="a38928e7-6386-495a-b0a9-4e6eb4eeac11" name="Default Changelist" comment="" />
-      <created>1611162710166</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1611162710166</updated>
-      <workItem from="1611162711290" duration="2267000" />
-    </task>
-    <task id="LOCAL-00001" summary="added output_lib package">
-      <created>1611162867039</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1611162867040</updated>
-    </task>
-    <task id="LOCAL-00002" summary="need to implement the graveyard">
-      <created>1611236428984</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1611236428984</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
-    <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -176,8 +122,93 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merge branch 'develop-3.0' of https://github.com/salvatorecorsaro/ironhack_rpgbattlesimulator into develop-3.0&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
-    <MESSAGE value="added output_lib package" />
-    <MESSAGE value="need to implement the graveyard" />
-    <option name="LAST_COMMIT_MESSAGE" value="need to implement the graveyard" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'develop-3.0' of https://github.com/salvatorecorsaro/ironhack_rpgbattlesimulator into develop-3.0&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1263" y="139" key="#Main" timestamp="1611069589903">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1263" y="139" key="#Main/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611069589903" />
+    <state x="-1263" y="139" key="#Main_(1)" timestamp="1610998038405">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1263" y="139" key="#Main_(1)/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610998038405" />
+    <state x="-1155" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1611248344767">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1155" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611248344767" />
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611088888142" />
+    <state x="-1177" y="414" width="433" height="217" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1611177590600">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1177" y="414" width="433" height="217" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611177590600" />
+    <state width="469" height="466" key="DebuggerActiveHint" timestamp="1611081833156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="469" height="466" key="DebuggerActiveHint/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611081833156" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1610885506652">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610885506652" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1610793995403">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610793995403" />
+    <state width="1899" height="360" key="GridCell.Tab.0.bottom" timestamp="1611250464235">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="360" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611250464235" />
+    <state width="1899" height="215" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611088853145" />
+    <state width="1899" height="360" key="GridCell.Tab.0.center" timestamp="1611250464235">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="360" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611250464235" />
+    <state width="1899" height="215" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611088853145" />
+    <state width="1899" height="360" key="GridCell.Tab.0.left" timestamp="1611250464235">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="360" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611250464235" />
+    <state width="1899" height="215" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611088853145" />
+    <state width="1899" height="360" key="GridCell.Tab.0.right" timestamp="1611250464235">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="360" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611250464235" />
+    <state width="1899" height="215" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611088853145" />
+    <state width="1899" height="318" key="GridCell.Tab.1.bottom" timestamp="1611179807007">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="318" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611179807007" />
+    <state width="1899" height="318" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611081877791" />
+    <state width="1899" height="318" key="GridCell.Tab.1.center" timestamp="1611179807007">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="318" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611179807007" />
+    <state width="1899" height="318" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611081877791" />
+    <state width="1899" height="318" key="GridCell.Tab.1.left" timestamp="1611179807007">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="318" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611179807007" />
+    <state width="1899" height="318" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611081877791" />
+    <state width="1899" height="318" key="GridCell.Tab.1.right" timestamp="1611179807007">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="318" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611179807007" />
+    <state width="1899" height="318" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611081877791" />
+    <state x="184" y="86" key="MergeDialog" timestamp="1611082937722">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="184" y="86" key="MergeDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611082937722" />
+    <state x="598" y="281" key="MultipleFileMergeDialog" timestamp="1611082937729">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="598" y="281" key="MultipleFileMergeDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1611082937729" />
+    <state x="-1459" y="165" key="SettingsEditor" timestamp="1610879120881">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1459" y="165" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610879120881" />
+    <state x="-1461" y="233" key="git4idea.branch.GitSmartOperationDialog" timestamp="1611004570812">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1461" y="233" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611004570812" />
   </component>
 </project>

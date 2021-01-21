@@ -1,7 +1,7 @@
 id, name, hp, stamina, strength, mana, intelligence
-01, Kane, 105, 38, 4, 0, 0
-02, Kamara, 102, 31, 7, 0, 0
-03, Gunnar, 108, 26, 6, 0, 0
-04, Arwyn, 55, 0, 0, 46, 37
-05, Nerys, 76, 0, 0, 34, 22
-06, Saruman, 89, 0, 0, 26, 17
+17, Kane, 175, 38, 4, 0, 0
+18, Kamara, 142, 31, 7, 0, 0
+19, Gunnar, 168, 26, 6, 0, 0
+20, Arwyn, 55, 0, 0, 46, 37
+21, Nerys, 76, 0, 0, 34, 22
+22, Saruman, 89, 0, 0, 26, 17
