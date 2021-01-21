@@ -1,14 +1,19 @@
-package com.ironhack.rpg_simulator.classes;
+package com.ironhack.rpg_simulator.classes.menu_management;
 
-import com.ironhack.rpg_simulator.fight.classes.Battle;
-import com.ironhack.rpg_simulator.fight.classes.RoundStats;
-import com.ironhack.rpg_simulator.main.StoredParties;
+import com.ironhack.rpg_simulator.classes.database.ImportParty;
+import com.ironhack.rpg_simulator.classes.database.RandomDatabaseGenerator;
+import com.ironhack.rpg_simulator.classes.character_management.Character;
+import com.ironhack.rpg_simulator.classes.character_management.Party;
+import com.ironhack.rpg_simulator.classes.character_management.Warrior;
+import com.ironhack.rpg_simulator.classes.character_management.Wizard;
+import com.ironhack.rpg_simulator.classes.fight.Battle;
+import com.ironhack.rpg_simulator.classes.fight.RoundStats;
+import com.ironhack.rpg_simulator.classes.database.StoredParties;
 import com.ironhack.rpg_simulator.ressources.Ressources;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -355,6 +360,7 @@ public class MenuManager {
             System.out.println("Starting round " + battle.getRoundNumber() + "...");
             RoundStats roundStats = battle.fight(0, 0);
             roundStats.printAttackLogs();
+            introToContinue();
         }
         announceTeamWinner(battle);
         loadPartiesFromDatabase();
@@ -386,8 +392,8 @@ public class MenuManager {
     }
 
     public void introToContinue() {
-        System.out.println("Press intro to continue");
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Press intro to continue");
         scanner.nextLine();
     }
     public void introToReturnToMainMenu() {

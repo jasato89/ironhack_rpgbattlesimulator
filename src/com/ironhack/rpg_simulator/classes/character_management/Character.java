@@ -1,4 +1,4 @@
-package com.ironhack.rpg_simulator.classes;
+package com.ironhack.rpg_simulator.classes.character_management;
 
 
 import com.ironhack.rpg_simulator.interfaces.Attacker;

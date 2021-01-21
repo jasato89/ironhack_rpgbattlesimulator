@@ -1,4 +1,4 @@
-package com.ironhack.rpg_simulator.fight.classes;
+package com.ironhack.rpg_simulator.classes.fight;
 
 public class AttackStats {
 

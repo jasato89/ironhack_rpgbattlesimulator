@@ -1,6 +1,6 @@
-package com.ironhack.rpg_simulator.fight.classes;
+package com.ironhack.rpg_simulator.classes.fight;
 
-import com.ironhack.rpg_simulator.classes.Character;
+import com.ironhack.rpg_simulator.classes.character_management.Character;
 
 import java.util.ArrayList;
 import java.util.List;

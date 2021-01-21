@@ -1,4 +1,6 @@
-package com.ironhack.rpg_simulator.classes;
+package com.ironhack.rpg_simulator.classes.character_management;
+
+import com.ironhack.rpg_simulator.classes.database.RandomDatabaseGenerator;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -28,21 +30,7 @@ public class Party {
     }
 
 
-    public List<Character> getAliveMembers() {
-        return aliveMembers;
-    }
 
-    public void setAliveMembers(List<Character> aliveMembers) {
-        this.aliveMembers = aliveMembers;
-    }
-
-    public void updateAliveMember(Character updatedMember, int index) {
-        this.aliveMembers.set(index, updatedMember);
-    }
-
-    public int getPartyMaxSize() {
-        return partySize;
-    }
 
     public void removeAliveMember() {
         List<Character> temp = new ArrayList<>();
@@ -84,26 +72,7 @@ public class Party {
         return partyMembers;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Character getMemberFromList(int index) {
-        return partyMembers.get(index);
-    }
-
-    public Character getMemberFromAliveList(int index) {
-        return aliveMembers.get(index);
-    }
-
-    public List<Character> getPartyMembers() {
-        return partyMembers;
-
-    }
 
     public void exportParty() {
         try {
@@ -113,7 +82,7 @@ public class Party {
             int counter = 0;
 
             for (String path : pathNames) {
-                if (path.toString().equals(fileName)) {
+                if (path.equals(fileName)) {
                     counter++;
                 }
             }
@@ -158,5 +127,45 @@ public class Party {
                 ", partyMembers=" + partyMembers +
                 ", aliveMembers=" + aliveMembers +
                 '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Character getMemberFromList(int index) {
+        return partyMembers.get(index);
+    }
+
+    public Character getMemberFromAliveList(int index) {
+        return aliveMembers.get(index);
+    }
+
+    public List<Character> getPartyMembers() {
+        return partyMembers;
+    }
+
+    public List<Character> getAliveMembers() {
+        return aliveMembers;
+    }
+
+    public void setAliveMembers(List<Character> aliveMembers) {
+        this.aliveMembers = aliveMembers;
+    }
+
+    public void updateAliveMember(Character updatedMember, int index) {
+        this.aliveMembers.set(index, updatedMember);
+    }
+
+    public int getPartySize() {
+        return partySize;
+    }
+
+    public void setPartySize(int partySize) {
+        this.partySize = partySize;
     }
 }

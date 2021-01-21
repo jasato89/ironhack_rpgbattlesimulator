@@ -1,9 +1,7 @@
-package com.ironhack.rpg_simulator.fight.classes;
+package com.ironhack.rpg_simulator.classes.fight;
 
-import com.ironhack.rpg_simulator.classes.Character;
-import com.ironhack.rpg_simulator.classes.Party;
-
-import java.util.List;
+import com.ironhack.rpg_simulator.classes.character_management.Character;
+import com.ironhack.rpg_simulator.classes.character_management.Party;
 
 public class Battle {
     private int roundNumber;

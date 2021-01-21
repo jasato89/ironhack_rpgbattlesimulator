@@ -1,4 +1,9 @@
-package com.ironhack.rpg_simulator.classes;
+package com.ironhack.rpg_simulator.classes.database;
+
+import com.ironhack.rpg_simulator.classes.character_management.Character;
+import com.ironhack.rpg_simulator.classes.character_management.Party;
+import com.ironhack.rpg_simulator.classes.character_management.Warrior;
+import com.ironhack.rpg_simulator.classes.character_management.Wizard;
 
 import java.io.File;   //Import File package to receive by parameter the CSV file to be read
 import java.io.FileNotFoundException;   //Import File Exception to manage exception if the file wasn't found

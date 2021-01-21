@@ -1,6 +1,6 @@
-package com.ironhack.rpg_simulator.main;
+package com.ironhack.rpg_simulator.classes.database;
 
-import com.ironhack.rpg_simulator.classes.Party;
+import com.ironhack.rpg_simulator.classes.character_management.Party;
 
 import java.util.ArrayList;
 import java.util.List;

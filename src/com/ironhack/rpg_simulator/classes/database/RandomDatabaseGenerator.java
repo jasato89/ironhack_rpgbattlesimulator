@@ -1,16 +1,11 @@
-package com.ironhack.rpg_simulator.classes;
+package com.ironhack.rpg_simulator.classes.database;
+
+import com.ironhack.rpg_simulator.classes.character_management.Warrior;
+import com.ironhack.rpg_simulator.classes.character_management.Wizard;
 
 import java.util.Random;
 
 public class RandomDatabaseGenerator {
-    /*Create a full party of randomly generated Wizards and Warriors with randomized stats considering this limits.
-
-    name: based on an array of names, pick random position and if is already in the party add Jr at the end.
-    hp: random between 100-200 to warriors, 50-100 for wizards)
-    stamina: random between 10-50
-    strength: random between 1-10
-    mana: random between 10-50
-    intelligence: random between 1-50*/
 
     private static final int HP_WARRIOR_MIN = 100;
     private static final int HP_WARRIOR_MAX = 200;
