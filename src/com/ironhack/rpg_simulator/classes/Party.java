@@ -1,5 +1,7 @@
 package com.ironhack.rpg_simulator.classes;
 
+import com.ironhack.rpg_simulator.output_lib.Output;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -143,10 +145,12 @@ public class Party {
     }
 
     public String aliveMembersString() {
+        Output.printElementListLike("Party: " + name, 3);
         String result = "Party: " + name + "\n";
         int memberCount = 1;
         for (Character member : aliveMembers) {
-            result += memberCount++ +": " + member.toString() + "\n";
+            Output.printElementListLike(memberCount++ + " : " + member.toString(), 0);
+//            result += memberCount++ +": " + member.toString() + "\n";
         }
         return result;
     }

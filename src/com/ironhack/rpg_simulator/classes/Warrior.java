@@ -37,8 +37,8 @@ public class Warrior extends Character {
 
     //we use this method to show a warrior in console
     public String toString(){
-        return "Name: " +getName()  + " Type: Warrior HP: " +
-                getHp() + " Stamina: " + getStamina() +" Strength: " + getStrength() + "\n";
+        return "" + getName()  + ", Warrior HP: " +
+                getHp() + " STA: " + getStamina() +" STR: " + getStrength();
     }
 
     //getters and setters

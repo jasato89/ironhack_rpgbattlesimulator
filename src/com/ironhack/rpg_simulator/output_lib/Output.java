@@ -1,18 +1,107 @@
 package com.ironhack.rpg_simulator.output_lib;
 
+import com.ironhack.rpg_simulator.classes.Party;
+
 import java.io.IOException;
+import java.util.List;
 
 public class Output {
     private static final String DEFAULT = (char) 27 + "[0m";
+    private static final String BLACK = (char) 27 + "[30m";
     private static final String RED = (char) 27 + "[31m";
     private static final String GREEN = (char) 27 + "[32m";
     private static final String GREEN_BCK = (char) 27 + "[42m";
     private static final String MAGENTA_BCK = (char) 27 + "[30;45m";
     private static final String RED_BCK = (char) 27 + "[41m";
+    private static final String YELLOW_BCK = (char) 27 + "[30;43m";
+    private static final String WHITE_BCK = (char) 27 + "[30;47m";
     private static final String BLOCK = " ";
 
+    private static final String CYAN_BCK = (char) 27 + "[46m";
 
 
+
+    public static void printCentralMenu(String [] menu) throws IOException, InterruptedException {
+        Output.clearConsole();
+        System.out.println(fillWithSpaces(25) +  PreRendering.getTitle());
+        printEmptyLines(5);
+        for (int i = 0; i < menu.length; i++){
+            System.out.println(fillWithSpaces(15) + RED_BCK + BLOCK + (i + 1) + BLOCK + insertText(menu[i], 20, 0) + BLOCK + DEFAULT);
+            System.out.println();
+        }
+    }
+
+    public static void printHeader(String header) throws IOException, InterruptedException {
+        Output.clearConsole();
+        System.out.println(fillWithSpaces(25) +  PreRendering.getTitle());
+        printEmptyLines(3);
+        printElementListLike(header, 1);
+//        System.out.println(fillWithSpaces(15) + GREEN_BCK + BLOCK + insertText(header, 25, 99) + BLOCK + DEFAULT);
+        printEmptyLines(8);
+
+    }
+
+    public static void printHeader(String header, boolean emptyLines) throws IOException, InterruptedException {
+        Output.clearConsole();
+        System.out.println(fillWithSpaces(25) +  PreRendering.getTitle());
+        printEmptyLines(2);
+        printElementListLike(header, 1);
+//        System.out.println(fillWithSpaces(15) + GREEN_BCK + BLOCK + insertText(header, 25, 99) + BLOCK + DEFAULT);
+        System.out.println();
+        if (emptyLines == true) printEmptyLines(8);
+
+    }
+
+    public static void printHeaderPlusList(String header, List<Party> storedParties, int i) throws IOException, InterruptedException {
+        Output.clearConsole();
+        System.out.println(fillWithSpaces(25) +  PreRendering.getTitle());
+        printEmptyLines(3);
+        System.out.println(fillWithSpaces(15) + GREEN_BCK + BLOCK + insertText(header, 20, 0) + BLOCK + DEFAULT);
+        System.out.println();
+        for (Party party : storedParties) {
+            System.out.println(fillWithSpaces(3) + i++ + "." + BLOCK + party.getName());
+            System.out.println();
+        }
+    }
+
+    public static void printHeaderPlusList(String header, List<Party> storedParties, int i, int selection) throws IOException, InterruptedException {
+        Output.clearConsole();
+        System.out.println(fillWithSpaces(25) +  PreRendering.getTitle());
+        printEmptyLines(3);
+        System.out.println(fillWithSpaces(15) + GREEN_BCK + BLOCK + insertText(header, 20, 0) + BLOCK + DEFAULT);
+        System.out.println();
+        for (Party party : storedParties) {
+            if (i != selection) {
+                System.out.println(fillWithSpaces(3) + i++ + "." + BLOCK + party.getName());
+                System.out.println();
+            }
+        }
+    }
+
+    public static void printBottomPrompt(String text){
+        System.out.println(fillWithSpaces(15) + RED_BCK + BLOCK + insertText(text, 20, 0) + BLOCK + DEFAULT);
+    }
+
+    public static void printElementListLike(String text, int i){
+        String colorBck = DEFAULT;
+
+        switch (i) {
+            case 1 -> colorBck = RED_BCK;
+            case 3 -> colorBck = YELLOW_BCK;
+            case 5 -> colorBck = GREEN_BCK;
+            case 7 -> colorBck = WHITE_BCK;
+        }
+        System.out.println(fillWithSpaces(5) + colorBck + BLOCK + insertText(text, 50, 99) + BLOCK + DEFAULT);
+    }
+
+
+
+    public static void printTitleAndInstruction(String instruction) throws IOException, InterruptedException {
+        Output.clearConsole();
+        System.out.println(fillWithSpaces(5) +  PreRendering.getTitle());
+        printEmptyLines(3);
+        System.out.println(fillWithSpaces(5) +  instruction);
+    }
 
 
 
@@ -143,7 +232,8 @@ public class Output {
         String rString = "";
         text = strLen > len ? text.substring(0, len) : text;
         if (side < 0) rString += text + Output.fillWithSpaces(len - strLen) + Output.fillWithSpaces(len);
-        if (side == 0) rString += Output.fillWithSpaces(len /2) + text + Output.fillWithSpaces(len - strLen) + Output.fillWithSpaces(len /2);
+        else if (side == 0) rString += Output.fillWithSpaces(len /2) + text + Output.fillWithSpaces(len - strLen) + Output.fillWithSpaces(len /2);
+        else if (side == 99) rString += Output.fillWithSpaces(3) + text + Output.fillWithSpaces(len - strLen) + Output.fillWithSpaces(3);
         else rString += Output.fillWithSpaces(len) + text + Output.fillWithSpaces(len - strLen);
         return rString;
     }
@@ -152,8 +242,6 @@ public class Output {
         text = strLen > len ? text.substring(0, len) : text;
         if (side == 0) System.out.print(text + Output.fillWithSpaces(len - strLen ) + Output.fillWithSpaces(len));
         else if (side == 1) System.out.print(Output.fillWithSpaces(len) + text + Output.fillWithSpaces(len - strLen ));
-
-
         return len - 1;
     }
     public static int printHealth(int health, int maxHealth){

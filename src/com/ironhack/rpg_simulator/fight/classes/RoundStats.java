@@ -2,7 +2,9 @@ package com.ironhack.rpg_simulator.fight.classes;
 
 import com.ironhack.rpg_simulator.classes.Character;
 import com.ironhack.rpg_simulator.classes.Warrior;
+import com.ironhack.rpg_simulator.output_lib.Output;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,13 +57,14 @@ public class RoundStats {
         }
     }
 
-    public void printAttackLogs() {
+    public void printAttackLogs() throws IOException, InterruptedException {
         String name1 = nameFighter1;
         String name2 = nameFighter2;
         String class1 = getClass1() < 2 ? "Warrior" : "Wizard";
         String class2 = getClass2() < 2 ? "Warrior" : "Wizard";
         String attackType1;
         String attackType2;
+        Output.printHeader("Starting fight...", false);
 
         for (AttackStats attackStats: attackLogs) {
             attackType1 = getAttackName(class1, attackStats.getAttackType1());
@@ -70,10 +73,10 @@ public class RoundStats {
 
             int attackValue1 = attackStats.getAttackValue1();
             int attackValue2 = attackStats.getAttackValue2();
-            System.out.println(name1 + " did " + attackValue1 + " damage using " + attackType1 + ".");
-            System.out.println(name2 + " did " + attackValue2 + " damage using " + attackType2 + ".");
+            Output.printElementListLike(name1 + " did " + attackValue1 + " damage using " + attackType1 + ".", 0);
+            Output.printElementListLike(name2 + " did " + attackValue2 + " damage using " + attackType2 + ".", 0);
         }
-        System.out.println(getRoundWinner(nameFighter1, nameFighter2));
+        Output.printElementListLike(getRoundWinner(nameFighter1, nameFighter2), 3);
 
     }
 

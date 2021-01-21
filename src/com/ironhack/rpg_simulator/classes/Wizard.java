@@ -40,8 +40,8 @@ public class Wizard extends Character {
 
     //we use this method to show a wizard in console
     public String toString(){
-        return "Name: " +getName()  + " Type: Wizard HP: " +
-                getHp() + " Intelligence: " + getIntelligence() +" Mana: " + getMana() + "\n";
+        return "" +getName()  + ", Wizard HP: " +
+                getHp() + " INT: " + getIntelligence() +" MANA: " + getMana();
     }
 
     //getters and setters
