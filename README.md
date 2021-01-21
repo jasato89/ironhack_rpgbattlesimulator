@@ -80,7 +80,17 @@ And then, it will display the Main Menu.
    
 ## Screenshots
 
+![alt text](https://github.com/salvatorecorsaro/ironhack_rpgbattlesimulator/blob/main/screenshots/Screen1.jpg?raw=true)
 
+![alt text](https://github.com/salvatorecorsaro/ironhack_rpgbattlesimulator/blob/main/screenshots/Screen2.jpg?raw=true)
+
+![alt text](https://github.com/salvatorecorsaro/ironhack_rpgbattlesimulator/blob/main/screenshots/Screen3.jpg?raw=true)
+
+![alt text](https://github.com/salvatorecorsaro/ironhack_rpgbattlesimulator/blob/main/screenshots/Screen4.jpg?raw=true)
+
+![alt text](https://github.com/salvatorecorsaro/ironhack_rpgbattlesimulator/blob/main/screenshots/Screen5.jpg?raw=true)
+
+![alt text](https://github.com/salvatorecorsaro/ironhack_rpgbattlesimulator/blob/main/screenshots/Screen6.jpg?raw=true)
 
 ## Authors
 **The Excepcionalist Team**: Adrià López, Jaume Sánchez, Salvatore Corsaro, Antonio Navarro, Iván Trujillo.
