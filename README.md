@@ -53,21 +53,30 @@ So, if you want to import a team from a CSV file, you only need to put the file 
 
 If you select the options 1 or 2, the following new options will be displayed:
 
-   1. Normal Mode (Choose your fighters) - Lets you battle, choosing your figthers for each round. For each round, it will appear the fighters that are alive
-   and you have to select one of them. Then, it will display a log of every action of the battle and, finally, the winer of the battle. Then, a new menu will
+1. Normal Mode (Choose your fighters) - Lets you battle, choosing your figthers for each round. For each round, it will appear the fighters that are alive
+   and you have to select one of them. Then, it will display a log of every action of the battle and, finally, the winner of the battle. Then, a new menu will
    appear:
       
-      1. Select next fighter - Returns to the previous menu.
+   1. Select next fighter - Returns to the previous menu.
       
-      2. Check the graveyard - Shows the graveyard for each team (the fighters who have died).
+   2. Check the graveyard - Shows the graveyard for each team (the fighters who have died). The, you have to press 'Enter' and it returns to this same menu.
       
-      3. Return to Main Menu - Ends the battle and return to the Main Menu.
+   3. Return to Main Menu - Ends the battle and return to the Main Menu.
    
-   2. Random Mode (The fighters will be chosen randomly) - The battle will take place randomly and immediately.
+2. Random Mode (The fighters will be chosen randomly) - The battle will take place randomly and immediately. It prints the first round and you have to press
+'Enter' to move along the next round. When the battle finishes, it prints the winner team and returns to the Main Menu.
    
-   3. Return to Main Menu
+3. Return to Main Menu
    
+If you select the option 3 on the Main Menu (Create New Team), it will display the instructions step by step to create a new party with the desired name and size.
+Then, it will be the same to each fighter (name, HP, stamina/mana, strength/intelligence). When you finish to create a party, the game will create a CSV file on the
+next path:
 
+```bash
+ ./src/com/ironhack/rpg_simulator/csv_files
+```
+
+And then, it will display the Main Menu.
    
 ## Screenshots
 
