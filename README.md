@@ -39,7 +39,10 @@ Starting the Main.java file will display a menu with 4 options:
    3. Create New Team - Lets you create a custom team, choosing the diferents stats for each figther.
    
    4. Exit the game
-   
+ 
+To choose an option you have to introduce the number and click 'Enter'. Other numbers and other characters won't be accepted and displays an error message
+and it will appear the same options again.
+ 
 Before the game starts, it loads the teams that are on a CSV file inside of the following path:
 
 ```bash
@@ -48,6 +51,19 @@ Before the game starts, it loads the teams that are on a CSV file inside of the 
 
 So, if you want to import a team from a CSV file, you only need to put the file on this directory.
 
+If you select the options 1 or 2, the following new options will be displayed:
+
+   1. Normal Mode (Choose your fighters) - Lets you battle, choosing your figthers for each round.
+   
+      For each round, it will appear the fighters that are alive and you have 
+   
+   2. Random Mode (The fighters will be chosen randomly) - The battle will take place randomly and immediately.
+   
+   3. Return to Main Menu
+   
+
+   
+## Screenshots
 
 
 ## Authors
