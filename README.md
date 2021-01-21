@@ -4,10 +4,14 @@ RPG Battle Simulator is a RPG game where you can select or create a party formed
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+1. Download the proyect from the repository.
+
+2. Open the directory as a project on a IDE as IntelliJ.
+
+3. Run the Main.java file on the path:
 
 ```bash
-pip install foobar
+ ./src/com/ironhack/rpg_simulator/main
 ```
 
 ## Usage
