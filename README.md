@@ -20,13 +20,13 @@ RPG Battle Simulator is a RPG game where you can select or create a party formed
 
    1.1. Normal Mode (choosing fighters)
   
-   1.2. Random Mode
+   1.2. Fast Mode
 
 2. Play with Custom Teams
 
    2.1. Normal Mode (choosing fighters)
   
-   2.2. Random Mode
+   2.2. Fast Mode
   
 ## Usage
 
@@ -63,7 +63,7 @@ If you select the options 1 or 2, the following new options will be displayed:
       
    3. Return to Main Menu - Ends the battle and return to the Main Menu.
    
-2. Random Mode (The fighters will be chosen randomly) - The battle will take place randomly and immediately. It prints the first round and you have to press
+2. Fast Mode (The fighters will be chosen randomly) - The battle will take place randomly and immediately. It prints the first round and you have to press
 'Enter' to move along the next round. When the battle finishes, it prints the winner team and returns to the Main Menu.
    
 3. Return to Main Menu
@@ -79,6 +79,7 @@ next path:
 And then, it will display the Main Menu.
    
 ## Screenshots
+
 
 
 ## Authors
