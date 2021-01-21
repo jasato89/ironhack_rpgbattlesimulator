@@ -4,7 +4,6 @@ import com.ironhack.rpg_simulator.fight.classes.Battle;
 import com.ironhack.rpg_simulator.fight.classes.RoundStats;
 import com.ironhack.rpg_simulator.main.StoredParties;
 import com.ironhack.rpg_simulator.output_lib.Output;
-import com.ironhack.rpg_simulator.output_lib.PreRendering;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,6 @@ public class MenuManager {
 
     public void mainMenu() throws IOException, InterruptedException {
 
-        PreRendering.setTitle("RPG BATTLE SIMULATOR");
         Output.printMainMenu(new String []{
                 "Play (Random Teams)",
                 "Play (selected Teams)",
@@ -39,31 +37,19 @@ public class MenuManager {
             matcher = pattern.matcher(input);
         }
         int selection = Integer.parseInt(input);
-
         switch (selection) {
-            case 1:
-                //generate two random teams and show modeMenu
-                mainMenuOption1();
-                break;
-            case 2:
-                //select two teams from database and show modeMenu
-                mainMenuOption2();
-                break;
-            case 3:
-                //show teamCustomization
-                mainMenuOption3();
-                break;
-            case 4:
+            case 1 -> mainMenuOption1();//generate two random teams and show modeMenu
+            case 2 -> mainMenuOption2();//select two teams from database and show modeMenu
+            case 3 -> mainMenuOption3();//show teamCustomization
+            case 4 -> {
                 System.out.println("Thanks for playing!");
                 System.exit(0);
-                break;
-            default:
-                mainMenu();
+            }
+            default -> mainMenu();
         }
     }
 
     public void modeMenu() throws IOException, InterruptedException {
-        PreRendering.setTitle("RPG BATTLE SIMULATOR");
         Output.printCentralMenu(new String []{
                 "Normal Mode",
                 "Fast Mode",
@@ -77,18 +63,10 @@ public class MenuManager {
             matcher = pattern.matcher(input);
         }
         int selection = Integer.parseInt(input);
-
         switch (selection) {
-            case 1:
-                //show battleMenu (where you can select your fighters and see results of each encounter)
-                battleMenu();
-                break;
-            case 2:
-                //show battle results
-                fastBattleMenu();
-                break;
-            default:
-                mainMenu();
+            case 1 -> battleMenu();//show battleMenu (where you can select your fighters and see results of each encounter)
+            case 2 -> fastBattleMenu(); //show battle results
+            default -> mainMenu();
         }
     }
 
@@ -165,7 +143,7 @@ public class MenuManager {
         Output.clearConsole();
         Output.printStringCentered("RPG BATTLE SIMULATOR", 20);
         Output.printEmptyLines(3);
-        Output.printStringCentered("The team " + name + " has been created succesfully.", 6);
+        Output.printStringCentered("The team " + name + " has been created successfully.", 6);
         Output.printEmptyLines(10);
     }
 
@@ -264,13 +242,13 @@ public class MenuManager {
         mainMenu();
     }
 
-    public void introToContinue() throws IOException, InterruptedException {
+    public void introToContinue()  {
         Output.printElementListLike("Press intro to select the next fighter",1);
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
     }
 
-    public void introToNextFight() throws IOException, InterruptedException {
+    public void introToNextFight(){
         Output.printElementListLike("Press intro to go to next fight",1);
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
@@ -290,7 +268,6 @@ public class MenuManager {
 //            String fileName = "C:\\Users\\salva\\IdeaProjects\\IronHack-Java\\ironhack_rpgFINAL\\src\\com\\ironhack\\rpg_simulator\\csv_files";
             String fileName = "src/com/ironhack/rpg_simulator/csv_files/";
             File databaseDir = new File(fileName);
-
             File[] partiesFiles = databaseDir.listFiles();
             for (File f : partiesFiles) {
                 storedParties.add(ImportParty.importPartyCsv(f));

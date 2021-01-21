@@ -115,7 +115,7 @@ public class Party {
             int counter = 0;
 
             for (String path : pathNames) {
-                if (path.toString().equals(fileName)) {
+                if (path.equals(fileName)) {
                     counter++;
                 }
             }
@@ -144,15 +144,10 @@ public class Party {
         }
     }
 
-    public String aliveMembersString() {
+    public void aliveMembersString() {
         Output.printElementListLike("Party: " + name, 3);
-        String result = "Party: " + name + "\n";
         int memberCount = 1;
-        for (Character member : aliveMembers) {
-            Output.printElementListLike(memberCount++ + " : " + member.toString(), 0);
-//            result += memberCount++ +": " + member.toString() + "\n";
-        }
-        return result;
+        for (Character member : aliveMembers) Output.printElementListLike(memberCount++ + " : " + member.toString(), 0);
     }
 
     public String toString() {

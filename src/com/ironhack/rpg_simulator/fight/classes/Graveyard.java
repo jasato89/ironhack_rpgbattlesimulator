@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Graveyard {
-    private List<Character> graveyard1;
-    private List<Character> graveyard2;
+    private final List<Character> graveyard1;
+    private final List<Character> graveyard2;
 
     public Graveyard() {
         this.graveyard1 = new ArrayList<>();
@@ -15,7 +15,7 @@ public class Graveyard {
     }
 
     public void addSoldier(Character soldier, int team) {
-        if(team == 1) {
+        if (team == 1) {
             this.graveyard1.add(soldier);
         } else if (team == 2) {
             this.graveyard2.add(soldier);
@@ -23,7 +23,7 @@ public class Graveyard {
     }
 
     public Character getSoldierByIndex(int team, int index) {
-        if(team == 1) {
+        if (team == 1) {
             return graveyard1.get(index);
         } else if (team == 2) {
             return graveyard2.get(index);

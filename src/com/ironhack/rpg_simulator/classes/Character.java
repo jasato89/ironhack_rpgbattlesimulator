@@ -5,7 +5,7 @@ import com.ironhack.rpg_simulator.interfaces.Attacker;
 
 public abstract class Character implements Attacker {
 
-        //Propieties
+        //Proprieties
         //Counter is static, because we get a fully counter of the total of Character created
         //With counter we setUp an individual id for each Character
         private static int counter = 0;

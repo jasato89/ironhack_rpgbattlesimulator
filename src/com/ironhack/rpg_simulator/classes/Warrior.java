@@ -1,6 +1,5 @@
 package com.ironhack.rpg_simulator.classes;
 
-import com.ironhack.rpg_simulator.interfaces.Attacker;
 
 public class Warrior extends Character {
 

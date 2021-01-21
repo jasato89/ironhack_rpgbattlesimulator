@@ -9,7 +9,7 @@ public class RandomTeamGeneration {
     public RandomTeamGeneration() {
     }
 
-    public List<Party> generateTwoRandomTeam(){
+    public List<Party> generateTwoRandomTeam() {
         List<Party> r = new ArrayList<>();
         r.add(new Party(5));
         r.add(new Party(5));

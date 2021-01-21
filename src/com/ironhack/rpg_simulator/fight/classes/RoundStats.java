@@ -22,16 +22,16 @@ public class RoundStats {
     private boolean validRound;//false if at least one of the soldiers is already dead
 
 
-    public RoundStats (Character char1, Character char2, String nameTeam1, String nameTeam2, String nameFighter1, String nameFighter2, int roundNumber) {
-        if(char1.isAlive() && char2.isAlive()) {
-            if(char1 instanceof Warrior) {
+    public RoundStats(Character char1, Character char2, String nameTeam1, String nameTeam2, String nameFighter1, String nameFighter2, int roundNumber) {
+        if (char1.isAlive() && char2.isAlive()) {
+            if (char1 instanceof Warrior) {
                 setClass1(1);
-            } else{
+            } else {
                 setClass1(2);
             }
-            if(char2 instanceof Warrior) {
+            if (char2 instanceof Warrior) {
                 setClass2(1);
-            } else{
+            } else {
                 setClass2(2);
             }
             attackLogs = new ArrayList<>();
@@ -48,11 +48,11 @@ public class RoundStats {
     }
 
     public String getRoundWinner(String soldier1, String soldier2) {
-        if(getLoser() == 1) {
+        if (getLoser() == 1) {
             return "The winner is " + soldier2 + " from team " + nameTeam2;
-        } else if(getLoser() == 2) {
+        } else if (getLoser() == 2) {
             return "The winner is " + soldier1 + " from team " + nameTeam1;
-        } else{
+        } else {
             return "None of the contestants survived.";
         }
     }
@@ -66,7 +66,7 @@ public class RoundStats {
         String attackType2;
         Output.printHeader("Starting fight...", false);
 
-        for (AttackStats attackStats: attackLogs) {
+        for (AttackStats attackStats : attackLogs) {
             attackType1 = getAttackName(class1, attackStats.getAttackType1());
 
             attackType2 = getAttackName(class2, attackStats.getAttackType2());

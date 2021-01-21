@@ -1,7 +1,5 @@
 package com.ironhack.rpg_simulator.classes;
 
-import com.ironhack.rpg_simulator.fight.classes.AttackStats;
-import com.ironhack.rpg_simulator.interfaces.Attacker;
 
 public class Wizard extends Character {
 

@@ -3,8 +3,6 @@ package com.ironhack.rpg_simulator.fight.classes;
 import com.ironhack.rpg_simulator.classes.Character;
 import com.ironhack.rpg_simulator.classes.Party;
 
-import java.util.List;
-
 public class Battle {
     private int roundNumber;
     private Graveyard graveyard;
@@ -22,10 +20,10 @@ public class Battle {
         RoundStats round = new RoundStats(party1.getAliveMembers().get(fighterIndex1),
                 party2.getAliveMembers().get(fighterIndex2), party1.getName(), party2.getName(),
                 party1.getAliveMembers().get(fighterIndex1).getName(), party2.getAliveMembers().get(fighterIndex2).getName(), getRoundNumber());
-        if(round.isValidRound()) {
+        if (round.isValidRound()) {
             Character fighter1 = party1.getAliveMembers().get(fighterIndex1);
             Character fighter2 = party2.getAliveMembers().get(fighterIndex2);
-            while(fighter1.isAlive() && fighter2.isAlive()) {
+            while (fighter1.isAlive() && fighter2.isAlive()) {
                 AttackStats attackStats = new AttackStats(fighter1.getHp(), fighter2.getHp());
                 int[] damageValue1 = fighter1.attack(); //Saving the attack value of each soldier
                 int[] damageValue2 = fighter2.attack();
@@ -49,26 +47,26 @@ public class Battle {
     private int findLoserAndSendToGraveyard(Character fighter1, Character fighter2, int fighterIndex1, int fighterIndex2) {
         int loser = 0;
         //if (party1.getAliveMembers().size() > 0) {
-            if(!fighter1.isAlive()) {
-                graveyard.addSoldier(fighter1, 1);
-                party1.removeAliveMember();
-                loser = 1;
-            } else{
-                party1.updateAliveMember(fighter1, fighterIndex1);
-            }
+        if (!fighter1.isAlive()) {
+            graveyard.addSoldier(fighter1, 1);
+            party1.removeAliveMember();
+            loser = 1;
+        } else {
+            party1.updateAliveMember(fighter1, fighterIndex1);
+        }
         //}
         //if (party2.getAliveMembers().size() > 0) {
-            if (!fighter2.isAlive()) {
-                graveyard.addSoldier(fighter2, 2);
-                party2.removeAliveMember();
-                if (loser == 1) { //In case both die at the same time, loser value is 3
-                    loser = 3;
-                } else {
-                    loser = 2;
-                }
+        if (!fighter2.isAlive()) {
+            graveyard.addSoldier(fighter2, 2);
+            party2.removeAliveMember();
+            if (loser == 1) { //In case both die at the same time, loser value is 3
+                loser = 3;
             } else {
-                party2.updateAliveMember(fighter2, fighterIndex2);
+                loser = 2;
             }
+        } else {
+            party2.updateAliveMember(fighter2, fighterIndex2);
+        }
         //}
         return loser;
     }
