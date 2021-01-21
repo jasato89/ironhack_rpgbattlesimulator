@@ -21,4 +21,4 @@ foobar.singularize('phenomena') # returns 'phenomenon'
 ```
 
 ## Authors
-<strong>The Excepcionalist Team<strong>: Adrià López, Jaume Sánchez, Salvatore Corsaro, Antonio Navarro, Iván Trujillo.
+**The Excepcionalist Team**: Adrià López, Jaume Sánchez, Salvatore Corsaro, Antonio Navarro, Iván Trujillo.
