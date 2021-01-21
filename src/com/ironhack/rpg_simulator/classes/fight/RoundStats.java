@@ -2,6 +2,7 @@ package com.ironhack.rpg_simulator.classes.fight;
 
 import com.ironhack.rpg_simulator.classes.character_management.Character;
 import com.ironhack.rpg_simulator.classes.character_management.Warrior;
+import com.ironhack.rpg_simulator.output.Output;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class RoundStats {
             } catch (InterruptedException e) {
             }
         }
-        System.out.println(getRoundWinner(nameFighter1, nameFighter2));
+        Output.printElementListLike(getRoundWinner(nameFighter1, nameFighter2), 3);
 
     }
 
