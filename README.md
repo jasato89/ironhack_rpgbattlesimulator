@@ -4,7 +4,7 @@ RPG Battle Simulator is a RPG game where you can select or create a party formed
 
 ## Installation
 
-1. Download the proyect from the repository.
+1. Download the project from the repository.
 
 2. Open the directory as a project on a IDE as IntelliJ.
 
