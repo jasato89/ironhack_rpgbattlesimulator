@@ -2,51 +2,11 @@ package com.ironhack.rpg_simulator.classes.fight;
 
 public class AttackStats {
 
-    private int initialHp1;
-    private int finalHp1;
-    private int initialHp2;
-    private int finalHp2;
+    //Properties
     private int attackValue1;
     private int attackType1; //1 for heavy, 2 for weak
     private int attackValue2;
     private int attackType2;
-
-    public AttackStats(int initialHp1, int initialHp2) {
-        setInitialHp1(initialHp1);
-        setInitialHp2(initialHp2);
-    }
-
-    public int getInitialHp1() {
-        return initialHp1;
-    }
-
-    public void setInitialHp1(int initialHp1) {
-        this.initialHp1 = initialHp1;
-    }
-
-    public int getFinalHp1() {
-        return finalHp1;
-    }
-
-    public void setFinalHp1(int finalHp1) {
-        this.finalHp1 = finalHp1;
-    }
-
-    public int getInitialHp2() {
-        return initialHp2;
-    }
-
-    public void setInitialHp2(int initialHp2) {
-        this.initialHp2 = initialHp2;
-    }
-
-    public int getFinalHp2() {
-        return finalHp2;
-    }
-
-    public void setFinalHp2(int finalHp2) {
-        this.finalHp2 = finalHp2;
-    }
 
     public int getAttackValue1() {
         return attackValue1;
@@ -79,6 +39,5 @@ public class AttackStats {
     public void setAttackValue2(int attackValue2) {
         this.attackValue2 = attackValue2;
     }
-
 
 }

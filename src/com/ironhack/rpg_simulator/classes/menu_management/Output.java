@@ -1,4 +1,4 @@
-package com.ironhack.rpg_simulator.output;
+package com.ironhack.rpg_simulator.classes.menu_management;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -26,7 +26,7 @@ public class Output {
         printLogo();
         System.out.println();
         for (int i = 0; i < menu.length; i++) {
-            System.out.println(fillWithSpaces(15) + MAGENTA_BCK + BLOCK + (i + 1) + BLOCK + insertText(menu[i], 20, 0) + BLOCK + DEFAULT);
+            System.out.println(fillWithSpaces(15) + MAGENTA_BCK + BLOCK + (i + 1) + BLOCK + insertText(menu[i], 25, 0) + BLOCK + DEFAULT);
             System.out.println();
         }
     }
@@ -98,12 +98,12 @@ public class Output {
     private static void printPresentation() throws IOException, InterruptedException {
         Output.clearConsole();
         Output.printEmptyLines(7);
-        Output.printElementListLike(fillWithSpaces(13) + GREEN + "The" + MAGENTA + " Exe" + BLUE + "ption" + RED + "alist" + DEFAULT, 99);
+        Output.printElementListLike(fillWithSpaces(13) + GREEN + "The" + MAGENTA + " Exce" + BLUE + "ption" + RED + "alist" + DEFAULT, 99);
         Output.printEmptyLines(9);
         Thread.sleep(1000);
         clearConsole();
         Output.printEmptyLines(7);
-        Output.printElementListLike(fillWithSpaces(13) + GREEN + "The" + MAGENTA + " Exe" + BLUE + "ption" + RED + "alist" + DEFAULT, 99);
+        Output.printElementListLike(fillWithSpaces(13) + GREEN + "The" + MAGENTA + " Exce" + BLUE + "ption" + RED + "alist" + DEFAULT, 99);
         Output.printElementListLike(fillWithSpaces(18) + "present", 0);
         Output.printEmptyLines(9);
         Thread.sleep(1000);
@@ -114,7 +114,7 @@ public class Output {
         Output.printEmptyLines(7);
         System.out.println(fillWithSpaces(10) + "For a better experience resize your terminal");
         Output.printEmptyLines(9);
-        Thread.sleep(1000);
+        Thread.sleep(2500);
     }
 
     public static void printLogo() {
@@ -160,7 +160,7 @@ public class Output {
             case 5 -> colorBck = GREEN_BCK;
             case 7 -> colorBck = WHITE_BCK;
         }
-        System.out.println(fillWithSpaces(5) + colorBck + BLOCK + insertText(text, 50, 99) + BLOCK + DEFAULT);
+        System.out.println(fillWithSpaces(5) + colorBck + BLOCK + insertText(text, 55, 99) + BLOCK + DEFAULT);
     }
 
     public static void printEmptyLines(int lines) {
@@ -195,13 +195,13 @@ public class Output {
 
     /**
      * Method to clear the console usable only on Windows os
-     *
+     * Not used when executing program inside IDE
      * @throws IOException
      * @throws InterruptedException
      */
     public static void clearConsole() throws IOException, InterruptedException {
-        if (isWindows())
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+//        if (isWindows())
+//            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
     }
 
     public static boolean isWindows() {

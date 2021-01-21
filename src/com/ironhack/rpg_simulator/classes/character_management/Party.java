@@ -30,8 +30,6 @@ public class Party {
     }
 
 
-
-
     public void removeAliveMember() {
         List<Character> temp = new ArrayList<>();
         for (Character character : aliveMembers) {
@@ -72,11 +70,9 @@ public class Party {
         return partyMembers;
     }
 
-
-
     public void exportParty() {
         try {
-            File dir = new File("src/com/ironhack/rpg_simulator/csv_files");
+            File dir = new File("src/com/ironhack/rpg_simulator/assets/csv_files");
             String fileName = getName() + ".csv";
             String[] pathNames = dir.list();
             int counter = 0;
@@ -90,8 +86,7 @@ public class Party {
                 fileName += "_" + counter;
             }
 
-            File file = new File("src/com/ironhack/rpg_simulator/csv_files/" + fileName);
-            //file.createNewFile();
+            File file = new File("src/com/ironhack/rpg_simulator/assets/csv_files/" + fileName);
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write("id, name, hp, stamina, strength, mana, intelligence\n");
 

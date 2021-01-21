@@ -5,10 +5,10 @@ import com.ironhack.rpg_simulator.classes.character_management.Party;
 import com.ironhack.rpg_simulator.classes.character_management.Warrior;
 import com.ironhack.rpg_simulator.classes.character_management.Wizard;
 
-import java.io.File;   //Import File package to receive by parameter the CSV file to be read
-import java.io.FileNotFoundException;   //Import File Exception to manage exception if the file wasn't found
-import java.util.Scanner;   //Import Scanner package to read the CSV file
-import java.util.ArrayList;   //Import ArrayList package to manage ArrayList
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class ImportParty {
 
@@ -18,13 +18,9 @@ public class ImportParty {
     //The only method in the class. It'll return a Party object created from the information in the CSV file
     //that we'll pass as a parameter
     public static Party importPartyCsv(File csvFile) {
-        //To control the appearance of Exceptions, specifically if file isn't found, we start with a 'try'
-        //to make sure that the code will be executed if no exceptions appear
         try {
-            //Initializes the Scanner and ArrayList objects
             Scanner scannerCsv = new Scanner(csvFile);
             ArrayList<Character> partyArray = new ArrayList<>();
-
             //Saves the Party name from the File name without '.csv'
             String partyName = csvFile.getName().substring(0, csvFile.getName().length() - 5);
             //Skips the first line of the CSV with the field names

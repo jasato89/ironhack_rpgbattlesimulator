@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoredParties {
-
+    //Properties
     private List<Party> theList;
 
+    //Constructor
     public StoredParties() {
         this.theList = new ArrayList<>();
     }

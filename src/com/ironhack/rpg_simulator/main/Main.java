@@ -1,7 +1,7 @@
 package com.ironhack.rpg_simulator.main;
 
 import com.ironhack.rpg_simulator.classes.menu_management.MenuManager;
-import com.ironhack.rpg_simulator.output.Output;
+import com.ironhack.rpg_simulator.classes.menu_management.Output;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -12,7 +12,7 @@ public class Main {
         MenuManager menuManager = new MenuManager();
         menuManager.loadPartiesFromDatabase();
         Output.printIntro();
-        Output.playSound("music/battleground.wav");
+        Output.playSound("src/com/ironhack/rpg_simulator/assets/music/battleground.wav");
         menuManager.mainMenu();
     }
 }

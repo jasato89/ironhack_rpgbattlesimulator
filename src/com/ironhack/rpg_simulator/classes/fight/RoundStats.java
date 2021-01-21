@@ -2,13 +2,14 @@ package com.ironhack.rpg_simulator.classes.fight;
 
 import com.ironhack.rpg_simulator.classes.character_management.Character;
 import com.ironhack.rpg_simulator.classes.character_management.Warrior;
-import com.ironhack.rpg_simulator.output.Output;
+import com.ironhack.rpg_simulator.classes.menu_management.Output;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoundStats {
 
+    //Properties
     private int class1; //1 for Warrior, 2 for Wizard
     private int class2;
     private String nameTeam1;
@@ -20,7 +21,7 @@ public class RoundStats {
     private int roundNumber;
     private boolean validRound;//false if at least one of the soldiers is already dead
 
-
+    //Constructor
     public RoundStats (Character char1, Character char2, String nameTeam1, String nameTeam2, String nameFighter1, String nameFighter2, int roundNumber) {
         if(char1.isAlive() && char2.isAlive()) {
             if(char1 instanceof Warrior) {
@@ -66,9 +67,7 @@ public class RoundStats {
 
         for (AttackStats attackStats: attackLogs) {
             attackType1 = getAttackName(class1, attackStats.getAttackType1());
-
             attackType2 = getAttackName(class2, attackStats.getAttackType2());
-
             int attackValue1 = attackStats.getAttackValue1();
             int attackValue2 = attackStats.getAttackValue2();
             System.out.println("The fighters attack each other!");
@@ -80,7 +79,6 @@ public class RoundStats {
             }
         }
         Output.printElementListLike(getRoundWinner(nameFighter1, nameFighter2), 3);
-
     }
 
     private String getAttackName(String class1, int attackType12) {
@@ -93,6 +91,7 @@ public class RoundStats {
         return attackType1;
     }
 
+    //Getters and setters
     public String getNameFighter1() {
         return nameFighter1;
     }

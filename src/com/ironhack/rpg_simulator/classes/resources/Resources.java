@@ -1,4 +1,4 @@
-package com.ironhack.rpg_simulator.ressources;
+package com.ironhack.rpg_simulator.classes.resources;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -24,22 +24,6 @@ public abstract class Resources {
         selection = Integer.parseInt(input);
         return selection;
     }
-    //here if we doesn't
-    public static int validateIntMenu(String arg) {
-        Scanner scanner = new Scanner(System.in);
-        int selection;
-
-        String input = scanner.nextLine();
-        Pattern pattern = Pattern.compile(arg);
-        Matcher matcher = pattern.matcher(input);
-        while (!matcher.matches()) {
-            input = scanner.nextLine();
-            matcher = pattern.matcher(input);
-        }
-        selection = Integer.parseInt(input);
-        return selection;
-    }
-
 
     //We use this function to validate a correct String in a menu
     //here if we need a message
@@ -51,19 +35,6 @@ public abstract class Resources {
         Matcher matcher = pattern.matcher(input);
         while (!matcher.matches()) {
             System.out.println(sout);
-            input = scanner.nextLine();
-            matcher = pattern.matcher(input);
-        }
-        return input;
-    }
-    //here if we doesn't
-    public static String validateStringMenu(String arg) {
-        Scanner scanner = new Scanner(System.in);
-
-        String input = scanner.nextLine();
-        Pattern pattern = Pattern.compile(arg);
-        Matcher matcher = pattern.matcher(input);
-        while (!matcher.matches()) {
             input = scanner.nextLine();
             matcher = pattern.matcher(input);
         }

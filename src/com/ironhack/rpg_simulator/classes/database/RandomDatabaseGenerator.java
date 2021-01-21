@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class RandomDatabaseGenerator {
 
+    //Stat restrictions for Characters
     private static final int HP_WARRIOR_MIN = 100;
     private static final int HP_WARRIOR_MAX = 200;
     private static final int HP_WIZARD_MIN = 50;
@@ -83,6 +84,7 @@ public class RandomDatabaseGenerator {
             "Uhobarin",
             "Orin"
     };
+
     private static final String[] PARTY_NAME = {"Avengers",
             "Goal Diggers",
             "Hot Shots",
@@ -118,9 +120,7 @@ public class RandomDatabaseGenerator {
             "White Walkers"
     };
 
-
     public static Warrior getRandomWarrior() {
-
         return new Warrior(WARRIOR_NAME[new Random().nextInt(WARRIOR_NAME.length)],
                 new Random().nextInt(HP_WARRIOR_MIN + 1) + HP_WARRIOR_MAX - HP_WARRIOR_MIN,
                 new Random().nextInt(STAMINA_MIN + 1) + STAMINA_MAX - STAMINA_MIN,

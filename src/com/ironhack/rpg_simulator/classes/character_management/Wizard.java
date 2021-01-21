@@ -2,7 +2,7 @@ package com.ironhack.rpg_simulator.classes.character_management;
 
 public class Wizard extends Character {
 
-    //properties
+    //Properties
     private int mana;
     private int intelligence;
 
@@ -35,13 +35,7 @@ public class Wizard extends Character {
         return damage;
     }
 
-    //we use this method to show a wizard in console
-    public String toString(){
-        return "Name: " +getName()  + " Type: Wizard HP: " +
-                getHp() + " Intelligence: " + getIntelligence() +" Mana: " + getMana() + "\n";
-    }
-
-    //getters and setters
+    //Getters and setters
 
     public int getMana() {
         return mana;
@@ -57,6 +51,11 @@ public class Wizard extends Character {
 
     public void setIntelligence(int intelligence) {
         this.intelligence = intelligence;
+    }
+
+    public String toString(){
+        return "Name: " +getName()  + " Type: Wizard HP: " +
+                getHp() + " Intelligence: " + getIntelligence() +" Mana: " + getMana() + "\n";
     }
 }
 

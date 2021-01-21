@@ -6,9 +6,7 @@ import com.ironhack.rpg_simulator.interfaces.Attacker;
 public abstract class Character implements Attacker {
 
         //Propieties
-        //Counter is static, because we get a fully counter of the total of Character created
-        //With counter we setUp an individual id for each Character
-        private static int counter = 0;
+        private static int counter = 0; //With counter we setUp an individual id for each Character
         private int id;
         private String name;
         private int hp;
@@ -25,7 +23,7 @@ public abstract class Character implements Attacker {
         }
 
 
-        //damage is a Method, to let a character change his hp, when is attacked
+        //damage is a method to let a character change his hp when is attacked
         public void damage(int damage) {
                 setHp(getHp()-damage);
                 if(getHp() <= 0) {
@@ -39,7 +37,7 @@ public abstract class Character implements Attacker {
                 this.id = counter;
         }
 
-        //getters and setters
+        //Getters and setters
 
         public int getId() {
                 return id;

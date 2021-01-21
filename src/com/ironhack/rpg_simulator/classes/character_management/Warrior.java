@@ -2,7 +2,7 @@ package com.ironhack.rpg_simulator.classes.character_management;
 
 public class Warrior extends Character {
 
-    //properties
+    //Properties
     private int stamina;
     private int strength;
 
@@ -18,7 +18,7 @@ public class Warrior extends Character {
     public int[] attack() {
         //We insert the damage into an int[]
         int[] damage = new int[2];
-        //This is a heavy attack
+        //This is a Heavy attack
         if( getStamina()>= 5 ) {
             damage[0] = getStrength();
             setStamina(getStamina() - 5);
@@ -33,13 +33,7 @@ public class Warrior extends Character {
         return damage;
     }
 
-    //we use this method to show a warrior in console
-    public String toString(){
-        return "Name: " +getName()  + " Type: Warrior HP: " +
-                getHp() + " Stamina: " + getStamina() +" Strength: " + getStrength() + "\n";
-    }
-
-    //getters and setters
+    //Getters and setters
     public int getStamina() {
         return stamina;
     }
@@ -54,6 +48,12 @@ public class Warrior extends Character {
 
     public void setStrength(int strength) {
         this.strength = strength;
+    }
+
+
+    public String toString(){
+        return "Name: " +getName()  + " Type: Warrior HP: " +
+                getHp() + " Stamina: " + getStamina() +" Strength: " + getStrength() + "\n";
     }
 
 
